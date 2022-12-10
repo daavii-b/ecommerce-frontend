@@ -39,6 +39,7 @@ export default function Login() {
             type="password-confirmation"
             name="password-confirmation"
             id="password-confirmation"
+            placeholder="confirm password"
           />
         </label>
         <button type="submit">Log in</button>
