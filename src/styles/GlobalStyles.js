@@ -17,10 +17,15 @@ export default createGlobalStyle`
     body {
         font-size: 1.5rem;
         font-family: monospace;
+        font-family: 'Alegreya', serif;
     }
 
-    h1, h2, h3, h4, h5, h6 {
-        font-family: 'Playfair Display', serif;
+    h1 {
+      font-family: 'Playfair Display', serif;
+    }
+
+    h2, h3, h4, h5, h6 {
+        font-family: 'David Libre', serif;
     }
 
     button {

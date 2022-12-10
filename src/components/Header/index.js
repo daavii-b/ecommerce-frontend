@@ -9,6 +9,8 @@ import {
   FaSearch,
 } from 'react-icons/fa';
 
+import { Link } from 'react-router-dom';
+
 import { Header, Nav, Form } from './styled';
 
 export default function MainHeader() {
@@ -35,34 +37,34 @@ export default function MainHeader() {
       <Nav>
         <ul>
           <li>
-            <a href="#">
-              <FaHome size={21} className="icons" />
-            </a>
+            <Link to="/">
+              <FaHome size={18} className="icons" />
+            </Link>
           </li>
           <li>
-            <a href="#">
-              <FaShoppingCart size={21} className="icons" />
-            </a>
+            <Link to="#">
+              <FaShoppingCart size={18} className="icons" />
+            </Link>
           </li>
           {userIsAuthenticated ? (
             <li>
-              <a href="#">
-                <FaUser size={21} className="icons" />
-              </a>
+              <Link to="#">
+                <FaUser size={18} className="icons" />
+              </Link>
             </li>
           ) : (
             <li>
-              <a href="#">
-                <FaSignInAlt size={21} className="icons" />
-              </a>
+              <Link to="/login">
+                <FaSignInAlt size={18} className="icons" />
+              </Link>
             </li>
           )}
 
           {userIsAuthenticated ? (
             <li>
-              <a href="#">
-                <FaSignOutAlt size={21} className="icons" />
-              </a>
+              <Link to="#">
+                <FaSignOutAlt size={18} className="icons" />
+              </Link>
             </li>
           ) : (
             ''

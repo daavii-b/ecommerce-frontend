@@ -13,11 +13,12 @@ export const Header = styled.header`
   padding: ${defaultStyles.padding};
   background-color: ${colors.headerColor};
 
+  border-bottom: 0.3rem solid rgba(0, 0, 0, 0.1);
   border-radius: 0.6rem;
   box-shadow: 0 0 9px 3px rgba(0, 0, 0, 0.1);
 
   h1 {
-    font-size: 2.8rem;
+    font-size: 2.4rem;
     font-style: italic;
     text-shadow: 0 4px 3px rgba(0, 0, 0, 0.15);
     letter-spacing: 5px;
