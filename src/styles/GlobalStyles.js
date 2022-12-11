@@ -17,7 +17,6 @@ export default createGlobalStyle`
     body {
         font-size: 1.5rem;
         font-family: monospace;
-        font-family: 'Alegreya', serif;
     }
 
     h1 {
@@ -38,6 +37,10 @@ export default createGlobalStyle`
 
     a {
         color: inherit;
+    }
+
+    img {
+        max-width: 100%;
     }
 
     .icons {

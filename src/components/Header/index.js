@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
 import {
@@ -7,18 +8,51 @@ import {
   FaShoppingCart,
   FaUser,
   FaSearch,
+  FaChevronUp,
+  FaChevronDown,
 } from 'react-icons/fa';
 
 import { Link } from 'react-router-dom';
 
 import { Header, Nav, Form } from './styled';
 
+import backImage from './assets/images/background.jpeg';
+
 export default function MainHeader() {
-  const userIsAuthenticated = false;
+  const userIsAuthenticated = true;
+
+  const menuHandleClick = () => {
+    const menu = document.querySelector('.show-menu');
+    const menuContainer = document.querySelector('.menu-container');
+
+    if (!menu.classList.contains('hide')) {
+      menu.classList.add('hide');
+    }
+
+    if (!menuContainer.classList.contains('show')) {
+      menuContainer.classList.add('show');
+      return;
+    }
+
+    menuContainer.classList.remove('show');
+    menu.classList.remove('hide');
+  };
 
   return (
     <Header>
+      <div className="menu-container">
+        <button className="close-menu" onClick={menuHandleClick} type="button">
+          <FaChevronUp size={18} />
+        </button>
+      </div>
+      <button type="button" className="show-menu">
+        <FaChevronDown size={18} onClick={menuHandleClick} />
+      </button>
+
       <div>
+        <div className="ecommerce-image">
+          <img src={backImage} alt="Ecommerce" />
+        </div>
         <h1>E-commerce</h1>
       </div>
 
