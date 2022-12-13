@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import * as colors from '../../styles/colors';
+import { device } from '../../styles/mediaQueries';
 
 export const Section = styled.section`
   display: grid;
@@ -10,6 +11,10 @@ export const Section = styled.section`
   gap: 2rem 1rem;
 
   height: fit-content;
+
+  @media ${device.mobileL} {
+    grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+  }
 `;
 
 export const Article = styled.article`
@@ -21,6 +26,8 @@ export const ProductContainer = styled.div`
   width: 18rem;
   position: relative;
 
+  border: 1px solid rgba(0, 0, 0, 0.03);
+
   h2 {
     font-size: 1.4rem;
     font-weight: 200;
@@ -31,8 +38,9 @@ export const ProductContainer = styled.div`
     background-color: #6394e3d9;
     padding: 0.4rem 0.8rem;
     position: absolute;
-    font-size: 1.6rem;
-    border-radius: 0.3rem;
+    font-size: 1.3rem;
+    border-top-left-radius: 0.3rem;
+    border-bottom-right-radius: 0.3rem;
     text-align: center;
   }
 
@@ -68,7 +76,7 @@ export const ProductContainer = styled.div`
     justify-content: space-between;
 
     background-color: ${colors.productColor};
-    font-size: 1.5rem;
+    font-size: 1.3rem;
 
     padding: 0.4rem 0.1rem;
     margin-top: 0.5rem;

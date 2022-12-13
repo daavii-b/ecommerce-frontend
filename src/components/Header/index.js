@@ -16,10 +16,8 @@ import { Link } from 'react-router-dom';
 
 import { Header, Nav, Form } from './styled';
 
-import backImage from './assets/images/background.jpeg';
-
 export default function MainHeader() {
-  const userIsAuthenticated = true;
+  const userIsAuthenticated = false;
 
   const menuHandleClick = () => {
     const menu = document.querySelector('.show-menu');
@@ -50,9 +48,6 @@ export default function MainHeader() {
       </button>
 
       <div>
-        <div className="ecommerce-image">
-          <img src={backImage} alt="Ecommerce" />
-        </div>
         <h1>E-commerce</h1>
       </div>
 

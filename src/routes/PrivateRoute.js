@@ -6,7 +6,7 @@ export default function PrivateRoute() {
   const { isAuthenticated } = location.state || false;
 
   return !isAuthenticated ? (
-    <Navigate to="/login" state={location.pathname} />
+    <Navigate to="/login" state={{ from: location.pathname }} />
   ) : (
     <Outlet />
   );

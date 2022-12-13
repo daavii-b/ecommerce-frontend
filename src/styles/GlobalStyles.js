@@ -1,3 +1,4 @@
+import 'react-toastify/dist/ReactToastify.css';
 import styled, { createGlobalStyle } from 'styled-components';
 import * as colors from './colors';
 
@@ -45,6 +46,17 @@ export default createGlobalStyle`
 
     .icons {
         color: ${colors.iconsColor};
+    }
+
+    body .Toastify .Toastify__toast-container .Toastify__toast--success {
+        background: rgba(255, 255, 255, 0.3);
+        color: green;
+    }
+
+    body .Toastify .Toastify__toast-container .Toastify__toast--error {
+        background: rgba(255, 255, 255, 0.7);
+        color: red;
+
     }
 `;
 
