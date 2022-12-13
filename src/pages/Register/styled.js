@@ -15,7 +15,11 @@ export const Container = styled.div`
     align-items: center;
     justify-items: center;
 
-    background-image: linear-gradient(to bottom, black, transparent),
+    background-image: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.7),
+        transparent
+      ),
       url(${backImage});
     background-position: center;
     background-attachment: fixed;
@@ -33,27 +37,23 @@ export const Container = styled.div`
     .field-group {
       padding: 0.6rem;
 
-      label {
+      .field-label {
         text-transform: uppercase;
         font-size: 1.1rem;
         color: white;
-      }
 
-      input {
-        border-radius: 0.3rem;
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        margin-left: 0.5rem;
-        padding: 0.25rem 0.5rem;
-      }
+        input {
+          border-radius: 0.3rem;
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          margin-left: 0.5rem;
+          padding: 0.25rem 0.5rem;
 
-      input:focus {
-        border-color: rgba(235, 163, 20, 0.93);
-      }
-
-      input::placeholder {
-        font-size: 1.2rem;
-        font-weight: 200;
-        color: ${colors.headerColor};
+          &::placeholder {
+            font-size: 1.2rem;
+            font-weight: 200;
+            color: ${colors.headerColor};
+          }
+        }
       }
     }
 
@@ -90,26 +90,22 @@ export const Container = styled.div`
       align-items: center;
 
       .field-group {
-        input {
-          margin: 0%;
-        }
-
-        label {
+        .field-label {
           display: flex;
           flex-direction: column;
           justify-content: center;
-        }
 
-        input {
-          margin: 0.5rem;
-          margin-left: 0;
+          input {
+            margin: 0.5rem;
+            margin-left: 0;
+          }
         }
       }
     }
     @media ${device.tablet} {
       .register-form {
         width: 90vw;
-        height: 70vh;
+        height: 80vh;
         margin: auto;
 
         display: flex;
@@ -124,6 +120,7 @@ export const Container = styled.div`
 
         button[type='submit'] {
           width: 80%;
+          margin: 2rem auto;
         }
       }
     }

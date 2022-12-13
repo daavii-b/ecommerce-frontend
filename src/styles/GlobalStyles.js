@@ -1,6 +1,7 @@
 import 'react-toastify/dist/ReactToastify.css';
 import styled, { createGlobalStyle } from 'styled-components';
 import * as colors from './colors';
+import { device } from './mediaQueries';
 
 export default createGlobalStyle`
     * {
@@ -48,15 +49,33 @@ export default createGlobalStyle`
         color: ${colors.iconsColor};
     }
 
-    body .Toastify .Toastify__toast-container .Toastify__toast--success {
-        background: rgba(255, 255, 255, 0.3);
+
+
+    .toast-notification-style {
+        margin: 0.4rem 0;
+    }
+
+    @media ${device.mobileL} {
+        .toast-notification-style {
+            width: 28rem;
+        }
+    }
+
+
+    ${
+      '' /* body .Toastify .Toastify__toast-container .Toastify__toast--success {
+        width: 100%;
+        background: rgba(255, 255, 255, 0.7);
         color: green;
     }
 
     body .Toastify .Toastify__toast-container .Toastify__toast--error {
+        width: 70%;
+        right: 0;
         background: rgba(255, 255, 255, 0.7);
         color: red;
 
+    } */
     }
 `;
 

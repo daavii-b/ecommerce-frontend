@@ -61,16 +61,21 @@ export default function Register() {
         await axios.post('/users', { ...user });
 
         toast.success('You were registered successfully');
+        navigate('/login');
       } catch (error) {
         const status = get(error, 'response.status');
         const errors = [get(error, 'response.data')];
-        console.log(error, status, errors);
 
-        return false;
+        console.log(typeof status, errors);
+        if (status === 400) {
+          errors.forEach((err) => {
+            Object.keys(err).map((key) =>
+              toast.error(`${key.toUpperCase()}: ${err[key]}`)
+            );
+          });
+        }
       }
     }
-
-    return navigate('/');
   };
 
   return (
@@ -82,7 +87,7 @@ export default function Register() {
         method="POST"
       >
         <div className="field-group">
-          <label htmlFor="first name">
+          <label className="field-label" htmlFor="first name">
             first name
             <input
               type="text"
@@ -91,12 +96,11 @@ export default function Register() {
               placeholder="First Name"
               value={firstName}
               onChange={(e) => setFirstName(e.target.value)}
-              onFocus={() => toast.info('First name is optionally.')}
             />
           </label>
         </div>
         <div className="field-group">
-          <label htmlFor="last name">
+          <label className="field-label" htmlFor="last name">
             last name
             <input
               type="text"
@@ -105,12 +109,11 @@ export default function Register() {
               placeholder="Last Name"
               value={lastName}
               onChange={(e) => setLastName(e.target.value)}
-              onFocus={() => toast.info('Last name is optionally.')}
             />
           </label>
         </div>
         <div className="field-group">
-          <label htmlFor="username">
+          <label className="field-label" htmlFor="username">
             username
             <input
               type="text"
@@ -123,7 +126,7 @@ export default function Register() {
           </label>
         </div>
         <div className="field-group">
-          <label htmlFor="email">
+          <label className="field-label" htmlFor="email">
             e-mail
             <input
               type="email"
@@ -136,8 +139,8 @@ export default function Register() {
           </label>
         </div>
         <div className="field-group">
-          <label htmlFor="password">
-            password
+          <label className="field-label" htmlFor="password">
+            Password
             <input
               type="password"
               name="password"
@@ -149,7 +152,7 @@ export default function Register() {
           </label>
         </div>
         <div className="field-group">
-          <label htmlFor="password-confirmation">
+          <label className="field-label" htmlFor="password-confirmation">
             Password
             <input
               type="password"
