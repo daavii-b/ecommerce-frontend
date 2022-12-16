@@ -19,78 +19,114 @@ export const Header = styled.header`
 
   box-shadow: 0 6px 9px 3px rgba(0, 0, 0, 0.15);
 
-  /* Menu Bar Logic */
-  .menu-container {
-    justify-self: flex-start;
-    z-index: 1;
-    top: 8rem;
-    width: 13rem;
-    height: 0%;
+  /* Category Nav Bar Logic */
+
+  .category-nav {
+    width: fit-content;
+    height: fit-content;
+
     position: absolute;
+    top: 8rem;
+    left: 0;
 
-    transition: all 0.5s ease-in-out;
+    .toggle-menu {
+      border: none;
+      border-radius: 0 0 0.4rem 0.4rem / 0 0.6rem 0.6rem;
+      background: transparent;
 
-    opacity: 0;
-    visibility: hidden;
+      width: 4rem;
+      height: 4rem;
+      padding: 0.2rem;
+
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      transition: 0.6s ease-out;
+
+      svg {
+        width: 70%;
+        height: 70%;
+      }
+
+      visibility: visible;
+      opacity: 1;
+    }
+
+    .category-list {
+      background: rgba(23, 23, 23, 0.7);
+
+      width: 0vw;
+      height: 70vh;
+      overflow: hidden;
+
+      display: flex;
+      flex-direction: column;
+      padding: 0.5rem;
+
+      border-top: none;
+      z-index: 100;
+
+      border-bottom-right-radius: 0.5rem;
+      transition: 0.6s ease-out;
+
+      visibility: hidden;
+
+      li {
+        margin: 0.3rem;
+        list-style: circle inside;
+
+        a {
+          display: inline-block;
+          padding: 0.5rem;
+          font-size: 1.2rem;
+          text-transform: capitalize;
+
+          color: rgba(255, 255, 255, 1);
+
+          transition: 0.3s ease-out;
+
+          &:hover {
+            color: ${colors.headerColor};
+            transition: 0.3s ease-in;
+          }
+        }
+      }
+
+      li::marker {
+        color: white;
+      }
+    }
+
+    .toggle-menu.off {
+      visibility: hidden;
+      transition: 0.6s ease-out;
+      opacity: 0;
+    }
   }
 
-  .show {
-    top: 8rem;
-    border-bottom-right-radius: 1rem;
-    background-color: ${colors.headerColor};
-    transition: all 0.5s ease-in;
-    width: 13rem;
-
-    height: 37rem;
-
-    transition: all 0.5s ease-in;
-
-    opacity: 1;
+  .category-nav.active .category-list {
     visibility: visible;
+
+    overflow: auto;
+
+    width: 15rem;
+
+    transition: 0.6s ease-in;
   }
 
-  .show-menu {
-    position: absolute;
-    top: 8rem;
-    left: 4rem;
-
-    background-color: ${colors.headerColor};
-
-    width: 4rem;
-    height: 3rem;
-
-    border: none;
-    border-bottom-left-radius: 0.4rem;
-    border-bottom-right-radius: 0.4rem;
-
-    box-shadow: 0 4px 4px 2px rgba(0, 0, 0, 0.15);
-
-    transition: all 0.5s ease-in-out;
-    opacity: 1;
-    visibility: visible;
-  }
-
-  .hide {
-    top: 50rem;
-    opacity: 0;
+  .category-nav.active .toggle-menu {
+    left: 15rem;
+    transition: 0.6s ease-in;
     visibility: hidden;
-    transition: all 0.6s ease-in;
+    opacity: 0;
   }
 
-  .close-menu {
-    position: absolute;
-    bottom: -3rem;
-    left: 4rem;
-    background-color: ${colors.headerColor};
-
-    width: 4rem;
-    height: 3rem;
-
-    border: none;
-    border-bottom-left-radius: 0.4rem;
-    border-bottom-right-radius: 0.4rem;
-
-    box-shadow: 0 4px 4px 2px rgba(0, 0, 0, 0.15);
+  .category-nav.active .toggle-menu.off {
+    left: 15rem;
+    visibility: visible;
+    transition: 0.6s ease-in;
+    opacity: 1;
   }
 
   .ecommerce-image {

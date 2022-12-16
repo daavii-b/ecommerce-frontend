@@ -8,10 +8,9 @@ import {
   FaShoppingCart,
   FaUser,
   FaSearch,
-  FaChevronUp,
-  FaChevronDown,
+  FaChevronRight,
 } from 'react-icons/fa';
-
+import { AiOutlineClose } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
 
 import { Header, Nav, Form } from './styled';
@@ -19,33 +18,46 @@ import { Header, Nav, Form } from './styled';
 export default function MainHeader() {
   const userIsAuthenticated = false;
 
-  const menuHandleClick = () => {
-    const menu = document.querySelector('.show-menu');
-    const menuContainer = document.querySelector('.menu-container');
+  const navHandleClick = () => {
+    // if (event.type === 'touchstart') event.preventDefault();
+    // const toggleMenu = document.querySelectorAll('.toggle-menu');
+    const categoryNav = document.querySelector('.category-nav');
 
-    if (!menu.classList.contains('hide')) {
-      menu.classList.add('hide');
-    }
-
-    if (!menuContainer.classList.contains('show')) {
-      menuContainer.classList.add('show');
-      return;
-    }
-
-    menuContainer.classList.remove('show');
-    menu.classList.remove('hide');
+    categoryNav.classList.toggle('active');
   };
 
   return (
     <Header>
-      <div className="menu-container">
-        <button className="close-menu" onClick={menuHandleClick} type="button">
-          <FaChevronUp size={18} />
+      <nav className="category-nav">
+        <button type="button" className="toggle-menu" aria-expanded="false">
+          <FaChevronRight
+            size={10}
+            // onTouchStart={menuHandleClick}
+            onClick={navHandleClick}
+          />
         </button>
-      </div>
-      <button type="button" className="show-menu">
-        <FaChevronDown size={18} onClick={menuHandleClick} />
-      </button>
+        <ul className="category-list">
+          <li className="category-item">
+            <a href="#">Category-1</a>{' '}
+          </li>
+          <li className="category-item">
+            <a href="#">Category-2</a>
+          </li>
+          <li className="category-item">
+            <a href="#">Category-3</a>
+          </li>
+          <li className="category-item">
+            <a href="#">Category-4</a>
+          </li>
+        </ul>
+        <button
+          type="button"
+          onClick={navHandleClick}
+          className="toggle-menu off"
+        >
+          <AiOutlineClose size={10} />
+        </button>
+      </nav>
 
       <div>
         <h1>E-commerce</h1>
