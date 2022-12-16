@@ -10,7 +10,13 @@ export const Form = styled.form`
   align-items: center;
   justify-items: center;
 
-  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), transparent),
+  background-image: linear-gradient(
+      to bottom,
+      rgba(20, 20, 20, 0.7),
+      rgba(20, 20, 20, 0.6),
+      rgba(20, 20, 20, 0.5),
+      transparent
+    ),
     url(${backImage});
   background-position: center;
   background-attachment: fixed;
@@ -31,7 +37,7 @@ export const Form = styled.form`
     .field-label {
       text-transform: uppercase;
       font-size: 1.1rem;
-      color: white;
+      color: rgba(250, 250, 250, 1);
 
       input {
         border-radius: 0.3rem;
@@ -107,6 +113,11 @@ export const Form = styled.form`
       width: 80%;
       margin: 2rem auto;
     }
+  }
+
+  @media ${device.mobileL} {
+    height: 90vh;
+    background-position: 50% center;
   }
 
   @media ${device.mobileM} {

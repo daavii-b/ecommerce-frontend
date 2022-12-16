@@ -38,6 +38,7 @@ export const ProductContainer = styled.div`
     background-color: #6394e3d9;
     padding: 0.4rem 0.8rem;
     position: absolute;
+    left: -1rem;
     font-size: 1.3rem;
     border-top-left-radius: 0.3rem;
     border-bottom-right-radius: 0.3rem;

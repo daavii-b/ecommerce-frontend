@@ -163,7 +163,7 @@ export default function Register() {
           />
         </label>
       </div>
-      <button type="submit">Log in</button>
+      <button type="submit">Sign up</button>
     </Form>
   );
 }
