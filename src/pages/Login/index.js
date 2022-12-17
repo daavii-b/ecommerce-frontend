@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { isEmail } from 'validator';
+import { get } from 'lodash';
 
 import { FaOpencart } from 'react-icons/fa';
 import { toast } from 'react-toastify';
@@ -8,11 +9,12 @@ import { toast } from 'react-toastify';
 import { Container, Form } from './styled';
 import * as actions from '../../store/modules/auth/actions';
 
-export default function Register() {
+export default function Login(props) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const dispatch = useDispatch();
+  const from = get(props, 'location.state.from', '/');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -30,7 +32,7 @@ export default function Register() {
         password,
       };
 
-      dispatch(actions.loginRequest(user));
+      dispatch(actions.loginRequest({ ...user, from }));
     }
   };
 

@@ -1,5 +1,7 @@
 /* eslint-disable no-console */
 /* eslint-disable jsx-a11y/anchor-is-valid */
+import { useSelector } from 'react-redux';
+
 import React from 'react';
 import {
   FaHome,
@@ -16,7 +18,7 @@ import { Link } from 'react-router-dom';
 import { Header, Nav, Form } from './styled';
 
 export default function MainHeader() {
-  const userIsAuthenticated = false;
+  const { isAuthenticated } = useSelector((state) => state.authReducer);
 
   const navHandleClick = () => {
     // if (event.type === 'touchstart') event.preventDefault();
@@ -87,9 +89,9 @@ export default function MainHeader() {
               <FaShoppingCart size={18} className="icons" />
             </Link>
           </li>
-          {userIsAuthenticated ? (
+          {isAuthenticated ? (
             <li>
-              <Link to="#">
+              <Link to="/user">
                 <FaUser size={18} className="icons" />
               </Link>
             </li>
@@ -101,7 +103,7 @@ export default function MainHeader() {
             </li>
           )}
 
-          {userIsAuthenticated ? (
+          {isAuthenticated ? (
             <li>
               <Link to="#">
                 <FaSignOutAlt size={18} className="icons" />

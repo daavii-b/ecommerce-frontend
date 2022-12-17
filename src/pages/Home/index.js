@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from 'react';
 import { FaImage } from 'react-icons/fa';
 import { get } from 'lodash';
-
 import axios from '../../services/axios';
 import { Section, Article, ProductContainer } from './styled';
 
