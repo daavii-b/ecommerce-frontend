@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import React from 'react';
 import { Outlet, Navigate, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';

@@ -18,3 +18,24 @@ export function loginFailure(payload) {
     payload,
   };
 }
+
+export function logoutRequest(payload) {
+  return {
+    type: types.LOGOUT_REQUEST,
+    payload,
+  };
+}
+
+export function logoutSuccess(payload) {
+  return {
+    type: types.LOGOUT_SUCCESS,
+    payload,
+  };
+}
+
+export function logoutFailure(payload) {
+  return {
+    type: types.LOGOUT_FAILURE,
+    payload,
+  };
+}

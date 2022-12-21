@@ -1,35 +1,45 @@
 /* eslint-disable no-console */
 import { call, put, all, takeLatest } from 'redux-saga/effects';
-import { toast } from 'react-toastify';
 import { get } from 'lodash';
-import { redirect } from 'react-router-dom';
 
 import * as types from '../types';
-import axios from '../../../services/axios';
 import * as actions from './actions';
+import axios from '../../../services/axios';
 
 function* loginRequest({ payload }) {
   try {
     const response = yield call(axios.post, 'tokens/', payload);
-    yield put(actions.loginSuccess({ ...response.data }));
+    yield put(actions.loginSuccess({ ...response.data, from: payload.from }));
 
-    toast.success('You have successfully logged in');
     axios.defaults.headers.Authorization = `Bearer ${response.data.access}`;
-
-    yield redirect('/');
   } catch (error) {
-    const status = get(error, 'response.status');
-    const errors = [get(error, 'response.data')];
-
-    if (status === 400) {
-      errors.forEach((err) => {
-        Object.keys(err).map((key) =>
-          toast.error(`${key.toUpperCase()}: ${err[key]}`)
-        );
-      });
-    }
-    yield put(actions.loginFailure());
+    yield put(
+      actions.loginFailure({
+        errors: [get(error, 'response.data')],
+        status: get(error, 'response.status'),
+      })
+    );
   }
 }
 
-export default all([takeLatest(types.LOGIN_REQUEST, loginRequest)]);
+function* logoutRequest({ payload }) {
+  const { status } = payload.response;
+
+  if (status === 401) {
+    yield put(actions.logoutSuccess(payload));
+  } else {
+    yield put(actions.logoutFailure(payload));
+  }
+}
+
+function persistRehydrated({ payload }) {
+  const token = get(payload, 'authReducer.token', false);
+
+  if (token) axios.defaults.headers.Authorization = `Bearer ${token}`;
+}
+
+export default all([
+  takeLatest(types.LOGIN_REQUEST, loginRequest),
+  takeLatest(types.LOGOUT_REQUEST, logoutRequest),
+  takeLatest(types.PERSIST_REHYDRATE, persistRehydrated),
+]);

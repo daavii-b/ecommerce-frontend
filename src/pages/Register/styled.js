@@ -1,26 +1,14 @@
 import styled from 'styled-components';
-import backImage from './assets/images/background.jpeg';
 
-import * as colors from '../../styles/colors';
 import { device } from '../../styles/mediaQueries';
 
 export const Form = styled.form`
   display: grid;
   grid-template-columns: repeat(2, minmax(28rem, 1fr));
+  grid-gap: 0.2rem;
   align-items: center;
   justify-items: center;
-
-  background-image: linear-gradient(
-      to bottom,
-      rgba(20, 20, 20, 0.7),
-      rgba(20, 20, 20, 0.6),
-      rgba(20, 20, 20, 0.5),
-      transparent
-    ),
-    url(${backImage});
-  background-position: center;
-  background-attachment: fixed;
-  background-size: contain;
+  background-color: rgba(20, 20, 20, 0.9);
 
   width: 60vw;
   height: 75vh;
@@ -35,20 +23,38 @@ export const Form = styled.form`
     padding: 0.6rem;
 
     .field-label {
+      display: flex;
+      flex-direction: column;
+
       text-transform: uppercase;
       font-size: 1.1rem;
       color: rgba(250, 250, 250, 1);
 
+      color: white;
+
       input {
-        border-radius: 0.3rem;
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        margin-left: 0.5rem;
-        padding: 0.25rem 0.5rem;
+        width: 28rem;
+
+        margin-top: 0.2rem;
+
+        background-color: rgba(255, 255, 255, 0.6);
+        transition: all 0.2s ease-in;
+        border: 1px solid rgba(0, 0, 0, 0.2);
+        border-radius: 0.4rem;
+        padding: 0.3rem;
+        padding-left: 0.6rem;
+
+        font-size: 1.2rem;
+
+        &:focus {
+          transition: all 0.3s ease-in-out;
+          border: 1px solid rgba(128, 110, 228, 0.8);
+          background-color: rgba(255, 255, 255, 1);
+        }
 
         &::placeholder {
           font-size: 1.2rem;
-          font-weight: 200;
-          color: ${colors.headerColor};
+          font-weight: 400;
         }
       }
     }
@@ -66,6 +72,7 @@ export const Form = styled.form`
         justify-content: center;
 
         input {
+          width: 20rem;
           margin: 0.5rem;
           margin-left: 0;
         }
@@ -79,6 +86,8 @@ export const Form = styled.form`
     padding: 0.5rem;
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 0.6rem;
+
+    justify-self: center;
 
     color: white;
     background-color: transparent;

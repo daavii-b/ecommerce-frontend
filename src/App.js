@@ -1,8 +1,8 @@
 import React from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
+import Router from './routes/CustomRouter';
 
 import GlobalStyles, { MainContainer } from './styles/GlobalStyles';
 

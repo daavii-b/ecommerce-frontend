@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { useSelector } from 'react-redux';
 
@@ -111,7 +110,7 @@ export default function MainHeader() {
 
         <ul className="nav-items">
           <li>
-            <Link to="#">
+            <Link to="/cart">
               <FaShoppingCart size={20} className="icons" />
             </Link>
           </li>

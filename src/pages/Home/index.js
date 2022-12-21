@@ -1,18 +1,22 @@
-/* eslint-disable no-console */
 import React, { useEffect, useState } from 'react';
-import { FaImage } from 'react-icons/fa';
+import { useDispatch } from 'react-redux';
 import { get } from 'lodash';
 import axios from '../../services/axios';
 import { Section, Article, ProductContainer } from './styled';
+import * as actions from '../../store/modules/auth/actions';
 
 export default function Home() {
   const [products, setProducts] = useState([]);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     async function listProducts() {
-      const response = await axios.get('products/');
-
-      setProducts(response.data.results);
+      try {
+        const response = await axios.get('products/');
+        setProducts(response.data.results);
+      } catch (err) {
+        dispatch(actions.logoutRequest(err));
+      }
     }
 
     listProducts();
@@ -31,7 +35,7 @@ export default function Home() {
                 </a>
               </div>
             ) : (
-              <FaImage size={185} className="product-image-placeholder" />
+              ''
             )}
 
             <div className="product-header">

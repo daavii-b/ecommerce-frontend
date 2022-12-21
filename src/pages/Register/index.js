@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 import { isEmail } from 'validator';
@@ -66,7 +65,6 @@ export default function Register() {
         const status = get(error, 'response.status');
         const errors = [get(error, 'response.data')];
 
-        console.log(typeof status, errors);
         if (status === 400) {
           errors.forEach((err) => {
             Object.keys(err).map((key) =>

@@ -59,6 +59,9 @@ export const Header = styled.header`
     }
 
     .category-list {
+      display: flex;
+      flex-direction: column;
+
       background: rgba(23, 23, 23, 0.7);
 
       width: 0vw;

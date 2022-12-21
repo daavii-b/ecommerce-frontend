@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useLocation } from 'react-router-dom';
+
 import { isEmail } from 'validator';
-import { get } from 'lodash';
 
 import { FaOpencart } from 'react-icons/fa';
 import { toast } from 'react-toastify';
@@ -9,12 +10,15 @@ import { toast } from 'react-toastify';
 import { Container, Form } from './styled';
 import * as actions from '../../store/modules/auth/actions';
 
-export default function Login(props) {
+export default function Login() {
+  const { isAuthenticated } = useSelector((state) => state.authReducer);
+  const location = useLocation();
+  const { from } = location.state || '/user';
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const dispatch = useDispatch();
-  const from = get(props, 'location.state.from', '/');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -36,7 +40,7 @@ export default function Login(props) {
     }
   };
 
-  return (
+  return !isAuthenticated ? (
     <Container>
       <h1>
         E-commerce
@@ -81,6 +85,10 @@ export default function Login(props) {
           <a href="/register">Create an account</a>
         </p>
       </div>
+    </Container>
+  ) : (
+    <Container>
+      <h2>You are authenticated</h2>
     </Container>
   );
 }
