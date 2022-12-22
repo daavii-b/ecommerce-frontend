@@ -7,7 +7,6 @@ export const initialState = {
   isAuthenticated: false,
   token: '',
   user: {},
-  isLoading: false,
 };
 
 export default (state = initialState, action) => {
@@ -54,7 +53,13 @@ export default (state = initialState, action) => {
     }
 
     case types.LOGOUT_FAILURE: {
-      return state;
+      const newState = { ...initialState };
+
+      history.push('/login', newState);
+
+      toast.warning('An error occurred while logging out');
+
+      return newState;
     }
 
     default:

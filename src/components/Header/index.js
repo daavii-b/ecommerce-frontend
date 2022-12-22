@@ -1,7 +1,8 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
-import { useSelector } from 'react-redux';
-
 import React from 'react';
+import { useSelector } from 'react-redux';
+import { AiOutlineClose } from 'react-icons/ai';
+import { Link } from 'react-router-dom';
+
 import {
   FaSignOutAlt,
   FaSignInAlt,
@@ -11,8 +12,6 @@ import {
   FaChevronRight,
   FaBars,
 } from 'react-icons/fa';
-import { AiOutlineClose } from 'react-icons/ai';
-import { Link } from 'react-router-dom';
 
 import { Header, Nav, Form } from './styled';
 
@@ -56,20 +55,7 @@ export default function MainHeader() {
         >
           <FaChevronRight size={10} onClick={categoryNavHandleClick} />
         </button>
-        <ul className="category-list">
-          <li className="category-item">
-            <a href="#">Category-1</a>{' '}
-          </li>
-          <li className="category-item">
-            <a href="#">Category-2</a>
-          </li>
-          <li className="category-item">
-            <a href="#">Category-3</a>
-          </li>
-          <li className="category-item">
-            <a href="#">Category-4</a>
-          </li>
-        </ul>
+        <ul className="category-list" />
         <button
           type="button"
           onClick={categoryNavHandleClick}
@@ -130,7 +116,7 @@ export default function MainHeader() {
 
           {isAuthenticated ? (
             <li>
-              <Link to="#">
+              <Link to="/logout">
                 <FaSignOutAlt size={20} className="icons" />
               </Link>
             </li>
