@@ -4,16 +4,18 @@ import { device } from '../../styles/mediaQueries';
 
 export const Section = styled.section`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(17.5rem, 1fr));
 
   align-items: flex-start;
   justify-items: center;
-  gap: 2rem 1rem;
+  gap: 1.5rem;
 
   height: fit-content;
 
-  @media ${device.mobileL} {
-    grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+  padding: 1rem;
+
+  @media ${device.laptop} {
+    grid-template-columns: repeat(auto-fit, 1fr);
   }
 `;
 
@@ -23,10 +25,19 @@ export const Article = styled.article`
 `;
 
 export const ProductContainer = styled.div`
-  width: 18rem;
+  width: fit-content;
+  height: fit-content;
   position: relative;
 
   border: 1px solid rgba(0, 0, 0, 0.03);
+
+  transform: scale(1);
+  transition: 0.4s ease-in-out;
+
+  &:hover {
+    transform: scale(1.02);
+    transition: 0.4s ease-out;
+  }
 
   h2 {
     font-size: 1.4rem;
