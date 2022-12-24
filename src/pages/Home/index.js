@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { get } from 'lodash';
+
 import axios from '../../services/axios';
+
 import { Section, Article, ProductContainer } from './styled';
 import * as actions from '../../store/modules/auth/actions';
+import * as globalActions from '../../store/modules/global/actions';
 
 export default function Home() {
   const [products, setProducts] = useState([]);
@@ -12,10 +15,12 @@ export default function Home() {
   useEffect(() => {
     async function listProducts() {
       try {
+        dispatch(globalActions.startLoad());
         const response = await axios.get('products/');
         setProducts(response.data.results);
+        dispatch(globalActions.finishLoad());
       } catch (err) {
-        dispatch(actions.logoutRequest(err));
+        dispatch(globalActions.dispatchAction(actions.logoutRequest, err));
       }
     }
 

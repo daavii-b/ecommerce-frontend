@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 import { device } from '../../styles/mediaQueries';
+import * as colors from '../../styles/colors';
 
 export const Form = styled.form`
   display: grid;
@@ -18,6 +19,19 @@ export const Form = styled.form`
 
   border-radius: 0.5rem;
   box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.25);
+
+  .form-header {
+    padding: 1rem;
+
+    color: white;
+    font-size: 2rem;
+    text-transform: uppercase;
+    grid-column: 1 / 3;
+
+    border-bottom: 1px solid ${colors.productColor};
+
+    margin-bottom: 1rem;
+  }
 
   div.field-group {
     padding: 0.6rem;

@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import { toast } from 'react-toastify';
 import * as types from '../types';
 import history from '../../../services/history';
@@ -13,6 +12,7 @@ export default (state = initialState, action) => {
   switch (action.type) {
     case types.LOGIN_SUCCESS: {
       const newState = { ...state };
+
       const from = action.payload.from || '/';
 
       newState.isAuthenticated = true;

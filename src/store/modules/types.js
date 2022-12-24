@@ -1,3 +1,8 @@
+export const DISPATCH_ACTION = 'DISPATCH_ACTION';
+
+export const START_LOAD = 'START_LOAD';
+export const FINISH_LOAD = 'FINISH_LOAD';
+
 export const LOGIN_REQUEST = 'LOGIN_REQUEST';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAILURE = 'LOGIN_FAILURE';

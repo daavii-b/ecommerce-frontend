@@ -10,7 +10,6 @@ function* loginRequest({ payload }) {
   try {
     const response = yield call(axios.post, 'tokens/', payload);
     yield put(actions.loginSuccess({ ...response.data, from: payload.from }));
-
     axios.defaults.headers.Authorization = `Bearer ${response.data.access}`;
   } catch (error) {
     yield put(
@@ -23,9 +22,12 @@ function* loginRequest({ payload }) {
 }
 
 function* logoutRequest({ payload }) {
-  const { status } = payload.response;
+  const { status, userLogout } = get(payload, 'response', {
+    status: null,
+    userLogout: true,
+  });
 
-  if (status === 401) {
+  if (status === 401 || userLogout) {
     yield put(actions.logoutSuccess(payload));
   } else {
     yield put(actions.logoutFailure(payload));

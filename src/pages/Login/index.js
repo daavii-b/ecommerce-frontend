@@ -9,6 +9,7 @@ import { toast } from 'react-toastify';
 
 import { Container, Form } from './styled';
 import * as actions from '../../store/modules/auth/actions';
+import * as globalActions from '../../store/modules/global/actions';
 
 export default function Login() {
   const { isAuthenticated } = useSelector((state) => state.authReducer);
@@ -36,7 +37,9 @@ export default function Login() {
         password,
       };
 
-      dispatch(actions.loginRequest({ ...user, from }));
+      dispatch(
+        globalActions.dispatchAction(actions.loginRequest, { ...user, from })
+      );
     }
   };
 
@@ -69,7 +72,7 @@ export default function Login() {
         <label className="field-label" htmlFor="password">
           Password
           <input
-            type="text"
+            type="password"
             id="password"
             name="password"
             placeholder="Password"

@@ -83,6 +83,9 @@ export default function Register() {
       action="#"
       method="POST"
     >
+      <div className="form-header">
+        <h2>E-commerce</h2>
+      </div>
       <div className="field-group">
         <label className="field-label" htmlFor="first name">
           first name
@@ -90,7 +93,7 @@ export default function Register() {
             type="text"
             name="first name"
             id="first name"
-            placeholder="First Name"
+            placeholder="John"
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
           />
@@ -103,7 +106,7 @@ export default function Register() {
             type="text"
             name="last name"
             id="last name"
-            placeholder="Last Name"
+            placeholder="Doe"
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
           />
@@ -116,7 +119,7 @@ export default function Register() {
             type="text"
             name="username"
             id="username"
-            placeholder="Username"
+            placeholder="jonhdoe"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />

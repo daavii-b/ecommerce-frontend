@@ -16,7 +16,9 @@ module.exports = {
     'react/jsx-filename-extension': 0,
     'import/prefer-default-export': 0,
     'default-param-last': 0,
+    // 'no-console': 0,
     'react-hooks/rules-of-hooks': 'error',
     'react-hooks/exhaustive-deps': 'warn',
+    'import/no-cycle': 0,
   },
 };
