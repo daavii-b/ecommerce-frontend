@@ -46,10 +46,9 @@ export const ProductContainer = styled.div`
   }
 
   .stock {
-    background-color: #6394e3d9;
+    background-color: ${colors.productColor};
     padding: 0.4rem 0.8rem;
     position: absolute;
-    left: -1rem;
     font-size: 1.3rem;
     border-top-left-radius: 0.3rem;
     border-bottom-right-radius: 0.3rem;
@@ -83,6 +82,7 @@ export const ProductContainer = styled.div`
   }
 
   .product-footer {
+    height: 3rem;
     display: flex;
     align-items: center;
     justify-content: space-between;

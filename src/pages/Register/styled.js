@@ -5,112 +5,114 @@ import * as colors from '../../styles/colors';
 
 export const Form = styled.form`
   display: grid;
-  grid-template-columns: repeat(2, minmax(28rem, 1fr));
-  grid-gap: 0.2rem;
-  align-items: center;
-  justify-items: center;
-  background-color: rgba(20, 20, 20, 0.9);
+  grid-template-columns: repeat(auto-fit, 30rem);
+  justify-content: center;
 
-  width: 60vw;
-  height: 75vh;
-  padding: 2rem;
+  width: 60%;
 
   margin: 0 auto;
+  background-color: rgb(20, 20, 20);
+  padding: 2rem;
+  color: white;
 
+  box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.2);
   border-radius: 0.5rem;
-  box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.25);
 
   .form-header {
-    padding: 1rem;
+    grid-column: 1/3;
+    padding: 1.5rem;
 
-    color: white;
     font-size: 2rem;
+    text-align: center;
     text-transform: uppercase;
-    grid-column: 1 / 3;
+    letter-spacing: 2px;
 
-    border-bottom: 1px solid ${colors.productColor};
-
-    margin-bottom: 1rem;
+    border-bottom: 1px solid ${colors.headerColor};
   }
 
-  div.field-group {
-    padding: 0.6rem;
+  .field-group {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
 
     .field-label {
       display: flex;
-      flex-direction: column;
+      flex-direction: row wrap;
+      align-items: center;
 
+      font-size: 1rem;
       text-transform: uppercase;
-      font-size: 1.1rem;
-      color: rgba(250, 250, 250, 1);
 
-      color: white;
+      margin: 2rem;
+
+      span.label-container {
+        width: 0;
+        display: inline-block;
+        opacity: 0;
+        visibility: hidden;
+        transition: 0.6s ease-in-out;
+      }
 
       input {
-        width: 28rem;
-
-        margin-top: 0.2rem;
-
-        background-color: rgba(255, 255, 255, 0.6);
-        transition: all 0.2s ease-in;
-        border: 1px solid rgba(0, 0, 0, 0.2);
+        background-color: rgba(255, 255, 255, 0.4);
+        margin-left: 0.6rem;
+        border: 1px solid ${colors.headerColor};
         border-radius: 0.4rem;
-        padding: 0.3rem;
-        padding-left: 0.6rem;
-
-        font-size: 1.2rem;
-
-        &:focus {
-          transition: all 0.3s ease-in-out;
-          border: 1px solid rgba(128, 110, 228, 0.8);
-          background-color: rgba(255, 255, 255, 1);
-        }
+        padding: 0.4rem;
+        transition: 0.6s ease-in-out;
 
         &::placeholder {
-          font-size: 1.2rem;
-          font-weight: 400;
+          padding: 0.2rem;
+          font-size: 1rem;
+          color: rgba(0, 0, 0, 0.7);
+        }
+
+        &:focus {
+          transition: 0.6s ease-out;
+          background-color: rgba(255, 255, 255, 0.9);
+
+          &::placeholder {
+            color: rgba(0, 0, 0, 1);
+          }
         }
       }
     }
-  }
 
-  @media ${device.laptop} {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(20rem, 1fr));
-    align-items: center;
-
-    div.field-group {
-      .field-label {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-
-        input {
-          width: 20rem;
-          margin: 0.5rem;
-          margin-left: 0;
-        }
+    .field-label.focus {
+      span.label-container {
+        width: 100%;
+        opacity: 1;
+        visibility: visible;
+        transition: 0.6s ease-in;
       }
     }
   }
 
   button[type='submit'] {
+    color: white;
     grid-column: 1 / 3;
-    width: 60%;
+    width: 70%;
+    height: 3rem;
     padding: 0.5rem;
+    margin-top: 2rem;
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 0.6rem;
 
     justify-self: center;
 
-    color: white;
     background-color: transparent;
 
     transition: all 0.5s ease-in;
 
+    box-shadow: 0 0 4px 0px rgba(255, 255, 255, 0.1);
+
     &:hover {
       background-color: rgba(255, 255, 255, 0.1);
       border: 1px solid rgba(255, 255, 255, 0.4);
+      box-shadow: 0 0 8px 2px rgba(255, 255, 255, 0.1);
+
       transition: all 0.5s ease-in-out;
     }
 
@@ -123,7 +125,6 @@ export const Form = styled.form`
 
   @media ${device.tablet} {
     width: 90vw;
-    height: 95vh;
     margin: auto;
 
     flex-direction: column;
@@ -133,18 +134,13 @@ export const Form = styled.form`
     background-position: 30% center;
 
     button[type='submit'] {
-      width: 80%;
+      width: 70%;
       margin: 2rem auto;
     }
   }
 
   @media ${device.mobileL} {
-    height: 90vh;
     background-position: 50% center;
-  }
-
-  @media ${device.mobileM} {
-    height: 100vh;
   }
 
   @media ${device.media500} {

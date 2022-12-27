@@ -100,19 +100,12 @@ export default function MainHeader() {
               <FaShoppingCart size={20} className="icons" />
             </Link>
           </li>
-          {isAuthenticated ? (
-            <li>
-              <Link to="/user">
-                <FaUser size={20} className="icons" />
-              </Link>
-            </li>
-          ) : (
-            <li>
-              <Link to="/login">
-                <FaSignInAlt size={20} className="icons" />
-              </Link>
-            </li>
-          )}
+
+          <li>
+            <Link to="/user">
+              <FaUser size={20} className="icons" />
+            </Link>
+          </li>
 
           {isAuthenticated ? (
             <li>
@@ -121,7 +114,11 @@ export default function MainHeader() {
               </Link>
             </li>
           ) : (
-            ''
+            <li>
+              <Link to="/login">
+                <FaSignInAlt size={20} className="icons" />
+              </Link>
+            </li>
           )}
         </ul>
       </Nav>

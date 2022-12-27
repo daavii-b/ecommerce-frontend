@@ -1,12 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { MainContainer } from './styled';
+import { Container } from './styled';
 
-export default function Main({ element }) {
-  return <MainContainer>{element}</MainContainer>;
+export default function Main({ children }) {
+  return <Container>{children}</Container>;
 }
 
 Main.propTypes = {
-  element: PropTypes.element.isRequired,
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.shape()),
+    PropTypes.shape(),
+  ]).isRequired,
 };

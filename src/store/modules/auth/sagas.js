@@ -9,8 +9,17 @@ import axios from '../../../services/axios';
 function* loginRequest({ payload }) {
   try {
     const response = yield call(axios.post, 'tokens/', payload);
-    yield put(actions.loginSuccess({ ...response.data, from: payload.from }));
     axios.defaults.headers.Authorization = `Bearer ${response.data.access}`;
+
+    const user = yield call(axios.get, 'users/');
+
+    yield put(
+      actions.loginSuccess({
+        ...response.data,
+        user: user.data,
+        from: payload.from,
+      })
+    );
   } catch (error) {
     yield put(
       actions.loginFailure({
@@ -28,8 +37,10 @@ function* logoutRequest({ payload }) {
   });
 
   if (status === 401 || userLogout) {
+    axios.defaults.headers.Authorization = '';
     yield put(actions.logoutSuccess(payload));
   } else {
+    axios.defaults.headers.Authorization = '';
     yield put(actions.logoutFailure(payload));
   }
 }

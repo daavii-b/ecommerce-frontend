@@ -12,7 +12,6 @@ export default (state = initialState, action) => {
   switch (action.type) {
     case types.LOGIN_SUCCESS: {
       const newState = { ...state };
-
       const from = action.payload.from || '/';
 
       newState.isAuthenticated = true;
@@ -22,7 +21,6 @@ export default (state = initialState, action) => {
       toast.success('You have successfully logged in');
 
       history.push(from, newState);
-
       return newState;
     }
 
@@ -45,7 +43,7 @@ export default (state = initialState, action) => {
     case types.LOGOUT_SUCCESS: {
       const newState = { ...initialState };
 
-      history.push('/login', newState);
+      history.push('/login');
 
       toast.info('Your session has been logged out');
 
@@ -57,7 +55,8 @@ export default (state = initialState, action) => {
 
       history.push('/login', newState);
 
-      toast.warning('An error occurred while logging out');
+      toast.warning('An error occurred and you was logged out.');
+      toast.info('Please, make login again');
 
       return newState;
     }

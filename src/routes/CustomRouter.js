@@ -11,7 +11,6 @@ export default function CustomRouter({ basename, children, history }) {
   });
 
   React.useLayoutEffect(() => history.listen(setState), [history]);
-
   return (
     <Router
       basename={basename}
@@ -31,6 +30,6 @@ CustomRouter.defaultProps = {
 
 CustomRouter.propTypes = {
   basename: PropTypes.string,
-  children: PropTypes.element.isRequired,
+  children: PropTypes.arrayOf(PropTypes.shape()).isRequired,
   history: PropTypes.shape(),
 };

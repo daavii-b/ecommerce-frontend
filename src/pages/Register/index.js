@@ -22,6 +22,12 @@ export default function Register() {
 
   const passwordIsEqual = () => password === confirmPassword;
 
+  const inputHandleFocus = (e) => {
+    const inputParent = e.target.parentElement;
+
+    inputParent.classList.toggle('focus');
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -88,7 +94,7 @@ export default function Register() {
       </div>
       <div className="field-group">
         <label className="field-label" htmlFor="first name">
-          first name
+          <span className="label-container">First name</span>
           <input
             type="text"
             name="first name"
@@ -96,12 +102,14 @@ export default function Register() {
             placeholder="John"
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
+            onFocus={inputHandleFocus}
+            onBlur={inputHandleFocus}
           />
         </label>
       </div>
       <div className="field-group">
         <label className="field-label" htmlFor="last name">
-          last name
+          <span className="label-container">Last name</span>
           <input
             type="text"
             name="last name"
@@ -109,12 +117,14 @@ export default function Register() {
             placeholder="Doe"
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
+            onFocus={inputHandleFocus}
+            onBlur={inputHandleFocus}
           />
         </label>
       </div>
       <div className="field-group">
         <label className="field-label" htmlFor="username">
-          username
+          <span className="label-container">Username</span>
           <input
             type="text"
             name="username"
@@ -122,12 +132,14 @@ export default function Register() {
             placeholder="jonhdoe"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
+            onFocus={inputHandleFocus}
+            onBlur={inputHandleFocus}
           />
         </label>
       </div>
       <div className="field-group">
         <label className="field-label" htmlFor="email">
-          e-mail
+          <span className="label-container">E-mail</span>
           <input
             type="email"
             name="email"
@@ -135,12 +147,14 @@ export default function Register() {
             placeholder="email@gmail.com"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            onFocus={inputHandleFocus}
+            onBlur={inputHandleFocus}
           />
         </label>
       </div>
       <div className="field-group">
         <label className="field-label" htmlFor="password">
-          Password
+          <span className="label-container">Password</span>
           <input
             type="password"
             name="password"
@@ -148,12 +162,14 @@ export default function Register() {
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            onFocus={inputHandleFocus}
+            onBlur={inputHandleFocus}
           />
         </label>
       </div>
       <div className="field-group">
         <label className="field-label" htmlFor="password-confirmation">
-          Password
+          <span className="label-container">C.Password</span>
           <input
             type="password"
             name="password-confirmation"
@@ -161,6 +177,8 @@ export default function Register() {
             placeholder="Confirm password"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
+            onFocus={inputHandleFocus}
+            onBlur={inputHandleFocus}
           />
         </label>
       </div>
