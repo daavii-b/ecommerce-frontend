@@ -1,5 +1,5 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { AiOutlineClose } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
 
@@ -11,11 +11,15 @@ import {
   FaSearch,
   FaChevronRight,
   FaBars,
+  FaHeart,
 } from 'react-icons/fa';
+import * as actions from '../../store/modules/auth/actions';
+import * as globalActions from '../../store/modules/global/actions';
 
 import { Header, Nav, Form } from './styled';
 
 export default function MainHeader() {
+  const dispatch = useDispatch();
   const { isAuthenticated } = useSelector((state) => state.authReducer);
 
   const categoryNavHandleClick = () => {
@@ -97,26 +101,42 @@ export default function MainHeader() {
         <ul className="nav-items">
           <li>
             <Link to="/cart">
-              <FaShoppingCart size={20} className="icons" />
+              <FaShoppingCart size={15} className="icons" />
+            </Link>
+          </li>
+
+          <li>
+            <Link to="/cart">
+              <FaHeart size={15} className="icons" />
             </Link>
           </li>
 
           <li>
             <Link to="/user">
-              <FaUser size={20} className="icons" />
+              <FaUser size={15} className="icons" />
             </Link>
           </li>
 
           {isAuthenticated ? (
             <li>
-              <Link to="/logout">
-                <FaSignOutAlt size={20} className="icons" />
+              <Link
+                onClick={(event) => {
+                  event.preventDefault();
+                  dispatch(
+                    globalActions.dispatchAction(actions.logoutRequest, {
+                      userLogout: true,
+                    })
+                  );
+                }}
+                to="/logout"
+              >
+                <FaSignOutAlt size={15} className="icons" />
               </Link>
             </li>
           ) : (
             <li>
               <Link to="/login">
-                <FaSignInAlt size={20} className="icons" />
+                <FaSignInAlt size={15} className="icons" />
               </Link>
             </li>
           )}

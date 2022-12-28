@@ -79,11 +79,6 @@ export default createGlobalStyle`
     }
 `;
 
-export const MainContainer = styled.div`
-  max-width: 100%;
-  margin: 0 auto;
-`;
-
 export const defaultContainer = styled.div`
   width: fit-content;
   height: fit-content;

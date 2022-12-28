@@ -20,6 +20,7 @@ export default function Routers() {
       <Route path="/user" element={<PrivateRoute />}>
         <Route path="/user" element={<User />} />
       </Route>
+
       <Route path="/cart" element={<PrivateRoute />}>
         <Route path="/cart" element={<Cart />} />
       </Route>

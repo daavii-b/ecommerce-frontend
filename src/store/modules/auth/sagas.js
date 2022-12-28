@@ -7,8 +7,10 @@ import * as actions from './actions';
 import axios from '../../../services/axios';
 
 function* loginRequest({ payload }) {
+  const from = payload.from || '/';
   try {
     const response = yield call(axios.post, 'tokens/', payload);
+
     axios.defaults.headers.Authorization = `Bearer ${response.data.access}`;
 
     const user = yield call(axios.get, 'users/');
@@ -17,7 +19,7 @@ function* loginRequest({ payload }) {
       actions.loginSuccess({
         ...response.data,
         user: user.data,
-        from: payload.from,
+        from,
       })
     );
   } catch (error) {
@@ -31,22 +33,12 @@ function* loginRequest({ payload }) {
 }
 
 function* logoutRequest({ payload }) {
-  const { status, userLogout } = get(payload, 'response', {
-    status: null,
-    userLogout: true,
-  });
-
-  if (status === 401 || userLogout) {
-    axios.defaults.headers.Authorization = '';
-    yield put(actions.logoutSuccess(payload));
-  } else {
-    axios.defaults.headers.Authorization = '';
-    yield put(actions.logoutFailure(payload));
-  }
+  axios.defaults.headers.Authorization = '';
+  yield put(actions.logoutSuccess({ ...payload }));
 }
 
 function persistRehydrated({ payload }) {
-  const token = get(payload, 'authReducer.token', false);
+  const token = get(payload, 'authReducer.token', '');
 
   if (token) axios.defaults.headers.Authorization = `Bearer ${token}`;
 }

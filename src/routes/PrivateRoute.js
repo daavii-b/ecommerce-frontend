@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 
 export default function PrivateRoute() {
   const location = useLocation();
+
   const { isAuthenticated } =
     useSelector((state) => state.authReducer) || false;
 

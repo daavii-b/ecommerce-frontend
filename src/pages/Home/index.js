@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+// import { useSearchParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { get } from 'lodash';
 
@@ -11,16 +12,20 @@ import * as globalActions from '../../store/modules/global/actions';
 export default function Home() {
   const [products, setProducts] = useState([]);
   const dispatch = useDispatch();
+  // const [qs] = useSearchParams();
 
   useEffect(() => {
     async function listProducts() {
       try {
         dispatch(globalActions.startLoad());
+
         const response = await axios.get('products/');
+
         setProducts(response.data.results);
+
         dispatch(globalActions.finishLoad());
       } catch (err) {
-        dispatch(globalActions.dispatchAction(actions.logoutRequest, err));
+        dispatch(globalActions.dispatchAction(actions.logoutRequest));
       }
     }
 

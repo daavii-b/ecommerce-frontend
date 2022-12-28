@@ -32,10 +32,3 @@ export function logoutSuccess(payload) {
     payload,
   };
 }
-
-export function logoutFailure(payload) {
-  return {
-    type: types.LOGOUT_FAILURE,
-    payload,
-  };
-}

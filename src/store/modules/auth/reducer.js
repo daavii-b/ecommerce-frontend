@@ -12,7 +12,6 @@ export default (state = initialState, action) => {
   switch (action.type) {
     case types.LOGIN_SUCCESS: {
       const newState = { ...state };
-      const from = action.payload.from || '/';
 
       newState.isAuthenticated = true;
       newState.token = action.payload.access;
@@ -20,7 +19,8 @@ export default (state = initialState, action) => {
 
       toast.success('You have successfully logged in');
 
-      history.push(from, newState);
+      history.push(action.payload.from);
+
       return newState;
     }
 
@@ -29,34 +29,34 @@ export default (state = initialState, action) => {
 
       const { errors, status } = action.payload;
 
-      if (status === 400) {
-        errors.forEach((err) => {
-          Object.keys(err).map((key) =>
-            toast.error(`${key.toUpperCase()}: ${err[key]}`)
-          );
-        });
-      }
+      switch (status) {
+        case 400: {
+          errors.forEach((err) => {
+            Object.keys(err).map((key) =>
+              toast.error(`${key.toUpperCase()}: ${err[key]}`)
+            );
+          });
 
-      return newState;
+          return newState;
+        }
+
+        case 401: {
+          toast.error('E-mail or password is incorrect');
+
+          return newState;
+        }
+
+        default:
+          return newState;
+      }
     }
 
     case types.LOGOUT_SUCCESS: {
       const newState = { ...initialState };
 
-      history.push('/login');
-
       toast.info('Your session has been logged out');
 
-      return newState;
-    }
-
-    case types.LOGOUT_FAILURE: {
-      const newState = { ...initialState };
-
-      history.push('/login', newState);
-
-      toast.warning('An error occurred and you was logged out.');
-      toast.info('Please, make login again');
+      history.push('/login');
 
       return newState;
     }

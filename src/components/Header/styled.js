@@ -9,7 +9,7 @@ export const Header = styled.header`
 
   display: grid;
   grid-template-columns: 18rem 1fr 20%;
-  gap: 0.4rem;
+  gap: 1rem;
   align-items: center;
   justify-items: center;
 
@@ -183,7 +183,9 @@ export const Header = styled.header`
 
 export const Nav = styled.nav`
   width: 100%;
+  height: fit-content;
   z-index: 100;
+  overflow: hidden;
 
   position: relative;
   top: 0;
@@ -194,7 +196,14 @@ export const Nav = styled.nav`
   justify-content: center;
   align-items: center;
 
-  transition: 0.3s ease-in;
+  transition: 0.2s ease-in;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-right: none;
+  border-radius: 0.6rem;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  padding: 0.3rem;
+  padding-right: none;
 
   button.toggle-navbar {
     position: absolute;
@@ -204,9 +213,9 @@ export const Nav = styled.nav`
     background-color: transparent;
     border: none;
 
-    padding: 0.4rem;
+    padding: 0.2rem;
 
-    transition: all 0.4 ease-in;
+    transition: all 0.2s ease-in;
 
     opacity: 0;
     visibility: hidden;
@@ -238,20 +247,21 @@ export const Nav = styled.nav`
   }
 
   @media ${device.tabletL} {
+    margin-top: 0.5rem;
     width: fit-content;
 
     position: absolute;
     top: 8rem;
     right: 0;
-    transition: all 0.4 ease-in;
+    transition: all 0.2s ease-in;
 
     flex-direction: column;
     align-items: flex-end;
     justify-content: flex-end;
 
     button.toggle-navbar {
-      width: 4rem;
-      height: 4rem;
+      width: 3.1rem;
+      height: 3.1rem;
 
       position: relative;
       top: 0;
@@ -260,9 +270,9 @@ export const Nav = styled.nav`
 
       background-color: transparent;
 
-      padding: 0.4rem;
+      padding: 0.2rem;
 
-      transition: all 0.5s ease-out;
+      transition: all 0.2s ease-out;
 
       opacity: 1;
       visibility: visible;
@@ -283,7 +293,7 @@ export const Nav = styled.nav`
       flex-direction: column;
       justify-content: flex-start;
 
-      transition: 0.5s ease-in;
+      transition: 0.3s ease-in;
 
       li {
         display: flex;
