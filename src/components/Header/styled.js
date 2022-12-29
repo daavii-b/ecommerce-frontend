@@ -40,8 +40,9 @@ export const Header = styled.header`
       border-radius: 0 0 0.4rem 0.4rem / 0 0.6rem 0.6rem;
 
       width: 2.5rem;
-      height: 4rem;
+      height: 2.5rem;
       padding: 0.2rem;
+      font-size: 2rem;
 
       position: absolute;
       top: 0;
@@ -50,8 +51,8 @@ export const Header = styled.header`
       transition: 0.6s ease-out;
 
       svg {
-        width: 50%;
-        height: 50%;
+        width: 70%;
+        height: 70%;
       }
 
       visibility: visible;
@@ -98,10 +99,14 @@ export const Header = styled.header`
             transition: 0.3s ease-in;
           }
         }
-      }
 
-      li::marker {
-        color: white;
+        &::marker {
+          color: white;
+        }
+
+        &:hover::marker {
+          color: ${colors.headerColor};
+        }
       }
     }
 
@@ -247,6 +252,7 @@ export const Nav = styled.nav`
   }
 
   @media ${device.tabletL} {
+    background-color: rgba(0, 0, 0, 0.15);
     margin-top: 0.5rem;
     width: fit-content;
 

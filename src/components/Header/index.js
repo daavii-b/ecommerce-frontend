@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { AiOutlineClose } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
@@ -17,16 +17,22 @@ import * as actions from '../../store/modules/auth/actions';
 import * as globalActions from '../../store/modules/global/actions';
 
 import { Header, Nav, Form } from './styled';
+import axios from '../../services/axios';
 
 export default function MainHeader() {
+  const [categories, setCategories] = useState([]);
+
   const dispatch = useDispatch();
   const { isAuthenticated } = useSelector((state) => state.authReducer);
 
-  const categoryNavHandleClick = () => {
+  const categoryNavHandleClick = async () => {
     const toggleMenu = document.querySelector('.toggle-category-menu');
     const categoryNav = document.querySelector('.category-nav');
 
     categoryNav.classList.toggle('active');
+
+    const categoriesResponse = await axios.get('categories/');
+    setCategories(categoriesResponse.data.results);
 
     if (categoryNav.classList.contains('active')) {
       toggleMenu.setAttribute('aria-expanded', true);
@@ -59,7 +65,13 @@ export default function MainHeader() {
         >
           <FaChevronRight size={10} onClick={categoryNavHandleClick} />
         </button>
-        <ul className="category-list" />
+        <ul className="category-list">
+          {categories.map((category) => (
+            <li key={category.id}>
+              <a href={`?category=${category.name}`}>{category.name}</a>
+            </li>
+          ))}
+        </ul>
         <button
           type="button"
           onClick={categoryNavHandleClick}
