@@ -10,6 +10,7 @@ import Header from './components/Header';
 import Main from './components/Main';
 import Routers from './routes';
 import Loading from './components/Loading';
+import CartProvider from './context/Cart';
 
 function App() {
   const { isLoading } = useSelector((state) => state.globalReducer);
@@ -19,7 +20,9 @@ function App() {
       <Router history={history}>
         <Header />
         <Main>
-          <Routers />
+          <CartProvider>
+            <Routers />
+          </CartProvider>
         </Main>
         <GlobalStyles />
         <ToastContainer
