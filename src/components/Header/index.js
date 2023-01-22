@@ -124,7 +124,7 @@ export default function MainHeader() {
           </li>
 
           <li>
-            <Link to="/user">
+            <Link to="/users">
               <FaUser size={15} className="icons" />
             </Link>
           </li>

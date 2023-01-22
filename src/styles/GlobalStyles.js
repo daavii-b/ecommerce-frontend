@@ -62,6 +62,22 @@ export default createGlobalStyle`
     }
 
 
+    #form-checkout {
+    display: flex;
+    flex-direction: column;
+    max-width: 600px;
+    }
+
+    .container {
+    height: 18px;
+    display: inline-block;
+    border: 1px solid rgb(118, 118, 118);
+    border-radius: 2px;
+    padding: 1px 2px;
+    }
+
+
+
     ${
       '' /* body .Toastify .Toastify__toast-container .Toastify__toast--success {
         width: 100%;

@@ -7,7 +7,8 @@ import Register from '../pages/Register';
 import User from '../pages/User';
 import Page404 from '../pages/Page404';
 import Cart from '../pages/Cart';
-
+import Payment from '../pages/Payment';
+import PaymentStatus from '../pages/PaymentStatus';
 import PrivateRoute from './PrivateRoute';
 
 export default function Routers() {
@@ -17,12 +18,17 @@ export default function Routers() {
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
 
-      <Route path="/user" element={<PrivateRoute />}>
-        <Route path="/user" element={<User />} />
+      <Route path="/users" element={<PrivateRoute />}>
+        <Route path="/users" element={<User />} />
       </Route>
 
       <Route path="/cart" element={<PrivateRoute />}>
         <Route path="/cart" element={<Cart />} />
+      </Route>
+
+      <Route path="/payments" element={<PrivateRoute />}>
+        <Route path="/payments" element={<Payment />} />
+        <Route path="/payments/status/" element={<PaymentStatus />} />
       </Route>
 
       <Route path="*" element={<Page404 />} />
