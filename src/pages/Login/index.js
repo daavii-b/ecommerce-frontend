@@ -45,12 +45,12 @@ export default function Login() {
 
   return !isAuthenticated ? (
     <Container>
-      <h1>
+      <h2 translate="no">
         E-commerce
         <span className="cart-icon">
           <FaOpencart size={34} />
         </span>
-      </h1>
+      </h2>
       <hr />
       <Form
         onSubmit={handleSubmit}

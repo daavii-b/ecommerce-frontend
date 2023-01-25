@@ -80,12 +80,14 @@ export const Header = styled.header`
       visibility: hidden;
 
       li {
+        width: 100%;
         margin: 0.3rem;
         list-style: circle inside;
 
         a {
+          width: 100%;
           display: inline-block;
-          padding: 0.5rem;
+          padding: 1rem 2rem;
 
           font-size: 1.2rem;
           text-transform: capitalize;
@@ -242,10 +244,17 @@ export const Nav = styled.nav`
     opacity: 1;
 
     li {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
       margin: 0 0.2rem;
 
       a {
-        display: block;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
         padding: 0.6rem;
       }
     }

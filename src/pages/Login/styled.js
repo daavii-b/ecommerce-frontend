@@ -20,7 +20,7 @@ export const Container = styled.div`
   border-radius: 0.5rem;
   box-shadow: 0 7px 10px 2px rgba(0, 0, 0, 0.3);
 
-  h1 {
+  h2 {
     display: flex;
     align-items: center;
     justify-content: center;

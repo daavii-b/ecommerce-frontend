@@ -6,7 +6,7 @@ export const CartContext = createContext();
 export default function CartProvider({ children }) {
   const [productsCart, setProductsCart] = useState([]);
   const addProductCart = useMemo(
-    () => (productId) => {
+    () => (productId, cProduct) => {
       const copyProductsCart = [...productsCart];
       const product = copyProductsCart.find(
         (cartProduct) => cartProduct.id === productId
@@ -14,6 +14,7 @@ export default function CartProvider({ children }) {
       if (!product) {
         copyProductsCart.push({
           id: productId,
+          product: cProduct,
           qty: 1,
         });
       } else {
@@ -46,7 +47,12 @@ export default function CartProvider({ children }) {
     [productsCart]
   );
 
-  const clearCart = useMemo(() => () => setProductsCart([]), []);
+  const clearCart = useMemo(
+    () => () => {
+      setProductsCart([]);
+    },
+    []
+  );
 
   const contextObj = useMemo(
     () => ({

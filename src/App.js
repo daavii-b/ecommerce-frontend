@@ -10,7 +10,7 @@ import Header from './components/Header';
 import Main from './components/Main';
 import Routers from './routes';
 import Loading from './components/Loading';
-import CartProvider from './context/Cart';
+import CartProvider from './context/cart';
 
 function App() {
   const { isLoading } = useSelector((state) => state.globalReducer);
@@ -29,13 +29,13 @@ function App() {
           className="toast-notification-style"
           toastClassName="toast-notification-style"
           autoClose={1500}
-          limit={5}
+          limit={3}
           hideProgressBar={false}
           newestOnTop
           closeOnClick
           rtl={false}
           pauseOnFocusLoss={false}
-          draggable={false}
+          draggable
           pauseOnHover
           theme="dark"
         />

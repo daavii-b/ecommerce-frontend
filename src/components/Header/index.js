@@ -83,7 +83,9 @@ export default function MainHeader() {
 
       <div>
         <h1>
-          <Link to="/">E-commerce</Link>
+          <Link to="/" translate="no">
+            E-commerce
+          </Link>
         </h1>
       </div>
 

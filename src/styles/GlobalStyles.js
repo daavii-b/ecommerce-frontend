@@ -76,6 +76,25 @@ export default createGlobalStyle`
     padding: 1px 2px;
     }
 
+    * {
+      scrollbar-width: thin;
+      scrollbar-color: blue orange;
+    }
+
+    /* Works on Chrome, Edge, and Safari */
+    *::-webkit-scrollbar {
+      width: .7rem;
+      height: .7rem;
+    }
+
+    *::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    *::-webkit-scrollbar-thumb {
+      background-color: ${colors.headerColor};
+      border-radius: .6rem;
+    }
 
 
     ${
