@@ -43,6 +43,10 @@ export default function Home() {
     return String(((descValue / price) * 100).toFixed(0)).concat('%');
   }
 
+  function formatTextLength(text) {
+    return text.length > 28 ? `${text.substring(0, 25)}...` : text;
+  }
+
   return (
     <Section className="product">
       {products.map((product) => (
@@ -74,23 +78,27 @@ export default function Home() {
 
             <div className="product-header">
               <a href="/">
-                <h2>{product.name}</h2>
+                <h2>{formatTextLength(product.name)}</h2>
               </a>
             </div>
 
             <div className="product-footer">
               <button type="button" className="add-fav">
-                <FaRegHeart size={18} />
+                <FaRegHeart size={16} />
               </button>
               {product.promotional_price ? (
                 <div className="product-price">
-                  <span className="price old">R${product.price}</span>
-                  <span className="price promotional">
+                  <span translate="no" className="price old">
+                    R${product.price}
+                  </span>
+                  <span translate="no" className="price promotional">
                     R${product.promotional_price}
                   </span>
                 </div>
               ) : (
-                <span className="product-price">R${product.price}</span>
+                <span translate="no" className="product-price">
+                  R${product.price}
+                </span>
               )}
               <button
                 type="button"
@@ -103,7 +111,7 @@ export default function Home() {
                   });
                 }}
               >
-                <FaCartPlus size={18} />
+                <FaCartPlus size={16} />
               </button>
             </div>
           </ProductContainer>

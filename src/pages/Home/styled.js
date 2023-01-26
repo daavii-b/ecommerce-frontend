@@ -98,7 +98,7 @@ export const ProductContainer = styled.div`
     padding: 0.5rem 0;
     border-top: 0.1px solid ${colors.headerColor};
     border-bottom: 0.1px solid ${colors.headerColor};
-
+    text-overflow: ellipsis;
     font-size: 1.6rem;
   }
 
