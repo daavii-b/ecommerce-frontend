@@ -38,7 +38,7 @@ export default function Login() {
       };
 
       dispatch(
-        globalActions.dispatchAction(actions.loginRequest, { ...user, from })
+        globalActions.dispatchAction(actions.loginRequest, { user, from })
       );
     }
   };

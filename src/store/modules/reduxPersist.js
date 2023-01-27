@@ -1,11 +1,11 @@
 import { persistReducer } from 'redux-persist';
-import sessionStorage from 'redux-persist/es/storage/session';
+import storage from 'redux-persist/es/storage';
 
 export default (reducers) => {
   const persistor = persistReducer(
     {
       key: 'ecommerce',
-      storage: sessionStorage,
+      storage,
       whitelist: ['authReducer', 'globalReducer', 'cartReducer'],
     },
     reducers

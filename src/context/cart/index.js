@@ -60,6 +60,7 @@ export default function CartProvider({ children }) {
       addProductCart,
       removeProductCart,
       clearCart,
+      setProductsCart,
     }),
     [addProductCart, clearCart, productsCart, removeProductCart]
   );
