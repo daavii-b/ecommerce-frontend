@@ -38,7 +38,7 @@ export const ProductContainer = styled.div`
     transform: scale(1.02);
     transition: 0.4s ease-out;
 
-    box-shadow: 0 0 8px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 6px 3px rgba(0, 0, 0, 0.1);
   }
 
   h2 {
@@ -48,7 +48,8 @@ export const ProductContainer = styled.div`
   }
 
   .stock {
-    background-color: ${colors.productColor};
+    color: white;
+    background-color: rgba(0, 0, 0, 0.4);
     padding: 0.4rem 0.8rem;
     position: absolute;
     font-size: 1.3rem;
@@ -63,7 +64,7 @@ export const ProductContainer = styled.div`
     align-items: center;
     justify-content: center;
 
-    background-color: rgba(255, 251, 63, 0.8);
+    background-color: rgba(255, 251, 30, 0.8);
     padding: 0.4rem 0.8rem;
     position: absolute;
     font-size: 1.3rem;
@@ -82,7 +83,7 @@ export const ProductContainer = styled.div`
     padding-bottom: 0.5rem;
 
     img {
-      box-shadow: 6px -3px 5px 1px rgba(0, 0, 0, 0.1);
+      box-shadow: 4px -3px 3px 1px rgba(0, 0, 0, 0.1);
       border-radius: 0.3rem;
     }
 
@@ -108,30 +109,40 @@ export const ProductContainer = styled.div`
     align-items: center;
     justify-content: space-around;
 
-    background-color: ${colors.productColor};
+    border: 1px solid ${colors.productColor};
     font-size: 1.3rem;
 
     padding: 0.4rem;
     margin-top: 0.5rem;
 
-    box-shadow: 0 4px 5px 2px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 2px 2px 2px rgba(0, 0, 0, 0.06);
     font-weight: 500;
+
     button {
       background-color: transparent;
       border: none;
       outline: none;
+
+      width: 5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .fav-button {
+      & > .remove {
+        color: red;
+      }
+    }
+    .fav-button:hover {
+      & > .add {
+        color: ${colors.productColor};
+      }
     }
 
     span {
       width: 100%;
       text-align: center;
-    }
-
-    .add-fav {
-      width: 5rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
     }
 
     .product-price {
@@ -142,6 +153,9 @@ export const ProductContainer = styled.div`
 
       .price.old {
         text-decoration: line-through;
+        text-decoration-color: red;
+        color: rgba(255, 0, 0, 0.8);
+
         font-weight: lighter;
         font-size: 1.2rem;
       }
@@ -153,13 +167,6 @@ export const ProductContainer = styled.div`
       .price {
         text-transform: uppercase;
       }
-    }
-
-    .add-cart {
-      width: 5rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
     }
   }
 `;

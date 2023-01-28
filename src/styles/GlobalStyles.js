@@ -93,7 +93,8 @@ export default createGlobalStyle`
 
     *::-webkit-scrollbar-thumb {
       background-color: ${colors.headerColor};
-      border-radius: .6rem;
+      border-top-left-radius: none;
+      border-top-right-radius: none;
     }
 
 

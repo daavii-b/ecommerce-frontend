@@ -2,9 +2,10 @@ import React, { useEffect, useState, useContext } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { get } from 'lodash';
-import { FaCartPlus, FaCaretDown, FaRegHeart } from 'react-icons/fa';
+import { FaCartPlus, FaCaretDown, FaRegHeart, FaHeart } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 import { CartContext } from '../../context/cart';
+import { FavoritesContext } from '../../context/favorites';
 import axios from '../../services/axios';
 import { Section, Article, ProductContainer } from './styled';
 import * as actions from '../../store/modules/auth/actions';
@@ -17,6 +18,7 @@ export default function Home() {
   const searchTerm = qs.get('search') || '';
 
   const { addProductCart } = useContext(CartContext);
+  const { toggleProductFav, checkProductIsFav } = useContext(FavoritesContext);
 
   useEffect(() => {
     async function listProducts() {
@@ -52,7 +54,9 @@ export default function Home() {
       {products.map((product) => (
         <Article key={product.id}>
           <ProductContainer>
-            <span className="stock">units: {product.stock}</span>
+            <abbr title="Units" className="stock">
+              {product.stock}
+            </abbr>
             {product.promotional_price ? (
               <span className="per-des">
                 {getPercentageDiscount(
@@ -83,8 +87,16 @@ export default function Home() {
             </div>
 
             <div className="product-footer">
-              <button type="button" className="add-fav">
-                <FaRegHeart size={16} />
+              <button
+                className="fav-button"
+                onClick={() => toggleProductFav(product.id)}
+                type="button"
+              >
+                {checkProductIsFav(product.id) ? (
+                  <FaHeart size={16} className="remove" />
+                ) : (
+                  <FaRegHeart size={16} className="add" />
+                )}
               </button>
               {product.promotional_price ? (
                 <div className="product-price">
