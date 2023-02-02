@@ -1,6 +1,5 @@
-// import { useContext } from 'react';
 import * as types from '../types';
-// import { CartContext } from '../../../context/cart';
+import axios from '../../../services/axios';
 
 export const cartInitialState = {
   cart: [],
@@ -8,16 +7,18 @@ export const cartInitialState = {
 
 export default (state = cartInitialState, action) => {
   switch (action.type) {
-    case types.ADD_PRODUCT_CART: {
-      return state;
+    case types.UPDATE_CART: {
+      const newState = { ...state };
+
+      axios.post('user/cart/', {
+        cartProducts: [...action.payload.cart],
+      });
+
+      newState.cart = [...action.payload.cart];
+
+      return newState;
     }
 
-    case types.REMOVE_PRODUCT_CART: {
-      return state;
-    }
-    case types.CLEAR_CART: {
-      return state;
-    }
     default:
       return state;
   }

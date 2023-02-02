@@ -36,15 +36,14 @@ function* logoutRequest({ payload }) {
   yield put(actions.logoutSuccess({ ...payload }));
 }
 
-// function persistRehydrated({ payload }) {
-//   console.log(payload);
-//   const token = get(payload, 'authReducer.token', '');
+function persistRehydrated({ payload }) {
+  const token = get(payload, 'authReducer.token', '');
 
-//   if (token) axios.defaults.headers.Authorization = `Bearer ${token}`;
-// }
+  if (token) axios.defaults.headers.Authorization = `Bearer ${token}`;
+}
 
 export default all([
   takeLatest(types.LOGIN_REQUEST, loginRequest),
   takeLatest(types.LOGOUT_REQUEST, logoutRequest),
-  // takeLatest(types.PERSIST_REHYDRATE, persistRehydrated),
+  takeLatest(types.PERSIST_REHYDRATE, persistRehydrated),
 ]);

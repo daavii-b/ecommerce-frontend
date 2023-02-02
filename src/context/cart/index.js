@@ -1,10 +1,12 @@
 import React, { createContext, useState, useMemo } from 'react';
 import PropTypes from 'prop-types';
+import axios from '../../services/axios';
 
 export const CartContext = createContext();
 
 export default function CartProvider({ children }) {
   const [productsCart, setProductsCart] = useState([]);
+
   const addProductCart = useMemo(
     () => (productId, cProduct) => {
       const copyProductsCart = [...productsCart];
@@ -22,6 +24,10 @@ export default function CartProvider({ children }) {
       }
 
       setProductsCart(copyProductsCart);
+
+      axios.post('cart/', {
+        productsCart: [...copyProductsCart],
+      });
     },
     [productsCart]
   );
@@ -31,17 +37,27 @@ export default function CartProvider({ children }) {
       const copyProductsCart = [...productsCart];
 
       const product = copyProductsCart.find(
-        (cartProduct) => cartProduct.id === productId
+        (cProduct) => cProduct.id === productId
       );
 
       if (product && product.qty > 1) {
         product.qty -= 1;
+
         setProductsCart(copyProductsCart);
+
+        axios.post('cart/', {
+          productsCart: [...copyProductsCart],
+        });
       } else {
         const cartProductsFiltered = copyProductsCart.filter(
-          (cartProduct) => cartProduct.id !== productId
+          (cProduct) => cProduct.id !== productId
         );
+
         setProductsCart(cartProductsFiltered);
+
+        axios.post('cart/', {
+          productsCart: [...cartProductsFiltered],
+        });
       }
     },
     [productsCart]
@@ -50,6 +66,10 @@ export default function CartProvider({ children }) {
   const clearCart = useMemo(
     () => () => {
       setProductsCart([]);
+
+      axios.post('cart/', {
+        productsCart: [],
+      });
     },
     []
   );
@@ -62,7 +82,7 @@ export default function CartProvider({ children }) {
       clearCart,
       setProductsCart,
     }),
-    [addProductCart, clearCart, productsCart, removeProductCart]
+    [productsCart, addProductCart, removeProductCart, clearCart]
   );
 
   return (
