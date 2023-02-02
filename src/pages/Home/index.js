@@ -64,7 +64,7 @@ export default function Home() {
                   product.promotional_price
                 )}
                 <span className="arrow-down">
-                  <FaCaretDown size={15} />
+                  <FaCaretDown size={13} />
                 </span>
               </span>
             ) : (
@@ -114,7 +114,7 @@ export default function Home() {
               )}
               <button
                 type="button"
-                className="add-cart"
+                className="add-cart-button"
                 onClick={() => {
                   addProductCart(product.id, product);
                   toast.info('Product added to the cart successfully', {
@@ -123,7 +123,7 @@ export default function Home() {
                   });
                 }}
               >
-                <FaCartPlus size={16} />
+                <FaCartPlus className="add-cart" size={16} />
               </button>
             </div>
           </ProductContainer>

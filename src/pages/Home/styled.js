@@ -33,6 +33,7 @@ export const ProductContainer = styled.div`
 
   transform: scale(1);
   transition: 0.4s ease-in-out;
+  overflow: hidden;
 
   &:hover {
     transform: scale(1.02);
@@ -81,6 +82,7 @@ export const ProductContainer = styled.div`
     justify-content: center;
     margin: auto;
     padding-bottom: 0.5rem;
+    overflow: hidden;
 
     img {
       box-shadow: 4px -3px 3px 1px rgba(0, 0, 0, 0.1);
@@ -126,6 +128,7 @@ export const ProductContainer = styled.div`
       width: 5rem;
       display: flex;
       align-items: center;
+
       justify-content: center;
     }
 
