@@ -12,5 +12,4 @@ export const PERSIST_REHYDRATE = 'persist/REHYDRATE';
 export const LOGOUT_REQUEST = 'LOGOUT_REQUEST';
 export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
 
-export const UPDATE_CART = 'UPDATE_CART';
 export const UPDATE_FAVORITES = 'UPDATE_FAVORITES';
