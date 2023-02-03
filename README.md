@@ -1,1 +1,1 @@
-# Consume an API with React
+# Consuming an API with React
