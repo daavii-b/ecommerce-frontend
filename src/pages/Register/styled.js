@@ -9,9 +9,10 @@ export const Form = styled.form`
   justify-content: center;
 
   width: 60%;
+  height: 80vh;
 
   margin: 0 auto;
-  background-color: rgb(20, 20, 20);
+  background-color: rgba(20, 20, 20, 0.9);
   padding: 2rem;
   color: white;
 
@@ -19,8 +20,13 @@ export const Form = styled.form`
   border-radius: 0.5rem;
 
   .form-header {
+    width: 100%;
+    height: 100%;
     grid-column: 1/3;
-    padding: 1.5rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     font-size: 2rem;
     text-align: center;
@@ -28,6 +34,25 @@ export const Form = styled.form`
     letter-spacing: 2px;
 
     border-bottom: 1px solid ${colors.headerColor};
+
+    h2 {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      text-align: center;
+      padding: 0.8rem;
+      font-weight: 100;
+      font-style: normal;
+      text-transform: uppercase;
+      border-radius: 0.3rem;
+
+      .cart-icon {
+        margin-left: 1rem;
+        text-align: center;
+        color: rgba(128, 110, 228, 0.8);
+      }
+    }
   }
 
   .field-group {
@@ -110,7 +135,7 @@ export const Form = styled.form`
 
     &:hover {
       background-color: rgba(255, 255, 255, 0.1);
-      border: 1px solid rgba(255, 255, 255, 0.4);
+      border: 1px solid ${colors.headerColor};
       box-shadow: 0 0 8px 2px rgba(255, 255, 255, 0.1);
 
       transition: all 0.5s ease-in-out;

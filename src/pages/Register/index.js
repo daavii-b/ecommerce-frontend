@@ -3,6 +3,7 @@ import { toast } from 'react-toastify';
 import { isEmail } from 'validator';
 import { useNavigate } from 'react-router-dom';
 import { get } from 'lodash';
+import { FaOpencart } from 'react-icons/fa';
 import axios from '../../services/axios';
 import { Form } from './styled';
 
@@ -90,7 +91,12 @@ export default function Register() {
       method="POST"
     >
       <div className="form-header">
-        <h2>E-commerce</h2>
+        <h2 translate="no">
+          E-commerce
+          <span className="cart-icon">
+            <FaOpencart size={34} />
+          </span>
+        </h2>
       </div>
       <div className="field-group">
         <label className="field-label" htmlFor="first name">

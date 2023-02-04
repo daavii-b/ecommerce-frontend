@@ -212,6 +212,10 @@ export const Nav = styled.nav`
   padding: 0.3rem;
   padding-right: none;
 
+  &:hover {
+    border-color: rgba(255, 255, 255, 0.4);
+  }
+
   button.toggle-navbar {
     position: absolute;
     top: 8rem;
@@ -256,6 +260,13 @@ export const Nav = styled.nav`
         justify-content: center;
 
         padding: 0.6rem;
+      }
+
+      transition: 0.3s ease-out;
+
+      &:hover svg {
+        transition: 0.3s ease-in;
+        color: rgba(255, 255, 255, 0.8);
       }
     }
   }
