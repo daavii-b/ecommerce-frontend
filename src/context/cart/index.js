@@ -1,10 +1,13 @@
 import React, { createContext, useState, useMemo } from 'react';
 import PropTypes from 'prop-types';
-import axios from '../../services/axios';
+import { useDispatch } from 'react-redux';
+import * as cartActions from '../../store/modules/cart/actions';
+import { addAmount, removeAmount, clearAmount } from '../../utils/cart';
 
 export const CartContext = createContext();
 
 export default function CartProvider({ children }) {
+  const dispatch = useDispatch();
   const [productsCart, setProductsCart] = useState([]);
 
   const addProductCart = useMemo(
@@ -14,22 +17,21 @@ export default function CartProvider({ children }) {
         (cartProduct) => cartProduct.id === productId
       );
       if (!product) {
-        copyProductsCart.push({
+        const newProduct = {
           id: productId,
           product: cProduct,
           qty: 1,
-        });
+        };
+        copyProductsCart.push(newProduct);
+        addAmount(newProduct.product);
       } else {
         product.qty += 1;
+        addAmount(product.product);
       }
-
       setProductsCart(copyProductsCart);
-
-      axios.post('cart/', {
-        productsCart: [...copyProductsCart],
-      });
+      dispatch(cartActions.processAddProduct({ products: copyProductsCart }));
     },
-    [productsCart]
+    [dispatch, productsCart]
   );
 
   const removeProductCart = useMemo(
@@ -45,9 +47,11 @@ export default function CartProvider({ children }) {
 
         setProductsCart(copyProductsCart);
 
-        axios.post('cart/', {
-          productsCart: [...copyProductsCart],
-        });
+        removeAmount(product.product);
+
+        dispatch(
+          cartActions.processRemoveProduct({ products: copyProductsCart })
+        );
       } else {
         const cartProductsFiltered = copyProductsCart.filter(
           (cProduct) => cProduct.id !== productId
@@ -55,23 +59,26 @@ export default function CartProvider({ children }) {
 
         setProductsCart(cartProductsFiltered);
 
-        axios.post('cart/', {
-          productsCart: [...cartProductsFiltered],
-        });
+        removeAmount(product.product);
+
+        dispatch(
+          cartActions.processRemoveProduct({
+            products: cartProductsFiltered,
+          })
+        );
       }
     },
-    [productsCart]
+    [dispatch, productsCart]
   );
 
   const clearCart = useMemo(
     () => () => {
       setProductsCart([]);
+      clearAmount();
 
-      axios.post('cart/', {
-        productsCart: [],
-      });
+      dispatch(cartActions.processClearCart({ productsCart: [] }));
     },
-    []
+    [dispatch]
   );
 
   const contextObj = useMemo(

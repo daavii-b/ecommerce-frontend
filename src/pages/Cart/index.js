@@ -10,14 +10,18 @@ import {
   FaPlus,
   FaMinus,
 } from 'react-icons/fa';
-// import { MdPayment } from 'react-icons/md';
-// import { AiOutlineClear } from 'react-icons/ai';
 import { toast } from 'react-toastify';
 import { CartContext } from '../../context/cart';
 import { FavoritesContext } from '../../context/favorites';
 import { Section, ProductContainer, Article } from './styled';
 import axios from '../../services/axios';
 import * as globalActions from '../../store/modules/global/actions';
+import setAmount, { cartAmount } from '../../utils/cart';
+import {
+  getPercentageDiscount,
+  formatTextLength,
+  getFormatedPrice,
+} from '../../utils';
 
 export default function Cart() {
   const dispatch = useDispatch();
@@ -38,8 +42,10 @@ export default function Cart() {
         const response = await axios.get('cart/');
 
         if (response.status === 200) {
-          const cartProds = response.data.cart;
+          const { products_cart: cartProds, cart_amount: amount } =
+            response.data;
           setProductsCart(cartProds);
+          setAmount(amount);
         }
 
         dispatch(globalActions.finishLoad());
@@ -50,20 +56,6 @@ export default function Cart() {
 
     listCartProducts();
   }, [dispatch, setProductsCart]);
-
-  function getPercentageDiscount(price, promotionalPrice) {
-    const descValue = price - promotionalPrice;
-
-    return String(((descValue / price) * 100).toFixed(0)).concat('%');
-  }
-
-  function formatTextLength(text) {
-    return text.length > 28 ? `${text.substring(0, 25)}...` : text;
-  }
-
-  function getFormatedPrice(price) {
-    return `R$${price.toFixed(2)}`;
-  }
 
   return (
     <Section className="cart-session">
@@ -144,15 +136,17 @@ export default function Cart() {
                         </button>
                       </div>
                       {item.product.promotional_price ? (
-                        <span className="per-des">
-                          {getPercentageDiscount(
-                            item.product.price,
-                            item.product.promotional_price
-                          )}
+                        <div className="per-des">
+                          <p>
+                            {getPercentageDiscount(
+                              item.product.price,
+                              item.product.promotional_price
+                            )}
+                          </p>
                           <span className="arrow-down">
                             <FaCaretDown size={12} />
                           </span>
-                        </span>
+                        </div>
                       ) : (
                         ''
                       )}
@@ -180,7 +174,14 @@ export default function Cart() {
           </ul>
         </div>
         <footer className="details-footer">
-          <div className="cart-amount">Amount</div>
+          <div className="cart-info">
+            <p className="cart-amount">
+              <abbr title="Amount">T: {getFormatedPrice(cartAmount)}</abbr>
+            </p>
+            <p className="cart-total-items">
+              <abbr title="Total items">I: {productsCart.length}</abbr>
+            </p>
+          </div>
           <div className="cart-actions">
             <button className="ready-to-pay" type="button">
               <span>

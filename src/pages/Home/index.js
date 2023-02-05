@@ -10,6 +10,11 @@ import axios from '../../services/axios';
 import { Section, Article, ProductContainer } from './styled';
 import * as actions from '../../store/modules/auth/actions';
 import * as globalActions from '../../store/modules/global/actions';
+import {
+  getPercentageDiscount,
+  formatTextLength,
+  getFormatedPrice,
+} from '../../utils';
 
 export default function Home() {
   const [products, setProducts] = useState([]);
@@ -38,16 +43,6 @@ export default function Home() {
 
     listProducts();
   }, [dispatch, searchTerm]);
-
-  function getPercentageDiscount(price, promotionalPrice) {
-    const descValue = price - promotionalPrice;
-
-    return String(((descValue / price) * 100).toFixed(0)).concat('%');
-  }
-
-  function formatTextLength(text) {
-    return text.length > 28 ? `${text.substring(0, 25)}...` : text;
-  }
 
   return (
     <Section className="product">
@@ -101,15 +96,15 @@ export default function Home() {
               {product.promotional_price ? (
                 <div className="product-price">
                   <span translate="no" className="price old">
-                    R${product.price}
+                    {getFormatedPrice(product.price)}
                   </span>
                   <span translate="no" className="price promotional">
-                    R${product.promotional_price}
+                    {getFormatedPrice(product.promotional_price)}
                   </span>
                 </div>
               ) : (
                 <span translate="no" className="product-price">
-                  R${product.price}
+                  {getFormatedPrice(product.price)}
                 </span>
               )}
               <button
