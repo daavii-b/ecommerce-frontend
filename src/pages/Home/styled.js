@@ -110,7 +110,7 @@ export const ProductContainer = styled.div`
     height: 3rem;
 
     display: grid;
-    grid-template-columns: 15% 70% 15%;
+    grid-template-columns: 13% 74% 13%;
     align-items: center;
     justify-items: center;
 
@@ -168,13 +168,14 @@ export const ProductContainer = styled.div`
         text-decoration: line-through;
         text-decoration-color: red;
         color: rgba(255, 0, 0, 0.8);
+        margin-right: 0.3rem;
 
         font-weight: lighter;
         font-size: 1.2rem;
       }
 
       .price.promotional {
-        font-size: 1.4rem;
+        font-size: 1.3rem;
       }
 
       .price {
