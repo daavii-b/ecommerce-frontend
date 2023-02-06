@@ -4,8 +4,11 @@ import * as defaultStyles from '../../styles/defaultStyles';
 import { device } from '../../styles/mediaQueries';
 
 export const Header = styled.header`
-  position: relative;
+  position: fixed;
+  width: 100%;
   height: 8rem;
+
+  z-index: 4;
 
   display: grid;
   grid-template-columns: 18rem 1fr 20%;
@@ -230,6 +233,8 @@ export const Nav = styled.nav`
 
     opacity: 0;
     visibility: hidden;
+
+    color: ${colors.productColor};
   }
 
   ul.nav-items {
@@ -272,7 +277,7 @@ export const Nav = styled.nav`
   }
 
   @media ${device.tabletL} {
-    background-color: rgba(0, 0, 0, 0.15);
+    background-color: rgba(0, 0, 0, 0.5);
     margin-top: 0.5rem;
     width: fit-content;
 
@@ -286,13 +291,14 @@ export const Nav = styled.nav`
     justify-content: flex-end;
 
     button.toggle-navbar {
+      display: block;
+
       width: 3.1rem;
       height: 3.1rem;
 
       position: relative;
       top: 0;
       right: 0;
-      display: block;
 
       background-color: transparent;
 

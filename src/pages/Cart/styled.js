@@ -6,8 +6,6 @@ export const Section = styled.section`
   display: grid;
   grid-template-columns: 60% 1fr;
 
-  overflow-x: hidden;
-
   .products-session,
   .products-details-session {
     & > header {
@@ -88,6 +86,8 @@ export const Section = styled.section`
         display: flex;
         align-items: center;
         justify-content: center;
+
+        text-shadow: 0 3px 1px rgba(0, 0, 0, 0.3);
 
         padding: 0.4rem;
 

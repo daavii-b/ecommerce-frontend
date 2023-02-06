@@ -4,7 +4,7 @@ import { device } from '../../styles/mediaQueries';
 
 export const Section = styled.section`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(18.5rem, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
 
   align-items: flex-start;
   justify-items: center;
