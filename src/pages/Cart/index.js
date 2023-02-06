@@ -9,6 +9,7 @@ import {
   FaCaretDown,
   FaPlus,
   FaMinus,
+  FaAngleDoubleRight,
 } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 import { CartContext } from '../../context/cart';
@@ -65,96 +66,113 @@ export default function Cart() {
         </header>
 
         <ul className="product-list">
-          {productsCart.length > 0
-            ? productsCart.map((item) => (
-                <li key={item.id}>
-                  <Article>
-                    <ProductContainer>
-                      <div className="product-cover">
+          {productsCart.length > 0 ? (
+            productsCart.map((item) => (
+              <li key={item.id}>
+                <Article>
+                  <ProductContainer>
+                    <div className="product-cover">
+                      <a target="_self" href="/">
                         <img
                           src={get(item.product, 'cover', '')}
                           alt={`Product Cover: ${item.product.name}`}
                         />
-                        <abbr title="Quantity" className="stock">
-                          {item.qty}
-                        </abbr>
-                      </div>
-                      <header className="product-header">
-                        <h3 translate="no">
-                          {formatTextLength(item.product.name)}
-                        </h3>
-                      </header>
-                      <footer className="product-footer">
-                        {item.product.promotional_price ? (
-                          <>
-                            <span translate="no" className="price old">
-                              {getFormatedPrice(item.product.price)}
-                            </span>
-                            <span translate="no" className="price promotional">
-                              {getFormatedPrice(item.product.promotional_price)}
-                            </span>
-                          </>
-                        ) : (
-                          <span translate="no" className="price">
+                      </a>
+                      <abbr title="Quantity" className="stock">
+                        {item.qty}
+                      </abbr>
+                    </div>
+                    <header className="product-header">
+                      <h3 translate="no">
+                        {formatTextLength(item.product.name)}
+                      </h3>
+                    </header>
+                    <footer className="product-footer">
+                      {item.product.promotional_price ? (
+                        <>
+                          <span translate="no" className="price old">
                             {getFormatedPrice(item.product.price)}
                           </span>
-                        )}
-                      </footer>
-                      <div className="cart-controls">
-                        <button
-                          className="fav-button"
-                          onClick={() => toggleProductFav(item.id)}
-                          type="button"
-                        >
-                          {checkProductIsFav(item.id) ? (
-                            <FaHeart size={11} className="remove" />
-                          ) : (
-                            <FaRegHeart size={11} className="add" />
-                          )}
-                        </button>
-                        <button
-                          onClick={() => {
-                            addProductCart(item.id);
-                            toast.info(
-                              'Product has been successfully added to cart'
-                            );
-                          }}
-                          type="button"
-                        >
-                          <FaPlus size={11} />
-                        </button>
-                        <button
-                          type="button"
-                          onClick={() => {
-                            removeProductCart(item.id);
-                            toast.info(
-                              'Product has been successfully removed from the cart'
-                            );
-                          }}
-                        >
-                          <FaMinus size={11} />
-                        </button>
-                      </div>
-                      {item.product.promotional_price ? (
-                        <div className="per-des">
-                          <p>
-                            {getPercentageDiscount(
-                              item.product.price,
-                              item.product.promotional_price
-                            )}
-                          </p>
-                          <span className="arrow-down">
-                            <FaCaretDown size={12} />
+                          <span translate="no" className="price promotional">
+                            {getFormatedPrice(item.product.promotional_price)}
                           </span>
-                        </div>
+                        </>
                       ) : (
-                        ''
+                        <span translate="no" className="price">
+                          {getFormatedPrice(item.product.price)}
+                        </span>
                       )}
-                    </ProductContainer>
-                  </Article>
-                </li>
-              ))
-            : ''}
+                    </footer>
+                    <div className="cart-controls">
+                      <button
+                        className="fav-button"
+                        onClick={() => toggleProductFav(item.id)}
+                        type="button"
+                      >
+                        {checkProductIsFav(item.id) ? (
+                          <FaHeart size={11} className="remove" />
+                        ) : (
+                          <FaRegHeart size={11} className="add" />
+                        )}
+                      </button>
+                      <button
+                        onClick={() => {
+                          addProductCart(item.id);
+                          toast.info(
+                            'Product has been successfully added to cart'
+                          );
+                        }}
+                        type="button"
+                      >
+                        <FaPlus size={11} />
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          removeProductCart(item.id);
+                          toast.info(
+                            'Product has been successfully removed from the cart'
+                          );
+                        }}
+                      >
+                        <FaMinus size={11} />
+                      </button>
+                    </div>
+                    {item.product.promotional_price ? (
+                      <div className="per-des">
+                        <p>
+                          {getPercentageDiscount(
+                            item.product.price,
+                            item.product.promotional_price
+                          )}
+                        </p>
+                        <span className="arrow-down">
+                          <FaCaretDown size={12} />
+                        </span>
+                      </div>
+                    ) : (
+                      ''
+                    )}
+                  </ProductContainer>
+                </Article>
+              </li>
+            ))
+          ) : (
+            <li>
+              <div className="empty-cart">
+                <h3>Your cart is Empty</h3>
+                <p>It is time to go shopping</p>
+                <p className="go-to-shopping">
+                  <a target="_self" href="/">
+                    let&apos;s go
+                    <span>
+                      <FaAngleDoubleRight className="icon" size={16} />
+                    </span>
+                  </a>
+                </p>
+              </div>
+            </li>
+          )}
         </ul>
       </section>
 
@@ -167,7 +185,9 @@ export default function Cart() {
             {productsCart.length
               ? productsCart.map((item) => (
                   <li key={item.id}>
-                    <h3>{item.product.name}</h3>
+                    <a href="/">
+                      <h3>{item.product.name}</h3>
+                    </a>
                   </li>
                 ))
               : ''}

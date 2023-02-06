@@ -11,6 +11,7 @@ export const Section = styled.section`
   .products-session,
   .products-details-session {
     & > header {
+      background-color: ${colors.headerColor};
       border: 1px solid rgba(0, 0, 0, 0.3);
       padding: 1rem;
 
@@ -22,8 +23,8 @@ export const Section = styled.section`
 
         &::first-letter {
           text-transform: uppercase;
-          color: ${colors.productColor};
           font-weight: bold;
+          color: white;
         }
       }
     }
@@ -32,7 +33,7 @@ export const Section = styled.section`
   }
 
   .product-list {
-    height: 80vh;
+    height: 70vh;
     padding: 0 1rem;
     margin-top: 0.2rem;
 
@@ -48,47 +49,137 @@ export const Section = styled.section`
     margin-right: 0.2rem;
   }
 
+  .empty-cart {
+    text-transform: uppercase;
+    font-size: 1.2rem;
+
+    padding: 0.6rem;
+    text-align: center;
+
+    h3 {
+      border: 1px solid rgba(0, 0, 0, 0.3);
+      border-radius: 0.7rem;
+
+      font-size: 1.6rem;
+      font-weight: 300;
+
+      padding: 0.4rem;
+
+      margin-bottom: 0.6rem;
+    }
+
+    p {
+      text-align: center;
+    }
+
+    .go-to-shopping {
+      width: fit-content;
+      margin: 2rem auto;
+
+      font-size: 1.4rem;
+
+      border-bottom: 1px solid ${colors.headerColor};
+      padding: 0.4rem;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        padding: 0.4rem;
+
+        span {
+          margin-left: 0.4rem;
+          .icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+        }
+      }
+
+      &:hover {
+        color: ${colors.headerColor};
+      }
+    }
+  }
+
   .products-details-session {
     margin-left: 0.2rem;
 
     .details-content {
       height: 100%;
-      max-height: 60vh;
-      margin-top: 0.4rem;
+      max-height: 57vh;
       padding: 0.6rem;
+      margin-top: 0.4rem;
 
       border: 1px solid rgba(0, 0, 0, 0.2);
+      overflow-y: auto;
+
+      box-shadow: 15px 1px 2px 1px rgba(0, 0, 0, 0.1);
+
+      &:hover {
+        border-color: ${colors.productColor};
+      }
 
       .product-list-name {
         overflow-y: auto;
 
         li {
-          border: 1px solid rgba(0, 0, 0, 0.2);
-          border-radius: 0.5rem;
-          padding: 0.4rem;
-          margin: 0.4rem 0;
+          border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+          padding: 0.3rem;
+          margin: 0.6rem 0;
+
+          transition: 0.2s ease-in;
 
           h3 {
             font-size: 1.2rem;
             font-weight: 200;
             text-transform: uppercase;
           }
+
+          &:hover {
+            transition: 0.2s ease-out;
+            color: ${colors.productColor};
+            border-color: ${colors.productColor};
+          }
         }
       }
     }
 
     .details-footer {
-      .cart-amount {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      .cart-info {
+        display: flex;
+        align-items: center;
+        margin: 0.4rem 0;
         padding: 0.5rem;
 
         p {
-          border: 1px solid rgba(0, 0, 0, 0.4);
+          width: fit-content;
+          text-transform: uppercase;
+          font-size: 1.3rem;
+          border: 1px solid ${colors.headerColor};
+          border-radius: 1rem;
+          padding: 0.5rem;
+        }
+
+        .cart-amount {
+          margin-right: 0.6rem;
         }
       }
 
       .cart-actions {
         display: flex;
         flex-direction: row wrap;
+        margin-top: 0.3rem;
+        width: 100%;
 
         button {
           width: 80%;
@@ -106,7 +197,7 @@ export const Section = styled.section`
 
           border: 1px solid rgba(0, 0, 0, 0.2);
           border-radius: 0.4rem;
-          box-shadow: 0 3px 3px 1px rgba(0, 0, 0, 0.1);
+          box-shadow: 2px 4px 3px 2px rgba(0, 0, 0, 0.12);
           text-transform: uppercase;
 
           span {
@@ -120,24 +211,32 @@ export const Section = styled.section`
           }
 
           &.ready-to-pay {
+            &:active {
+              box-shadow: 2px 4px 3px 2px rgba(0, 0, 0, 0.2);
+              background-color: rgba(0, 255, 0, 0.6);
+            }
+
             span {
               color: green;
             }
 
             border-color: green;
+
+            transition: 0.1s ease-out;
           }
 
           &.clear-cart {
+            &:active {
+              box-shadow: 2px 4px 3px 2px rgba(0, 0, 0, 0.2);
+              background-color: rgba(255, 0, 0, 0.6);
+            }
+
             span {
               .icon {
                 color: red;
               }
             }
             border-color: red;
-          }
-
-          &:active {
-            box-shadow: 0 3px 3px 1px rgba(0, 0, 0, 0.2);
           }
         }
       }

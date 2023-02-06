@@ -88,9 +88,9 @@ export default function Home() {
                 type="button"
               >
                 {checkProductIsFav(product.id) ? (
-                  <FaHeart size={16} className="remove" />
+                  <FaHeart size={15} className="remove" />
                 ) : (
-                  <FaRegHeart size={16} className="add" />
+                  <FaRegHeart size={15} className="add" />
                 )}
               </button>
               {product.promotional_price ? (
@@ -118,7 +118,7 @@ export default function Home() {
                   });
                 }}
               >
-                <FaCartPlus className="add-cart" size={16} />
+                <FaCartPlus className="add-cart" size={15} />
               </button>
             </div>
           </ProductContainer>

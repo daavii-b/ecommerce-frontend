@@ -9,5 +9,12 @@ export function formatTextLength(text) {
 }
 
 export function getFormatedPrice(price) {
-  return `R$${price.toFixed(2)}`;
+  return 'R$'.concat(
+    new Intl.NumberFormat('pt-BR', {
+      style: 'decimal',
+      currency: 'BRL',
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    }).format(price)
+  );
 }

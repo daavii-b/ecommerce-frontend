@@ -4,7 +4,7 @@ import { device } from '../../styles/mediaQueries';
 
 export const Section = styled.section`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(17.5rem, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(18.5rem, 1fr));
 
   align-items: flex-start;
   justify-items: center;
@@ -15,7 +15,7 @@ export const Section = styled.section`
   padding: 1rem;
 
   @media ${device.laptop} {
-    grid-template-columns: repeat(auto-fit, 1fr);
+    grid-template-columns: repeat(auto-fit, fit-content);
   }
 `;
 
@@ -106,10 +106,13 @@ export const ProductContainer = styled.div`
   }
 
   .product-footer {
+    width: 100%;
     height: 3rem;
-    display: flex;
+
+    display: grid;
+    grid-template-columns: 15% 70% 15%;
     align-items: center;
-    justify-content: space-around;
+    justify-items: center;
 
     border: 1px solid ${colors.productColor};
     font-size: 1.3rem;
@@ -121,14 +124,15 @@ export const ProductContainer = styled.div`
     font-weight: 500;
 
     button {
+      padding: 0.25rem;
+
       background-color: transparent;
       border: none;
       outline: none;
 
-      width: 5rem;
+      width: max-content;
       display: flex;
       align-items: center;
-
       justify-content: center;
     }
 
@@ -139,6 +143,12 @@ export const ProductContainer = styled.div`
     }
     .fav-button:hover {
       & > .add {
+        color: ${colors.productColor};
+      }
+    }
+
+    .add-cart-button:hover {
+      .add-cart {
         color: ${colors.productColor};
       }
     }
