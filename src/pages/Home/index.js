@@ -3,7 +3,6 @@ import { useSearchParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { get } from 'lodash';
 import { FaCartPlus, FaCaretDown, FaRegHeart, FaHeart } from 'react-icons/fa';
-import { toast } from 'react-toastify';
 import { CartContext } from '../../context/cart';
 import { FavoritesContext } from '../../context/favorites';
 import axios from '../../services/axios';
@@ -112,10 +111,6 @@ export default function Home() {
                 className="add-cart-button"
                 onClick={() => {
                   addProductCart(product.id, product);
-                  toast.info('Product added to the cart successfully', {
-                    autoClose: 1000,
-                    position: 'top-left',
-                  });
                 }}
               >
                 <FaCartPlus className="add-cart" size={15} />

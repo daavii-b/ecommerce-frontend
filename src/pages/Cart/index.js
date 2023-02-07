@@ -11,7 +11,6 @@ import {
   FaMinus,
   FaAngleDoubleRight,
 } from 'react-icons/fa';
-import { toast } from 'react-toastify';
 import { CartContext } from '../../context/cart';
 import { FavoritesContext } from '../../context/favorites';
 import { Section, ProductContainer, Article } from './styled';
@@ -118,9 +117,6 @@ export default function Cart() {
                       <button
                         onClick={() => {
                           addProductCart(item.id);
-                          toast.info(
-                            'Product has been successfully added to cart'
-                          );
                         }}
                         type="button"
                       >
@@ -130,9 +126,6 @@ export default function Cart() {
                         type="button"
                         onClick={() => {
                           removeProductCart(item.id);
-                          toast.info(
-                            'Product has been successfully removed from the cart'
-                          );
                         }}
                       >
                         <FaMinus size={11} />

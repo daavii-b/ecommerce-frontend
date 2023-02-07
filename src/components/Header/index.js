@@ -89,7 +89,7 @@ export default function MainHeader() {
         </h1>
       </div>
 
-      <Form className="search-form">
+      <Form className="search-form" action="/">
         <label htmlFor="search">
           <FaSearch size={15} className="search-icon" />
           <input
