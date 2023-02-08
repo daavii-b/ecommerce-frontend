@@ -119,7 +119,7 @@ export const Section = styled.section`
       border: 1px solid rgba(0, 0, 0, 0.2);
       overflow-y: auto;
 
-      box-shadow: 15px 1px 2px 1px rgba(0, 0, 0, 0.1);
+      box-shadow: 3px 1px 2px 1px rgba(0, 0, 0, 0.1);
 
       &:hover {
         border-color: ${colors.productColor};
@@ -197,7 +197,7 @@ export const Section = styled.section`
 
           border: 1px solid rgba(0, 0, 0, 0.2);
           border-radius: 0.4rem;
-          box-shadow: 2px 4px 3px 2px rgba(0, 0, 0, 0.12);
+          box-shadow: 2px 3px 2px 1px rgba(0, 0, 0, 0.1);
           text-transform: uppercase;
 
           span {
@@ -212,7 +212,7 @@ export const Section = styled.section`
 
           &.ready-to-pay {
             &:active {
-              box-shadow: 2px 4px 3px 2px rgba(0, 0, 0, 0.2);
+              box-shadow: 2px 4px 2px 1px rgba(0, 0, 0, 0.2);
               background-color: rgba(0, 255, 0, 0.6);
             }
 
@@ -227,7 +227,7 @@ export const Section = styled.section`
 
           &.clear-cart {
             &:active {
-              box-shadow: 2px 4px 3px 2px rgba(0, 0, 0, 0.2);
+              box-shadow: 2px 4px 2px 1px rgba(0, 0, 0, 0.2);
               background-color: rgba(255, 0, 0, 0.6);
             }
 
