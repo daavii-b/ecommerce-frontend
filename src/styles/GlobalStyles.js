@@ -12,12 +12,12 @@ export default createGlobalStyle`
         box-sizing: border-box;
     }
 
-    html {
+    :root, html {
         font-size: 62.5%;
     }
 
     body {
-        font-size: 1.5rem;
+        font-size: 1.6rem;
         font-family: monospace;
     }
 
@@ -31,6 +31,9 @@ export default createGlobalStyle`
 
     button {
         cursor: pointer;
+        outline: none;
+        border: none;
+        background-color: transparent;
     }
 
     li {

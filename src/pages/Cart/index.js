@@ -71,7 +71,7 @@ export default function Cart() {
                 <Article>
                   <ProductContainer>
                     <div className="product-cover">
-                      <a target="_self" href="/">
+                      <a target="_self" href={`/product/${item.product.slug}`}>
                         <img
                           src={get(item.product, 'cover', '')}
                           alt={`Product Cover: ${item.product.name}`}
@@ -178,7 +178,7 @@ export default function Cart() {
             {productsCart.length
               ? productsCart.map((item) => (
                   <li key={item.id}>
-                    <a href="/">
+                    <a href={`/product/${item.product.slug}`}>
                       <h3>{item.product.name}</h3>
                     </a>
                   </li>

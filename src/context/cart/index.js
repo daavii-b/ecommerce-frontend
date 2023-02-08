@@ -23,7 +23,7 @@ export default function CartProvider({ children }) {
           qty: 1,
         };
         copyProductsCart.push(newProduct);
-        addAmount(newProduct.product);
+        addAmount(cProduct);
       } else {
         product.qty += 1;
         addAmount(product.product);

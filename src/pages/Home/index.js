@@ -66,7 +66,7 @@ export default function Home() {
             )}
             {get(product, 'cover', '') ? (
               <div className="product-image">
-                <a href="/">
+                <a href={`/product/${product.slug}`}>
                   <img src={product.cover} alt={`Product: ${product.name}`} />
                 </a>
               </div>
@@ -75,7 +75,7 @@ export default function Home() {
             )}
 
             <div className="product-header">
-              <a href="/">
+              <a href={`/product/${product.slug}`}>
                 <h2>{formatTextLength(product.name)}</h2>
               </a>
             </div>

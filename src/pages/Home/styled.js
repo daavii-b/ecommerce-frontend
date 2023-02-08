@@ -50,7 +50,7 @@ export const ProductContainer = styled.div`
 
   .stock {
     color: white;
-    background-color: rgba(0, 0, 0, 0.4);
+    background-color: rgba(0, 0, 0, 0.7);
     padding: 0.4rem 0.8rem;
     position: absolute;
     font-size: 1.3rem;
@@ -73,7 +73,7 @@ export const ProductContainer = styled.div`
     border-bottom-left-radius: 0.3rem;
     text-align: center;
     font-weight: 600;
-    right: 0;
+    left: 0;
   }
 
   .product-image {
@@ -167,7 +167,7 @@ export const ProductContainer = styled.div`
       .price.old {
         text-decoration: line-through;
         text-decoration-color: red;
-        color: rgba(255, 0, 0, 0.8);
+        color: rgba(255, 0, 0, 0.75);
         margin-right: 0.3rem;
 
         font-weight: lighter;
