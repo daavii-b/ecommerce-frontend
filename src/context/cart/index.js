@@ -76,7 +76,7 @@ export default function CartProvider({ children }) {
       setProductsCart([]);
       clearAmount();
 
-      dispatch(cartActions.processClearCart({ productsCart: [] }));
+      dispatch(cartActions.processClearCart({ products: [] }));
     },
     [dispatch]
   );

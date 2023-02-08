@@ -44,6 +44,10 @@ export const Section = styled.section`
 
     position: relative;
 
+    border-radius: 0.5rem;
+
+    box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.15);
+
     img {
       width: 100%;
       border-radius: 0.5rem;
@@ -68,7 +72,9 @@ export const Section = styled.section`
 
       font-size: 1.5rem;
       text-align: justify;
-      font-weight: 200;
+      font-weight: 100;
+
+      letter-spacing: 0.1px;
     }
   }
 
@@ -83,7 +89,7 @@ export const Section = styled.section`
 
     border: 1px solid rgba(0, 0, 0, 0.7);
     border-radius: 0.7rem;
-    box-shadow: 0 4px 3px 1px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 3px 1px rgba(0, 0, 0, 0.06);
 
     overflow: hidden;
 
@@ -163,14 +169,14 @@ export const Section = styled.section`
         display: flex;
 
         transition: 0.3s ease-in-out;
-        background-color: rgba(0, 0, 0, 0.03);
+        background-color: rgba(0, 0, 0, 0.06);
 
         border-right: 1px solid rgba(0, 0, 0, 0.3);
         border-left: 1px solid rgba(0, 0, 0, 0.3);
 
         &:hover {
           transition: 0.3s ease-out;
-          background-color: rgba(0, 0, 0, 0.1);
+          background-color: rgba(0, 0, 0, 0.11);
         }
 
         &:active {
