@@ -207,11 +207,14 @@ export const Nav = styled.nav`
   align-items: center;
 
   transition: 0.2s ease-in;
+
   border: 1px solid rgba(0, 0, 0, 0.15);
   border-right: none;
   border-radius: 0.6rem;
+
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
+
   padding: 0.3rem;
   padding-right: none;
 
@@ -234,7 +237,7 @@ export const Nav = styled.nav`
     opacity: 0;
     visibility: hidden;
 
-    color: ${colors.productColor};
+    color: ${colors.defaultWhiteColor};
   }
 
   ul.nav-items {
@@ -243,6 +246,7 @@ export const Nav = styled.nav`
     right: 0;
 
     width: 100%;
+    height: 100%;
 
     display: flex;
     flex-direction: row;
@@ -251,8 +255,12 @@ export const Nav = styled.nav`
 
     visibility: visible;
     opacity: 1;
+    transition: 0.4s ease-in;
 
     li {
+      width: 100%;
+      height: 100%;
+
       display: flex;
       align-items: center;
       justify-content: center;
@@ -271,13 +279,13 @@ export const Nav = styled.nav`
 
       &:hover svg {
         transition: 0.3s ease-in;
-        color: rgba(255, 255, 255, 0.8);
+        color: ${colors.defaultWhiteColor};
       }
     }
   }
 
   @media ${device.tabletL} {
-    background-color: rgba(0, 0, 0, 0.5);
+    background: ${colors.iconsColor};
     margin-top: 0.5rem;
     width: fit-content;
 
@@ -311,7 +319,8 @@ export const Nav = styled.nav`
     }
 
     ul.nav-items {
-      width: 0px;
+      width: fit-content;
+      height: fit-content;
 
       opacity: 0;
       visibility: hidden;
@@ -325,8 +334,6 @@ export const Nav = styled.nav`
       flex-direction: column;
       justify-content: flex-start;
 
-      transition: 0.3s ease-in;
-
       li {
         display: flex;
         align-items: center;
@@ -334,16 +341,19 @@ export const Nav = styled.nav`
 
         margin: 0.3rem 0;
 
-        width: 4rem;
+        width: 2rem;
         height: 4rem;
 
-        background-color: ${colors.productColor};
-
-        border-radius: 50%;
         box-shadow: 0 3px 10px 3px rgba(0, 0, 0, 0.1);
 
         a svg {
-          color: rgba(20, 20, 20, 0.8);
+          color: ${colors.defaultWhiteColor};
+        }
+
+        &:hover {
+          a svg {
+            color: ${colors.productColor};
+          }
         }
       }
     }
@@ -360,7 +370,7 @@ export const Nav = styled.nav`
       }
 
       ul.nav-items {
-        width: 5rem;
+        width: 3rem;
         height: fit-content;
         position: relative;
 

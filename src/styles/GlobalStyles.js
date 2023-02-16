@@ -19,6 +19,7 @@ export default createGlobalStyle`
     body {
         font-size: 1.6rem;
         font-family: monospace;
+        background-color: ${colors.defaultWhiteColor};
     }
 
     h1 {

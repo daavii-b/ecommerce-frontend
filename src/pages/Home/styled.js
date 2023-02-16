@@ -29,17 +29,22 @@ export const ProductContainer = styled.div`
   height: fit-content;
   position: relative;
 
-  border: 1px solid rgba(0, 0, 0, 0.03);
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  border-radius: 0.5rem;
 
   transform: scale(1);
   transition: 0.4s ease-in-out;
   overflow: hidden;
 
+  box-shadow: 0 0 6px 3px rgba(0, 0, 0, 0.08);
+  background-color: ${colors.defaultWhiteColor};
+
   &:hover {
     transform: scale(1.02);
     transition: 0.4s ease-out;
 
-    box-shadow: 0 0 6px 3px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 6px 3px rgba(0, 0, 0, 0.15);
+    border-color: rgba(0, 0, 0, 0.4);
   }
 
   h2 {
@@ -114,7 +119,7 @@ export const ProductContainer = styled.div`
     align-items: center;
     justify-items: center;
 
-    border: 1px solid ${colors.productColor};
+    border-top: 1px solid ${colors.productColor};
     font-size: 1.3rem;
 
     padding: 0.4rem;
