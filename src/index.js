@@ -6,16 +6,20 @@ import App from './App';
 import CartProvider from './context/cart';
 import FavoritesProvider from './context/favorites';
 import store, { persistor } from './store';
+import Router from './routes/CustomRouter';
+import history from './services/history';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <Provider store={store}>
     <PersistGate persistor={persistor}>
-      <CartProvider>
-        <FavoritesProvider>
-          <App />
-        </FavoritesProvider>
-      </CartProvider>
+      <Router history={history}>
+        <CartProvider>
+          <FavoritesProvider>
+            <App />
+          </FavoritesProvider>
+        </CartProvider>
+      </Router>
     </PersistGate>
   </Provider>
 );

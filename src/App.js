@@ -2,9 +2,7 @@ import React, { useEffect, useContext } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { ToastContainer } from 'react-toastify';
-import Router from './routes/CustomRouter';
 import GlobalStyles from './styles/GlobalStyles';
-import history from './services/history';
 import Header from './components/Header';
 import Main from './components/Main';
 import Routers from './routes';
@@ -29,28 +27,26 @@ function App() {
 
   return (
     <>
+      <GlobalStyles />
+      <Header />
+      <Main>
+        <Routers />
+      </Main>
+      <ToastContainer
+        className="toast-notification-style"
+        toastClassName="toast-notification-style"
+        autoClose={1500}
+        limit={2}
+        hideProgressBar={false}
+        newestOnTop
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss={false}
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
       <Loading isLoading={isLoading} />
-      <Router history={history}>
-        <Header />
-        <Main>
-          <Routers />
-        </Main>
-        <GlobalStyles />
-        <ToastContainer
-          className="toast-notification-style"
-          toastClassName="toast-notification-style"
-          autoClose={1500}
-          limit={2}
-          hideProgressBar={false}
-          newestOnTop
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss={false}
-          draggable
-          pauseOnHover
-          theme="dark"
-        />
-      </Router>
     </>
   );
 }
