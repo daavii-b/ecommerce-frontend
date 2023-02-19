@@ -1,25 +1,18 @@
-import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useLocation } from 'react-router-dom';
+import React, { useState, useContext } from 'react';
+import { useSelector } from 'react-redux';
 
 import { isEmail } from 'validator';
 
 import { FaOpencart } from 'react-icons/fa';
 import { toast } from 'react-toastify';
-
+import { AuthContext } from '../../context/auth';
 import { Container, Form } from './styled';
-import * as actions from '../../store/modules/auth/actions';
-import * as globalActions from '../../store/modules/global/actions';
 
 export default function Login() {
   const { isAuthenticated } = useSelector((state) => state.authReducer);
-  const location = useLocation();
-  const { from } = location.state || '/user';
-
+  const { loginUser } = useContext(AuthContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
-  const dispatch = useDispatch();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -32,14 +25,7 @@ export default function Login() {
     }
 
     if (!formErrors) {
-      const user = {
-        email,
-        password,
-      };
-
-      dispatch(
-        globalActions.dispatchAction(actions.loginRequest, { user, from })
-      );
+      loginUser({ email, password });
     }
   };
 
