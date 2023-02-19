@@ -191,7 +191,7 @@ export default function Cart() {
             <p className="cart-amount">
               <abbr title="Amount">T: {getFormatedPrice(cartAmount)}</abbr>
             </p>
-            <p className="cart-total-items">
+            <p className="cart-total-items" translate="no">
               <abbr title="Total items">I: {productsCart.length}</abbr>
             </p>
           </div>
