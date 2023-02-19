@@ -30,6 +30,6 @@ CustomRouter.defaultProps = {
 
 CustomRouter.propTypes = {
   basename: PropTypes.string,
-  children: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+  children: PropTypes.shape().isRequired,
   history: PropTypes.shape(),
 };
