@@ -83,6 +83,7 @@ export default function Home() {
             <div className="product-footer">
               <button
                 className="fav-button"
+                aria-label="add-favorites-button"
                 onClick={() => toggleProductFav(product.id)}
                 type="button"
               >
@@ -109,6 +110,7 @@ export default function Home() {
               <button
                 type="button"
                 className="add-cart-button"
+                aria-label="add-cart-button"
                 onClick={() => {
                   addProductCart(product.id, product);
                 }}
