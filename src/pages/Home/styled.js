@@ -29,7 +29,6 @@ export const ProductContainer = styled.div`
   height: fit-content;
   position: relative;
 
-  border: 1px solid rgba(0, 0, 0, 0.3);
   border-radius: 0.5rem;
 
   transform: scale(1);
@@ -114,12 +113,14 @@ export const ProductContainer = styled.div`
     width: 100%;
     height: 3rem;
 
+    background-color: ${colors.headerColor};
+    color: ${colors.iconsColor};
+
     display: grid;
     grid-template-columns: 13% 74% 13%;
     align-items: center;
     justify-items: center;
 
-    border-top: 1px solid ${colors.productColor};
     font-size: 1.3rem;
 
     padding: 0.4rem;
@@ -139,6 +140,7 @@ export const ProductContainer = styled.div`
       display: flex;
       align-items: center;
       justify-content: center;
+      color: ${colors.iconsColor};
     }
 
     .fav-button {
@@ -147,14 +149,18 @@ export const ProductContainer = styled.div`
       }
     }
     .fav-button:hover {
+      transition: 0.3s ease-out;
       & > .add {
-        color: ${colors.productColor};
+        transition: 0.3s ease-out;
+        color: ${colors.defaultWhiteColor};
       }
     }
 
     .add-cart-button:hover {
+      transition: 0.3s ease-out;
       .add-cart {
-        color: ${colors.productColor};
+        transition: 0.3s ease-out;
+        color: ${colors.defaultWhiteColor};
       }
     }
 
@@ -172,7 +178,6 @@ export const ProductContainer = styled.div`
       .price.old {
         text-decoration: line-through;
         text-decoration-color: red;
-        color: rgba(255, 0, 0, 0.75);
         margin-right: 0.3rem;
 
         font-weight: lighter;

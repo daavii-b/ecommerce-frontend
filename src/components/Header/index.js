@@ -62,6 +62,7 @@ export default function MainHeader() {
           type="button"
           className="toggle-category-menu"
           aria-expanded="false"
+          aria-label="Toggle category navigation"
         >
           <FaChevronRight size={10} onClick={categoryNavHandleClick} />
         </button>
@@ -76,6 +77,7 @@ export default function MainHeader() {
           type="button"
           onClick={categoryNavHandleClick}
           className="toggle-category-menu off"
+          aria-label="Close category navigation"
         >
           <AiOutlineClose size={10} />
         </button>
@@ -107,6 +109,7 @@ export default function MainHeader() {
           type="button"
           className="toggle-navbar"
           aria-expanded="false"
+          aria-label="Toggle navigation bar"
           onClick={mainNavHandleClick}
         >
           <FaBars size={18} />
@@ -114,19 +117,19 @@ export default function MainHeader() {
 
         <ul className="nav-items">
           <li>
-            <Link to="/cart">
+            <Link aria-label="Navigate to cart" to="/cart">
               <FaShoppingCart size={15} className="icons" />
             </Link>
           </li>
 
           <li>
-            <Link to="/cart">
+            <Link aria-label="Navigate to favorites" to="/cart">
               <FaHeart size={15} className="icons" />
             </Link>
           </li>
 
           <li>
-            <Link to="/users">
+            <Link aria-label="Navigate to user profile" to="/users">
               <FaUser size={15} className="icons" />
             </Link>
           </li>
@@ -144,12 +147,16 @@ export default function MainHeader() {
                 }}
                 to="/logout"
               >
-                <FaSignOutAlt size={15} className="icons" />
+                <FaSignOutAlt
+                  aria-label="Make logout"
+                  size={15}
+                  className="icons"
+                />
               </Link>
             </li>
           ) : (
             <li>
-              <Link to="/login">
+              <Link aria-label="Navigate to login" to="/login">
                 <FaSignInAlt size={15} className="icons" />
               </Link>
             </li>

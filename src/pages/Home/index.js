@@ -16,8 +16,8 @@ import {
 } from '../../utils';
 
 export default function Home() {
-  const [products, setProducts] = useState([]);
   const dispatch = useDispatch();
+  const [products, setProducts] = useState([]);
   const [qs] = useSearchParams();
   const searchTerm = qs.get('search') || '';
 
@@ -83,7 +83,7 @@ export default function Home() {
             <div className="product-footer">
               <button
                 className="fav-button"
-                aria-label="add-favorites-button"
+                aria-label="Click to add product in favorites"
                 onClick={() => toggleProductFav(product.id)}
                 type="button"
               >
@@ -110,7 +110,7 @@ export default function Home() {
               <button
                 type="button"
                 className="add-cart-button"
-                aria-label="add-cart-button"
+                aria-label="Click to add product in cart"
                 onClick={() => {
                   addProductCart(product.id, product);
                 }}
