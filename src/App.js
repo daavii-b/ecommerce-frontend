@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useLayoutEffect, useContext } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { ToastContainer } from 'react-toastify';
@@ -13,15 +13,15 @@ import * as favoritesActions from './store/modules/favorites/actions';
 function App() {
   const dispatch = useDispatch();
   const { isLoading } = useSelector((state) => state.globalReducer);
-  const { productsFav, setProductsFav } = useContext(FavoritesContext);
   const { favorites } = useSelector((state) => state.favoritesReducer);
+  const { productsFav, setProductsFav } = useContext(FavoritesContext);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (favorites.length > 0) setProductsFav([...favorites]);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     dispatch(favoritesActions.updateFavorites({ favorites: productsFav }));
   }, [dispatch, productsFav]);
 
