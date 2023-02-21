@@ -1,4 +1,4 @@
-export const iconsColor = '#301934';
+export const iconsColor = 'rgba(0, 0, 0, 1);';
 export const headerColor = '#806ec4';
 export const productColor = '#679de4';
 

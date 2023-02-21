@@ -13,6 +13,7 @@ function* loginRequest({ payload }) {
     axios.defaults.headers.Authorization = `Bearer ${response.data.access}`;
 
     const user = yield call(axios.get, 'users/');
+
     yield put(
       actions.loginSuccess({
         ...response.data,
@@ -23,6 +24,26 @@ function* loginRequest({ payload }) {
   } catch (error) {
     yield put(
       actions.loginFailure({
+        errors: [get(error, 'response.data')],
+        status: get(error, 'response.status'),
+      })
+    );
+  }
+}
+
+function* updateRequest({ payload }) {
+  try {
+    const response = yield call(axios.patch, 'users/', payload.user);
+
+    yield put(
+      actions.updateSuccess({
+        user: { ...response.data },
+        oldToken: payload.oldToken,
+      })
+    );
+  } catch (error) {
+    yield put(
+      actions.updateFailure({
         errors: [get(error, 'response.data')],
         status: get(error, 'response.status'),
       })
@@ -44,6 +65,7 @@ function persistRehydrated({ payload }) {
 
 export default all([
   takeLatest(types.LOGIN_REQUEST, loginRequest),
+  takeLatest(types.UPDATE_REQUEST, updateRequest),
   takeLatest(types.LOGOUT_REQUEST, logoutRequest),
   takeLatest(types.PERSIST_REHYDRATE, persistRehydrated),
 ]);

@@ -7,6 +7,10 @@ export const LOGIN_REQUEST = 'LOGIN_REQUEST';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAILURE = 'LOGIN_FAILURE';
 
+export const UPDATE_REQUEST = 'UPDATE_REQUEST';
+export const UPDATE_SUCCESS = 'UPDATE_SUCCESS';
+export const UPDATE_FAILURE = 'UPDATE_FAILURE';
+
 export const PERSIST_REHYDRATE = 'persist/REHYDRATE';
 
 export const LOGOUT_REQUEST = 'LOGOUT_REQUEST';

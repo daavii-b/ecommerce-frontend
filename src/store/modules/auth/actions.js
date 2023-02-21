@@ -18,6 +18,24 @@ export function loginFailure(payload) {
     payload,
   };
 }
+export function updateRequest(payload) {
+  return {
+    type: types.UPDATE_REQUEST,
+    payload,
+  };
+}
+export function updateSuccess(payload) {
+  return {
+    type: types.UPDATE_SUCCESS,
+    payload,
+  };
+}
+export function updateFailure(payload) {
+  return {
+    type: types.UPDATE_FAILURE,
+    payload,
+  };
+}
 
 export function logoutRequest(payload) {
   return {
