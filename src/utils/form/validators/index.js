@@ -5,8 +5,16 @@ export const usernameIsValid = (username) =>
   !(username.length < 3 || username.length > 35);
 export const firstNameIsValid = (firstName) =>
   !(firstName.length < 3 || firstName.length > 45);
-const lastNameIsValid = (lastName) =>
+export const lastNameIsValid = (lastName) =>
   !(lastName.length < 3 || lastName.length > 45);
+
+export const passwordIsEqual = (password, confirmPassword) =>
+  password === confirmPassword;
+
+export const passwordIsValid = (password) => password.length > 8;
+
+export const emptyPasswordField = (password, confirmPassword) =>
+  password.length === 0 || confirmPassword.length === 0;
 
 export function editFormValidator(userData) {
   const {
@@ -36,6 +44,27 @@ export function editFormValidator(userData) {
   }
 
   return userObject;
+}
+
+export function changePasswordFormValidator(userData) {
+  const { password, confirmPassword } = userData;
+  let isValid = true;
+
+  if (emptyPasswordField(password, confirmPassword)) {
+    toast.error('Password and confirmation password cannot be blank');
+    return { isValid: false };
+  }
+
+  if (!passwordIsValid(password)) {
+    toast.error('Password is invalid. Please enter a valid password');
+    isValid = false;
+  }
+  if (!passwordIsEqual(password, confirmPassword)) {
+    toast.error('Password and confirm password do not match');
+    isValid = false;
+  }
+
+  return { isValid };
 }
 
 export { isEmail };

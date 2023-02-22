@@ -387,7 +387,7 @@ export default function User() {
       <footer className="change-password-footer">
         <a
           aria-label="Change password link"
-          href="/users"
+          href="/users/change-password"
           className="change-password-link"
         >
           <p>

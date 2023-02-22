@@ -31,7 +31,7 @@ export const Section = styled.section`
   }
 
   .product-list {
-    height: 70vh;
+    height: 69vh;
     padding: 0 1rem;
     margin-top: 0.2rem;
 
