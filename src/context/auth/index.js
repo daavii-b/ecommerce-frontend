@@ -8,7 +8,9 @@ import * as globalActions from '../../store/modules/global/actions';
 export const AuthContext = createContext();
 
 export default function AuthProvider({ children }) {
-  const { user, token } = useSelector((state) => state.authReducer);
+  const { user, token, isAuthenticated } = useSelector(
+    (state) => state.authReducer
+  );
   const dispatch = useDispatch();
   const location = useLocation();
   const { from } = location.state || '/user';
@@ -44,8 +46,9 @@ export default function AuthProvider({ children }) {
       updateUser,
       user,
       token,
+      isAuthenticated,
     }),
-    [loginUser, updateUser, user, token]
+    [loginUser, updateUser, user, token, isAuthenticated]
   );
 
   return (

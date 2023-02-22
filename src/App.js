@@ -6,13 +6,11 @@ import GlobalStyles from './styles/GlobalStyles';
 import Header from './components/Header';
 import Main from './components/Main';
 import Routers from './routes';
-import Loading from './components/Loading';
 import { FavoritesContext } from './context/favorites';
 import * as favoritesActions from './store/modules/favorites/actions';
 
 function App() {
   const dispatch = useDispatch();
-  const { isLoading } = useSelector((state) => state.globalReducer);
   const { favorites } = useSelector((state) => state.favoritesReducer);
   const { productsFav, setProductsFav } = useContext(FavoritesContext);
 
@@ -46,7 +44,6 @@ function App() {
         pauseOnHover
         theme="dark"
       />
-      <Loading isLoading={isLoading} />
     </>
   );
 }

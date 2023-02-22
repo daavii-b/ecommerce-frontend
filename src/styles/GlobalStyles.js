@@ -50,7 +50,7 @@ export default createGlobalStyle`
     }
 
     .icons {
-        color: ${colors.iconsColor};
+        color: ${colors.defaultBlackColor};
     }
 
 
@@ -96,7 +96,7 @@ export default createGlobalStyle`
     }
 
     *::-webkit-scrollbar-thumb {
-      background-color: ${colors.headerColor};
+      background-color: ${colors.mainPurlpleColor};
       border-top-left-radius: none;
       border-top-right-radius: none;
     }

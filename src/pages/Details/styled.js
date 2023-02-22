@@ -19,14 +19,14 @@ export const Section = styled.section`
     border-radius: 0.7rem;
     grid-column: 1 / 3;
 
-    background-color: ${colors.productColor};
+    background-color: ${colors.secondMainColor};
 
     h3 {
       font-size: 1.8rem;
       font-weight: 400;
       text-transform: uppercase;
       letter-spacing: 0.12rem;
-      color: ${colors.iconsColor};
+      color: ${colors.defaultBlackColor};
     }
   }
 
@@ -133,7 +133,7 @@ export const Section = styled.section`
       padding: 0.6rem 0.7rem;
 
       border-radius: 0.8rem;
-      border: 1px solid ${colors.productColor};
+      border: 1px solid ${colors.secondMainColor};
 
       position: relative;
       left: 7rem;

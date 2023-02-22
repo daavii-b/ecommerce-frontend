@@ -9,7 +9,7 @@ export const Section = styled.section`
   .products-session,
   .products-details-session {
     & > header {
-      background-color: ${colors.headerColor};
+      background-color: ${colors.mainPurlpleColor};
       border: 1px solid rgba(0, 0, 0, 0.3);
       padding: 1rem;
 
@@ -76,7 +76,7 @@ export const Section = styled.section`
 
       font-size: 1.4rem;
 
-      border-bottom: 1px solid ${colors.headerColor};
+      border-bottom: 1px solid ${colors.mainPurlpleColor};
       padding: 0.4rem;
 
       display: flex;
@@ -102,7 +102,7 @@ export const Section = styled.section`
       }
 
       &:hover {
-        color: ${colors.headerColor};
+        color: ${colors.mainPurlpleColor};
       }
     }
   }
@@ -122,7 +122,7 @@ export const Section = styled.section`
       box-shadow: 3px 1px 2px 1px rgba(0, 0, 0, 0.1);
 
       &:hover {
-        border-color: ${colors.productColor};
+        border-color: ${colors.secondMainColor};
       }
 
       .product-list-name {
@@ -143,8 +143,8 @@ export const Section = styled.section`
 
           &:hover {
             transition: 0.2s ease-out;
-            color: ${colors.productColor};
-            border-color: ${colors.productColor};
+            color: ${colors.secondMainColor};
+            border-color: ${colors.secondMainColor};
           }
         }
       }
@@ -165,7 +165,7 @@ export const Section = styled.section`
           width: fit-content;
           text-transform: uppercase;
           font-size: 1.3rem;
-          border: 1px solid ${colors.headerColor};
+          border: 1px solid ${colors.mainPurlpleColor};
           border-radius: 1rem;
           padding: 0.5rem;
         }
@@ -271,7 +271,7 @@ export const ProductContainer = styled.div`
   &:hover {
     transform: scale(1.015);
     transition: 0.2s ease-out;
-    border: 1px solid ${colors.productColor};
+    border: 1px solid ${colors.secondMainColor};
     box-shadow: 2.5px 0 1px 1px rgba(0, 0, 0, 0.08);
   }
 
@@ -356,7 +356,7 @@ export const ProductContainer = styled.div`
     bottom: 0.4rem;
 
     border-radius: 0.6rem;
-    border: 1px solid ${colors.productColor};
+    border: 1px solid ${colors.secondMainColor};
     overflow: hidden;
 
     &:active {
@@ -375,7 +375,7 @@ export const ProductContainer = styled.div`
       transition: 0.1s ease-in-out;
 
       &:active {
-        color: ${colors.productColor};
+        color: ${colors.secondMainColor};
       }
     }
     .fav-button {
@@ -385,7 +385,7 @@ export const ProductContainer = styled.div`
     }
     .fav-button:hover {
       & > .add {
-        color: ${colors.productColor};
+        color: ${colors.secondMainColor};
       }
     }
   }

@@ -47,11 +47,11 @@ export const Section = styled.section`
           align-items: center;
           justify-content: center;
 
-          color: ${colors.productColor};
+          color: ${colors.secondMainColor};
 
           border-right: 1px solid rgba(0, 0, 0, 0.2);
 
-          background-color: ${colors.iconsColor};
+          background-color: ${colors.defaultBlackColor};
 
           border-top-left-radius: 0.4rem;
           border-bottom-left-radius: 0.4rem;
@@ -74,7 +74,7 @@ export const Section = styled.section`
 
       grid-gap: 0.8rem;
 
-      border-left: 1px solid ${colors.iconsColor};
+      border-left: 1px solid ${colors.defaultBlackColor};
 
       padding: 0.7rem;
       padding-left: 1.2rem;
@@ -99,7 +99,7 @@ export const Section = styled.section`
           span {
             font-size: 1.3rem;
             text-transform: uppercase;
-            color: ${colors.headerColor};
+            color: ${colors.mainPurlpleColor};
             letter-spacing: 0.3px;
           }
         }
@@ -120,8 +120,8 @@ export const Section = styled.section`
             }
 
             &:hover {
-              color: ${colors.productColor};
-              border-color: ${colors.productColor};
+              color: ${colors.secondMainColor};
+              border-color: ${colors.secondMainColor};
               box-shadow: -2px 2px 1px 1px rgba(0, 0, 0, 0.05);
               transition: 0.3s ease-in;
             }
@@ -260,7 +260,7 @@ export const Section = styled.section`
         grid-column-gap: 0.7rem;
 
         padding: 0.5rem;
-        border-left: 2px solid ${colors.productColor};
+        border-left: 2px solid ${colors.secondMainColor};
         transition: 0.3s ease-in;
 
         animation: remove-animate 0.4s linear;
@@ -303,7 +303,7 @@ export const Section = styled.section`
 
             &:focus {
               transition: 0.4s ease;
-              border-color: ${colors.productColor};
+              border-color: ${colors.secondMainColor};
             }
 
             &::placeholder {
@@ -323,7 +323,7 @@ export const Section = styled.section`
 
             font-size: 1.8rem;
 
-            color: ${colors.iconsColor};
+            color: ${colors.defaultBlackColor};
             transition: 0.3s ease;
 
             &:hover {
@@ -398,7 +398,7 @@ export const Section = styled.section`
 
       &:hover {
         transition: 0.4s ease;
-        color: ${colors.productColor};
+        color: ${colors.secondMainColor};
       }
 
       p {

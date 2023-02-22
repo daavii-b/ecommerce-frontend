@@ -33,7 +33,7 @@ export const Form = styled.form`
     text-transform: uppercase;
     letter-spacing: 2px;
 
-    border-bottom: 1px solid ${colors.headerColor};
+    border-bottom: 1px solid ${colors.mainPurlpleColor};
 
     h2 {
       display: flex;
@@ -83,7 +83,7 @@ export const Form = styled.form`
       input {
         background-color: rgba(255, 255, 255, 0.4);
         margin-left: 0.6rem;
-        border: 1px solid ${colors.headerColor};
+        border: 1px solid ${colors.mainPurlpleColor};
         border-radius: 0.4rem;
         padding: 0.4rem;
         transition: 0.6s ease-in-out;
@@ -135,7 +135,7 @@ export const Form = styled.form`
 
     &:hover {
       background-color: rgba(255, 255, 255, 0.1);
-      border: 1px solid ${colors.headerColor};
+      border: 1px solid ${colors.mainPurlpleColor};
       box-shadow: 0 0 8px 2px rgba(255, 255, 255, 0.1);
 
       transition: all 0.5s ease-in-out;

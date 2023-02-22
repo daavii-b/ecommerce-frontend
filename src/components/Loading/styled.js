@@ -61,7 +61,7 @@ export const Container = styled.div`
     width: 20rem;
     height: 20rem;
     z-index: 1000;
-    border: 0.1px solid ${colors.productColor};
+    border: 0.1px solid ${colors.secondMainColor};
     border-radius: 50%;
   }
   .loader-2 {
@@ -86,7 +86,7 @@ export const Container = styled.div`
 
     width: 3rem;
     height: 3rem;
-    background-color: ${colors.productColor};
+    background-color: ${colors.secondMainColor};
     border-radius: 50%;
     z-index: 10000;
   }

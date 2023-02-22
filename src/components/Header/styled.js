@@ -18,7 +18,7 @@ export const Header = styled.header`
 
   text-transform: uppercase;
   padding: ${defaultStyles.padding};
-  background-color: ${colors.headerColor};
+  background-color: ${colors.mainPurlpleColor};
 
   box-shadow: 0 6px 9px 3px rgba(0, 0, 0, 0.15);
 
@@ -100,7 +100,7 @@ export const Header = styled.header`
           transition: 0.3s ease-out;
 
           &:hover {
-            color: ${colors.headerColor};
+            color: ${colors.mainPurlpleColor};
             transition: 0.3s ease-in;
           }
         }
@@ -110,7 +110,7 @@ export const Header = styled.header`
         }
 
         &:hover::marker {
-          color: ${colors.headerColor};
+          color: ${colors.mainPurlpleColor};
         }
       }
     }
@@ -194,8 +194,8 @@ export const Header = styled.header`
 export const Nav = styled.nav`
   width: 100%;
   height: fit-content;
+
   z-index: 100;
-  overflow: hidden;
 
   position: relative;
   top: 0;
@@ -222,22 +222,34 @@ export const Nav = styled.nav`
     border-color: rgba(255, 255, 255, 0.4);
   }
 
+  &.active {
+    width: fit-content;
+    height: fit-content;
+
+    button.toggle-navbar {
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.1s ease-in;
+    }
+
+    ul.nav-items {
+      height: fit-content;
+      position: absolute;
+      top: 0;
+      right: 0;
+
+      transition: 0.3s ease-out;
+
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+
   button.toggle-navbar {
     position: absolute;
-    top: 8rem;
-    right: 0;
-
-    background-color: transparent;
-    border: none;
-
-    padding: 0.2rem;
-
-    transition: all 0.2s ease-in;
-
     opacity: 0;
     visibility: hidden;
-
-    color: ${colors.defaultWhiteColor};
+    transition: all 0.1s ease-in;
   }
 
   ul.nav-items {
@@ -246,12 +258,12 @@ export const Nav = styled.nav`
     right: 0;
 
     width: 100%;
-    height: 100%;
 
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-around;
+    grid-gap: 0.5rem;
 
     visibility: visible;
     opacity: 1;
@@ -261,18 +273,17 @@ export const Nav = styled.nav`
       width: 100%;
       height: 100%;
 
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      margin: 0 0.2rem;
+      display: block;
+      padding: 0.7rem 0.4rem;
 
       a {
+        width: 100%;
+        height: 100%;
+        z-index: 5;
+
         display: flex;
         align-items: center;
         justify-content: center;
-
-        padding: 0.6rem;
       }
 
       transition: 0.3s ease-out;
@@ -285,7 +296,6 @@ export const Nav = styled.nav`
   }
 
   @media ${device.tabletL} {
-    background: ${colors.iconsColor};
     margin-top: 0.5rem;
     width: fit-content;
 
@@ -299,85 +309,66 @@ export const Nav = styled.nav`
     justify-content: flex-end;
 
     button.toggle-navbar {
-      display: block;
-
-      width: 3.1rem;
-      height: 3.1rem;
-
       position: relative;
       top: 0;
       right: 0;
 
+      width: 3.8rem;
+      height: 3.1rem;
+
+      display: block;
+
       background-color: transparent;
+      color: ${colors.defaultWhiteColor};
+      border: none;
 
-      padding: 0.2rem;
-
-      transition: all 0.2s ease-out;
+      padding: 0.4rem;
 
       opacity: 1;
       visibility: visible;
+      transition: all 0.1s ease-in;
+
+      background-color: transparent;
+      color: ${colors.defaultSecondaryBlackColor};
     }
 
     ul.nav-items {
-      width: fit-content;
-      height: fit-content;
+      position: absolute;
+      top: 0;
+      right: -5rem;
+
+      width: 5rem;
+
+      background: ${colors.defaultBlackColor};
+      border: 1.5px solid ${colors.secondMainColor};
+      border-right: none;
+
+      border-top-left-radius: 0.4rem;
+      border-bottom-left-radius: 0.4rem;
 
       opacity: 0;
       visibility: hidden;
-
-      overflow: hidden;
-      position: absolute;
-      top: 0;
-      right: 0;
 
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
 
       li {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        margin: 0.3rem 0;
-
         width: 2rem;
         height: 4rem;
 
         box-shadow: 0 3px 10px 3px rgba(0, 0, 0, 0.1);
 
         a svg {
+          font-size: 1.5rem;
           color: ${colors.defaultWhiteColor};
         }
 
         &:hover {
           a svg {
-            color: ${colors.productColor};
+            color: ${colors.secondMainColor};
           }
         }
-      }
-    }
-
-    &.active {
-      button.toggle-navbar {
-        position: absolute;
-        padding: 0.4rem;
-
-        transition: all 0.5s ease-in;
-
-        opacity: 0;
-        visibility: hidden;
-      }
-
-      ul.nav-items {
-        width: 3rem;
-        height: fit-content;
-        position: relative;
-
-        transition: 0.5s ease-out;
-
-        opacity: 1;
-        visibility: visible;
       }
     }
   }

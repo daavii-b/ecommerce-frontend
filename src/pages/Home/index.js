@@ -27,14 +27,14 @@ export default function Home() {
   useEffect(() => {
     async function listProducts() {
       try {
-        dispatch(globalActions.startLoad());
+        // dispatch(globalActions.startLoad());
 
         const productsResponse = await axios.get(
           'products/?search='.concat(searchTerm)
         );
 
         setProducts(productsResponse.data.results);
-        dispatch(globalActions.finishLoad());
+        // dispatch(globalActions.finishLoad());
       } catch (err) {
         dispatch(globalActions.dispatchAction(actions.logoutRequest));
       }
