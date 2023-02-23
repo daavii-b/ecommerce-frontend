@@ -28,6 +28,7 @@ export default function MainHeader() {
   // elements references
   const refMainNavBar = useRef(null);
   const refCategoryNavBar = useRef(null);
+  // const refSearchForm = useRef(null);
 
   const categoryNavHandleClick = async () => {
     const toggleMenu = document.querySelector('.toggle-category-menu');
@@ -59,6 +60,7 @@ export default function MainHeader() {
 
   return (
     <Header>
+      {/* CATEGORY NAVIGATION BAR */}
       <nav ref={refCategoryNavBar} className="category-nav">
         <button
           type="button"
@@ -86,6 +88,7 @@ export default function MainHeader() {
         </ul>
       </nav>
 
+      {/* hEADER TITLE */}
       <div>
         <h1>
           <Link to="/" translate="no">
@@ -94,6 +97,7 @@ export default function MainHeader() {
         </h1>
       </div>
 
+      {/* SEARCH FORM */}
       <Form className="search-form" action="/">
         <label htmlFor="search">
           <FaSearch size={15} className="search-icon" />
@@ -107,6 +111,7 @@ export default function MainHeader() {
         </label>
       </Form>
 
+      {/* MAIN NAVIGATION BAR */}
       <Nav ref={refMainNavBar} className="main-navbar">
         <button
           type="button"
