@@ -14,6 +14,7 @@ export default function Pagination({
   qtyPages,
   totalProducts,
   searchTerm,
+  categoryFilter,
 }) {
   // Make pagination range return an array with the range of page.
   const totalPages = Math.ceil(totalProducts / 12);
@@ -77,9 +78,7 @@ export default function Pagination({
               className="pagination-control first-page"
             >
               <a
-                href={
-                  searchTerm ? `?search=${searchTerm}&page=${1}` : `?page=${1}`
-                }
+                href={`?search=${searchTerm}&category=${categoryFilter}&page=${1}`}
               >
                 <FaAngleDoubleLeft />
               </a>
@@ -94,11 +93,7 @@ export default function Pagination({
             >
               <a
                 onClick={handlePrevPageClick}
-                href={
-                  searchTerm
-                    ? `?search=${searchTerm}&page=${prevPage}`
-                    : `?page=${prevPage}`
-                }
+                href={`?search=${searchTerm}&category=${categoryFilter}&page=${prevPage}`}
               >
                 <FaAngleLeft />
               </a>
@@ -119,11 +114,7 @@ export default function Pagination({
             >
               <a
                 className="page-link"
-                href={
-                  searchTerm
-                    ? `?search=${searchTerm}&page=${page}`
-                    : `?page=${page}`
-                }
+                href={`?search=${searchTerm}&category=${categoryFilter}&page=${page}`}
               >
                 {page}
               </a>
@@ -136,11 +127,7 @@ export default function Pagination({
             >
               <a
                 onClick={handleNextPageClick}
-                href={
-                  searchTerm
-                    ? `?search=${searchTerm}&page=${nextPage}`
-                    : `?page=${nextPage}`
-                }
+                href={`?search=${searchTerm}&category=${categoryFilter}&page=${nextPage}`}
               >
                 <FaAngleRight />
               </a>
@@ -154,11 +141,7 @@ export default function Pagination({
               className="pagination-control last-page"
             >
               <a
-                href={
-                  searchTerm
-                    ? `?search=${searchTerm}&page=${totalPages}`
-                    : `?page=${totalPages}`
-                }
+                href={`?search=${searchTerm}&category=${categoryFilter}&page=${totalPages}`}
               >
                 <FaAngleDoubleRight />
               </a>
@@ -175,8 +158,9 @@ export default function Pagination({
 }
 
 Pagination.defaultProps = {
-  qtyPages: process.env.REACT_APP_QTY_PAGINATIONS_PAGES,
+  qtyPages: Number(process.env.REACT_APP_QTY_PAGINATIONS_PAGES),
   searchTerm: '',
+  categoryFilter: '',
 };
 
 Pagination.propTypes = {
@@ -184,4 +168,5 @@ Pagination.propTypes = {
   qtyPages: PropTypes.number,
   totalProducts: PropTypes.number.isRequired,
   searchTerm: PropTypes.string,
+  categoryFilter: PropTypes.string,
 };

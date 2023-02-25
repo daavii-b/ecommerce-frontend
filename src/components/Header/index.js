@@ -1,97 +1,116 @@
-import React, { useState, useContext, useRef } from 'react';
+import React, { useContext, useRef, useEffect, useState } from 'react';
+import { useLocation, Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { AiOutlineClose } from 'react-icons/ai';
-import { Link } from 'react-router-dom';
 import {
   FaSignOutAlt,
   FaSignInAlt,
   FaShoppingCart,
   FaUser,
   FaSearch,
-  FaChevronRight,
   FaBars,
   FaHeart,
 } from 'react-icons/fa';
+import { BiCategory } from 'react-icons/bi';
 import { AuthContext } from '../../context/auth';
-
 import * as actions from '../../store/modules/auth/actions';
 import * as globalActions from '../../store/modules/global/actions';
-
-import { Header, Nav, Form } from './styled';
+import { Header, Nav, CategoryNav, Form } from './styled';
 import axios from '../../services/axios';
 
 export default function MainHeader() {
+  const location = useLocation();
   const dispatch = useDispatch();
+
   const [categories, setCategories] = useState([]);
   const { isAuthenticated } = useContext(AuthContext);
 
   // elements references
   const refMainNavBar = useRef(null);
   const refCategoryNavBar = useRef(null);
-  // const refSearchForm = useRef(null);
+  const refToggleMainNavBar = useRef(null);
+  const refToggleCategoryNavBar = useRef(null);
 
-  const categoryNavHandleClick = async () => {
-    const toggleMenu = document.querySelector('.toggle-category-menu');
-
+  const categoryNavHandleClick = () => {
     refCategoryNavBar.current.classList.toggle('active');
 
-    const categoriesResponse = await axios.get('categories/');
-    setCategories(categoriesResponse.data.results);
-
     if (refCategoryNavBar.current.classList.contains('active')) {
-      toggleMenu.setAttribute('aria-expanded', true);
+      refToggleCategoryNavBar.current.setAttribute('aria-expanded', 'true');
     } else {
-      toggleMenu.setAttribute('aria-expanded', false);
+      refToggleCategoryNavBar.current.setAttribute('aria-expanded', 'false');
     }
   };
 
   const mainNavHandleClick = () => {
-    const toggleNavBar = document.querySelector('.toggle-navbar');
-
     refMainNavBar.current.classList.toggle('active');
 
-    toggleNavBar.setAttribute('aria-expanded', true);
+    refToggleMainNavBar.current.setAttribute('aria-expanded', true);
 
     setTimeout(() => {
       refMainNavBar.current.classList.toggle('active');
-      toggleNavBar.setAttribute('aria-expanded', false);
+      refToggleMainNavBar.current.setAttribute('aria-expanded', false);
     }, 3200);
   };
+
+  useEffect(() => {
+    async function listCategories() {
+      try {
+        const response = await axios.get('categories/');
+
+        setCategories(response.data);
+      } catch (err) {
+        console.error(err);
+      }
+    }
+    if (location.pathname === '/') listCategories();
+  }, [location.pathname]);
 
   return (
     <Header>
       {/* CATEGORY NAVIGATION BAR */}
-      <nav ref={refCategoryNavBar} className="category-nav">
-        <button
-          type="button"
-          className="toggle-category-menu"
-          aria-expanded="false"
-          aria-label="Toggle category navigation"
-        >
-          <FaChevronRight size={10} onClick={categoryNavHandleClick} />
-        </button>
-        <button
-          type="button"
-          onClick={categoryNavHandleClick}
-          className="toggle-category-menu off"
-          aria-label="Close category navigation"
-        >
-          <AiOutlineClose size={10} />
-        </button>
 
-        <ul className="category-list">
-          {categories.map((category) => (
-            <li key={category.id}>
-              <a href={`?category=${category.name}`}>{category.name}</a>
-            </li>
-          ))}
-        </ul>
-      </nav>
+      {location.pathname === '/' ? (
+        <CategoryNav ref={refCategoryNavBar} className="category-navbar">
+          <div>
+            <h2>
+              <button
+                ref={refToggleCategoryNavBar}
+                aria-expanded="false"
+                onClick={categoryNavHandleClick}
+                aria-label="Toggle category navigation"
+                className="toggle-category-nav"
+                type="button"
+              >
+                <span>
+                  <BiCategory />
+                </span>
+                Categories
+              </button>
+            </h2>
+          </div>
+          <ul className="categories-list">
+            {categories.map((category) => (
+              <li key={category.id} className="category-item">
+                <div className="category-container">
+                  <a
+                    className="category"
+                    aria-label={`Filter by category ${category.name}`}
+                    href={`?category=${category.name}`}
+                  >
+                    {category.name}
+                  </a>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </CategoryNav>
+      ) : (
+        ''
+      )}
 
       {/* hEADER TITLE */}
       <div>
         <h1>
-          <Link to="/" translate="no">
+          <Link aria-label="Go to home page" to="/" translate="no">
             E-commerce
           </Link>
         </h1>
@@ -117,7 +136,8 @@ export default function MainHeader() {
           type="button"
           className="toggle-navbar"
           aria-expanded="false"
-          aria-label="Toggle navigation bar"
+          aria-label="Toggle main navigation bar"
+          ref={refToggleMainNavBar}
           onClick={mainNavHandleClick}
         >
           <FaBars size={18} />

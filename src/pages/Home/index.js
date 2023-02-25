@@ -23,6 +23,7 @@ export default function Home() {
   const [qs] = useSearchParams();
   const searchTerm = qs.get('search') || '';
   const currentPage = Number(qs.get('page')) || 1;
+  const categoryFilter = qs.get('category') || '';
 
   const { addProductCart } = useContext(CartContext);
   const { toggleProductFav, checkProductIsFav } = useContext(FavoritesContext);
@@ -31,7 +32,7 @@ export default function Home() {
     async function listProducts() {
       try {
         const productsResponse = await axios.get(
-          `products/?search=${searchTerm}&page=${currentPage}`
+          `products/?search=${searchTerm}&category=${categoryFilter}&page=${currentPage}`
         );
 
         setTotalProducts(productsResponse.data.count);
@@ -42,7 +43,7 @@ export default function Home() {
     }
 
     listProducts();
-  }, [currentPage, dispatch, searchTerm]);
+  }, [currentPage, dispatch, searchTerm, categoryFilter]);
 
   return (
     <>
@@ -128,6 +129,7 @@ export default function Home() {
         currentPage={currentPage}
         totalProducts={totalProducts}
         searchTerm={searchTerm}
+        categoryFilter={categoryFilter}
       />
     </>
   );
