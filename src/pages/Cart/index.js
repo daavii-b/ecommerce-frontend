@@ -65,7 +65,7 @@ export default function Cart() {
         </header>
 
         <ul className="product-list">
-          {productsCart.length > 0 ? (
+          {productsCart ? (
             productsCart.map((item) => (
               <li key={item.id}>
                 <Article>
@@ -175,7 +175,7 @@ export default function Cart() {
         </header>
         <div className="details-content">
           <ul className="product-list-name">
-            {productsCart.length
+            {productsCart
               ? productsCart.map((item) => (
                   <li key={item.id}>
                     <a href={`/product/${item.product.slug}`}>
@@ -189,10 +189,12 @@ export default function Cart() {
         <footer className="details-footer">
           <div className="cart-info">
             <p className="cart-amount">
-              <abbr title="Amount">T: {getFormatedPrice(cartAmount)}</abbr>
+              <abbr title="Amount">T: {getFormatedPrice(cartAmount || 0)}</abbr>
             </p>
             <p className="cart-total-items" translate="no">
-              <abbr title="Total items">I: {productsCart.length}</abbr>
+              <abbr title="Total items">
+                I: {productsCart ? productsCart.length : 0}
+              </abbr>
             </p>
           </div>
           <div className="cart-actions">

@@ -83,7 +83,7 @@ export default function User() {
 
       refSubmitButton.current.setAttribute('disabled', true);
 
-      button.setAttribute('disabled', true);
+      button.toggleAttribute('disabled');
     }
   }
 
@@ -104,8 +104,8 @@ export default function User() {
       if (refEditForm.current.childElementCount === 1)
         refEditForm.current.classList.remove('enabled');
 
-      editButton.disabled = false;
-    }, 390);
+      editButton.toggleAttribute('disabled');
+    }, 380);
   }
 
   function enableSaveButton(newFiled, oldField) {

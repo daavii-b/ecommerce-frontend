@@ -38,16 +38,12 @@ function* updateRequest({ payload }) {
     yield put(
       actions.updateSuccess({
         user: { ...response.data },
-        oldToken: payload.oldToken,
+        accessToken: payload.accessToken,
+        refreshToken: payload.refreshToken,
       })
     );
   } catch (error) {
-    yield put(
-      actions.updateFailure({
-        errors: [get(error, 'response.data')],
-        status: get(error, 'response.status'),
-      })
-    );
+    yield put(actions.updateFailure());
   }
 }
 
@@ -57,15 +53,8 @@ function* logoutRequest({ payload }) {
   yield put(actions.logoutSuccess({ ...payload }));
 }
 
-function persistRehydrated({ payload }) {
-  const token = get(payload, 'authReducer.token', '');
-
-  if (token) axios.defaults.headers.Authorization = `Bearer ${token}`;
-}
-
 export default all([
   takeLatest(types.LOGIN_REQUEST, loginRequest),
   takeLatest(types.UPDATE_REQUEST, updateRequest),
   takeLatest(types.LOGOUT_REQUEST, logoutRequest),
-  takeLatest(types.PERSIST_REHYDRATE, persistRehydrated),
 ]);

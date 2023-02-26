@@ -158,15 +158,17 @@ export default function Pagination({
 }
 
 Pagination.defaultProps = {
+  currentPage: 1,
   qtyPages: Number(process.env.REACT_APP_QTY_PAGINATIONS_PAGES),
+  totalProducts: 0,
   searchTerm: '',
   categoryFilter: '',
 };
 
 Pagination.propTypes = {
-  currentPage: PropTypes.number.isRequired,
+  currentPage: PropTypes.number,
   qtyPages: PropTypes.number,
-  totalProducts: PropTypes.number.isRequired,
+  totalProducts: PropTypes.number,
   searchTerm: PropTypes.string,
   categoryFilter: PropTypes.string,
 };

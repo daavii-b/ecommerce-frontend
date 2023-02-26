@@ -64,7 +64,7 @@ export default function Register() {
       };
 
       try {
-        await axios.post('/users', { ...user });
+        await axios.post('users/', { ...user });
 
         toast.success('You were registered successfully');
         navigate('/login');
@@ -74,9 +74,7 @@ export default function Register() {
 
         if (status === 400) {
           errors.forEach((err) => {
-            Object.keys(err).map((key) =>
-              toast.error(`${key.toUpperCase()}: ${err[key]}`)
-            );
+            Object.keys(err).map((key) => toast.error(`${key}: ${err[key]}`));
           });
         }
       }

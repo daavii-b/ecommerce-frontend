@@ -7,7 +7,7 @@ import { Container } from './styled';
 
 export default function Payment() {
   const navigate = useNavigate();
-  const { token } = useSelector((state) => state.authReducer);
+  const { accessToken } = useSelector((state) => state.authReducer);
 
   const mp = new MercadoPago(process.env.REACT_APP_MP_PUBLIC_KEY);
   const bricksBuilderI = mp.bricks();
@@ -40,7 +40,7 @@ export default function Payment() {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',
-                Authorization: `Bearer ${token}`,
+                Authorization: `Bearer ${accessToken}`,
               },
               body: JSON.stringify(formData),
             })

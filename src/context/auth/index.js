@@ -4,13 +4,15 @@ import PropTypes from 'prop-types';
 import { useLocation } from 'react-router-dom';
 import * as actions from '../../store/modules/auth/actions';
 import * as globalActions from '../../store/modules/global/actions';
+import axios from '../../services/axios';
 
 export const AuthContext = createContext();
 
 export default function AuthProvider({ children }) {
-  const { user, token, isAuthenticated } = useSelector(
+  const { user, accessToken, refreshToken, isAuthenticated } = useSelector(
     (state) => state.authReducer
   );
+
   const dispatch = useDispatch();
   const location = useLocation();
   const { from } = location.state || '/user';
@@ -33,11 +35,77 @@ export default function AuthProvider({ children }) {
       dispatch(
         globalActions.dispatchAction(actions.updateRequest, {
           user: newUserData,
-          oldToken: token,
+          accessToken,
+          refreshToken,
         })
       );
     },
-    [dispatch, token]
+    [dispatch, accessToken, refreshToken]
+  );
+
+  const refreshUserToken = async () => {
+    try {
+      const response = await axios.post('tokens/refresh/', {
+        refresh: refreshToken,
+      });
+
+      const { access, refresh } = response.data;
+
+      dispatch(
+        actions.refreshUserToken({
+          accessToken: access,
+          refreshToken: refresh,
+          user,
+        })
+      );
+
+      return { access, refresh };
+    } catch (err) {
+      return err;
+    }
+  };
+
+  axios.interceptors.request.use(
+    (config) => {
+      if (['post', 'put', 'patch', 'delete'].includes(config.method)) {
+        axios.defaults.headers.post['Content-Type'] =
+          'application/json;charset=utf-8';
+        if (accessToken)
+          axios.defaults.headers.Authorization = `Bearer ${accessToken}`;
+      }
+
+      return config;
+    },
+    (error) => Promise.reject(error)
+  );
+
+  axios.interceptors.response.use(
+    (response) => response,
+
+    async (error) => {
+      const statusList = [401, 404];
+
+      if (statusList.includes(error.response.status)) {
+        const { access, refresh } = await refreshUserToken();
+
+        const { responseURL } = error.request;
+        const { method, data } = error.config;
+
+        try {
+          axios({
+            method,
+            url: responseURL,
+            data,
+          });
+        } catch (err) {
+          console.log(err);
+        }
+
+        return { access, refresh };
+      }
+
+      return Promise.reject(error);
+    }
   );
 
   const context = useMemo(
@@ -45,10 +113,10 @@ export default function AuthProvider({ children }) {
       loginUser,
       updateUser,
       user,
-      token,
+      accessToken,
       isAuthenticated,
     }),
-    [loginUser, updateUser, user, token, isAuthenticated]
+    [loginUser, updateUser, user, accessToken, isAuthenticated]
   );
 
   return (

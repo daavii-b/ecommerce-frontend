@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import { MdPayment } from 'react-icons/md';
 import { FaCartPlus, FaHeart, FaRegHeart, FaCaretDown } from 'react-icons/fa';
 import { get } from 'lodash';
+import { Parser } from 'html-to-react';
 import { FavoritesContext } from '../../context/favorites';
 import { CartContext } from '../../context/cart';
 import axios from '../../services/axios';
@@ -15,6 +16,7 @@ export default function Details() {
   const [product, setProduct] = useState({});
   const { toggleProductFav, checkProductIsFav } = useContext(FavoritesContext);
   const { addProductCart } = useContext(CartContext);
+  const htmlParser = new Parser();
 
   useEffect(() => {
     async function getProduct() {
@@ -34,10 +36,7 @@ export default function Details() {
         <img src={get(product, 'cover', '')} alt={`product: ${product.name}`} />
       </div>
       <article className="product-detail-description">
-        <p>
-          {product.description}
-          quo?
-        </p>
+        {htmlParser.parse(product.description)}
       </article>
       <footer className="product-detail-footer">
         {product.promotional_price ? (

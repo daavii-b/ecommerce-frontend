@@ -88,19 +88,21 @@ export default function MainHeader() {
             </h2>
           </div>
           <ul className="categories-list">
-            {categories.map((category) => (
-              <li key={category.id} className="category-item">
-                <div className="category-container">
-                  <a
-                    className="category"
-                    aria-label={`Filter by category ${category.name}`}
-                    href={`?category=${category.name}`}
-                  >
-                    {category.name}
-                  </a>
-                </div>
-              </li>
-            ))}
+            {categories
+              ? categories.map((category) => (
+                  <li key={category.id} className="category-item">
+                    <div className="category-container">
+                      <a
+                        className="category"
+                        aria-label={`Filter by category ${category.name}`}
+                        href={`?category=${category.name}`}
+                      >
+                        {category.name}
+                      </a>
+                    </div>
+                  </li>
+                ))
+              : ''}
           </ul>
         </CategoryNav>
       ) : (

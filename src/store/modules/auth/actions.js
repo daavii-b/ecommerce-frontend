@@ -50,3 +50,10 @@ export function logoutSuccess(payload) {
     payload,
   };
 }
+
+export function refreshUserToken(payload) {
+  return {
+    type: types.REFRESH_USER_TOKEN,
+    payload,
+  };
+}
