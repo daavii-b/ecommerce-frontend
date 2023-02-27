@@ -1,28 +1,12 @@
-import React, { useLayoutEffect, useContext } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React from 'react';
 
 import { ToastContainer } from 'react-toastify';
 import GlobalStyles from './styles/GlobalStyles';
 import Header from './components/Header';
 import Main from './components/Main';
 import Routers from './routes';
-import { FavoritesContext } from './context/favorites';
-import * as favoritesActions from './store/modules/favorites/actions';
 
 function App() {
-  const dispatch = useDispatch();
-  const { favorites } = useSelector((state) => state.favoritesReducer);
-  const { productsFav, setProductsFav } = useContext(FavoritesContext);
-
-  useLayoutEffect(() => {
-    if (favorites.length > 0) setProductsFav([...favorites]);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  useLayoutEffect(() => {
-    dispatch(favoritesActions.updateFavorites({ favorites: productsFav }));
-  }, [dispatch, productsFav]);
-
   return (
     <>
       <GlobalStyles />

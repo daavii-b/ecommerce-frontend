@@ -7,6 +7,7 @@ import { FaOpencart } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 import { AuthContext } from '../../context/auth';
 import { Container, Form } from './styled';
+import { manageToastNotification } from '../../utils/toast';
 
 export default function Login() {
   const { isAuthenticated } = useSelector((state) => state.authReducer);
@@ -20,7 +21,10 @@ export default function Login() {
     let formErrors = false;
 
     if (!isEmail(email)) {
-      toast.error('Email is invalid. Please enter a valid email address');
+      manageToastNotification('emai-error', toast.TYPE.ERROR);
+      toast.error('Email is invalid. Please enter a valid email address', {
+        toastId: 'email-error',
+      });
       formErrors = true;
     }
 

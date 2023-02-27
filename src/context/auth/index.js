@@ -43,27 +43,30 @@ export default function AuthProvider({ children }) {
     [dispatch, accessToken, refreshToken]
   );
 
-  const refreshUserToken = useMemo(async () => {
-    try {
-      const response = await axios.post('tokens/refresh/', {
-        refresh: refreshToken,
-      });
+  const refreshUserToken = useMemo(
+    () => async () => {
+      try {
+        const response = await axios.post('tokens/refresh/', {
+          refresh: refreshToken,
+        });
 
-      const { access, refresh } = response.data;
+        const { access, refresh } = response.data;
 
-      dispatch(
-        actions.refreshUserToken({
-          accessToken: access,
-          refreshToken: refresh,
-          user,
-        })
-      );
+        dispatch(
+          actions.refreshUserToken({
+            accessToken: access,
+            refreshToken: refresh,
+            user,
+          })
+        );
 
-      return { access, refresh };
-    } catch (err) {
-      return err;
-    }
-  }, [dispatch, refreshToken, user]);
+        return { access, refresh };
+      } catch (err) {
+        return err;
+      }
+    },
+    [dispatch, refreshToken, user]
+  );
 
   axios.interceptors.request.use(
     (config) => {
@@ -84,7 +87,7 @@ export default function AuthProvider({ children }) {
 
     async (error) => {
       const statusList = [401, 404];
-      console.log(error);
+
       if (statusList.includes(error.response.status)) {
         const { access, refresh } = await refreshUserToken();
 

@@ -6,7 +6,12 @@ export default (reducers) => {
     {
       key: 'ecommerce',
       storage,
-      whitelist: ['authReducer', 'globalReducer', 'favoritesReducer'],
+      whitelist: [
+        'authReducer',
+        'globalReducer',
+        'favoritesReducer',
+        'cartReducer',
+      ],
     },
     reducers
   );

@@ -1,5 +1,6 @@
 import { toast } from 'react-toastify';
 import { isEmail } from 'validator';
+import { manageToastNotification } from '../../toast';
 
 export const usernameIsValid = (username) =>
   !(username.length < 3 || username.length > 35);
@@ -26,19 +27,27 @@ export function editFormValidator(userData) {
   const userObject = { user: { ...userData }, isValid: true };
 
   if (!usernameIsValid(username)) {
+    manageToastNotification('edit-username-error', toast.TYPE.ERROR);
+
     toast.error('Username must have at least 3 characters');
     userObject.isValid = false;
   }
   if (!firstNameIsValid(firstName)) {
+    manageToastNotification('edit-firstName-error', toast.TYPE.ERROR);
+
     toast.error('First name must have at least 3 characters');
     userObject.isValid = false;
   }
   if (!lastNameIsValid(lastName)) {
+    manageToastNotification('edit-lastName-error', toast.TYPE.ERROR);
+
     toast.error('last name must have at least 3 characters');
     userObject.isValid = false;
   }
 
   if (!isEmail(email)) {
+    manageToastNotification('edit-email-error', toast.TYPE.ERROR);
+
     toast.error('Email is invalid. Please enter a valid email address');
     userObject.isValid = false;
   }
@@ -51,7 +60,7 @@ export function changePasswordFormValidator(userData) {
   let isValid = true;
 
   if (emptyPasswordField(password, confirmPassword)) {
-    toast.error('Password and confirmation password cannot be blank');
+    toast.error('Password and password confirmation cannot be blank');
     return { isValid: false };
   }
 
@@ -60,7 +69,7 @@ export function changePasswordFormValidator(userData) {
     isValid = false;
   }
   if (!passwordIsEqual(password, confirmPassword)) {
-    toast.error('Password and confirm password do not match');
+    toast.error('Password and password confirmation do not match');
     isValid = false;
   }
 

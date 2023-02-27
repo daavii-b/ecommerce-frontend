@@ -6,6 +6,7 @@ import { get } from 'lodash';
 import { FaOpencart } from 'react-icons/fa';
 import axios from '../../services/axios';
 import { Form } from './styled';
+import { manageToastNotification } from '../../utils/toast';
 
 export default function Register() {
   const [firstName, setFirstName] = useState('');
@@ -35,22 +36,40 @@ export default function Register() {
     let formErrors = false;
 
     if (!usernameIsValid()) {
-      toast.error('Username must have at least 3 characters');
+      manageToastNotification('register-username-error', toast.TYPE.ERROR);
+      toast.error('Username must have at least 3 characters', {
+        toastId: 'register-username-error',
+      });
       formErrors = true;
     }
 
     if (!isEmail(email)) {
-      toast.error('Email is invalid. Please enter a valid email address');
+      manageToastNotification('register-email-error', toast.TYPE.ERROR);
+
+      toast.error('Email is invalid. Please enter a valid email address', {
+        toastId: 'register-email-error',
+      });
       formErrors = true;
     }
 
     if (!passwordIsValid()) {
-      toast.error('Password must have at least 8 characters');
+      manageToastNotification('register-password-error', toast.TYPE.ERROR);
+
+      toast.error('Password must have at least 8 characters', {
+        toastId: 'register-password-error',
+      });
       formErrors = true;
     }
 
     if (!passwordIsEqual()) {
-      toast.error('Password don`t match');
+      manageToastNotification(
+        'register-password-confirmation-error',
+        toast.TYPE.ERROR
+      );
+
+      toast.error('Password don`t match', {
+        toastId: 'register-password-confirmation-error',
+      });
       formErrors = true;
     }
 
@@ -66,7 +85,11 @@ export default function Register() {
       try {
         await axios.post('users/', { ...user });
 
-        toast.success('You were registered successfully');
+        manageToastNotification('register-user-success', toast.TYPE.SUCCESS);
+
+        toast.success('You were registered successfully', {
+          toastId: 'register-user-success',
+        });
         navigate('/login');
       } catch (error) {
         const status = get(error, 'response.status');
@@ -74,7 +97,12 @@ export default function Register() {
 
         if (status === 400) {
           errors.forEach((err) => {
-            Object.keys(err).map((key) => toast.error(`${key}: ${err[key]}`));
+            Object.keys(err).map((key) => {
+              manageToastNotification('register-user-error', toast.TYPE.ERROR);
+              return toast.error(`${key}: ${err[key]}`, {
+                toastId: 'register-user-error',
+              });
+            });
           });
         }
       }

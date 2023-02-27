@@ -1,8 +1,8 @@
-import React, { useContext, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useContext, useRef } from 'react';
 import { get } from 'lodash';
 import { AiOutlineClear } from 'react-icons/ai';
 import { MdPayment } from 'react-icons/md';
+import { GoTriangleDown } from 'react-icons/go';
 import {
   FaRegHeart,
   FaHeart,
@@ -14,48 +14,27 @@ import {
 import { CartContext } from '../../context/cart';
 import { FavoritesContext } from '../../context/favorites';
 import { Section, ProductContainer, Article } from './styled';
-import axios from '../../services/axios';
-import * as globalActions from '../../store/modules/global/actions';
-import setAmount, { cartAmount } from '../../utils/cart';
-import {
-  getPercentageDiscount,
-  formatTextLength,
-  getFormatedPrice,
-} from '../../utils';
 
 export default function Cart() {
-  const dispatch = useDispatch();
   const {
     productsCart,
-    setProductsCart,
     addProductCart,
     removeProductCart,
     clearCart,
+    amount,
+    getPercentageDiscount,
+    formatTextLength,
+    getFormatedPrice,
   } = useContext(CartContext);
   const { toggleProductFav, checkProductIsFav } = useContext(FavoritesContext);
 
-  useEffect(() => {
-    async function listCartProducts() {
-      try {
-        dispatch(globalActions.startLoad());
+  // Elements references
+  const refProductsList = useRef(null);
+  const refShowProductsListButton = useRef(null);
 
-        const response = await axios.get('cart/');
-
-        if (response.status === 200) {
-          const { products_cart: cartProds, cart_amount: amount } =
-            response.data;
-          setProductsCart(cartProds);
-          setAmount(amount);
-        }
-
-        dispatch(globalActions.finishLoad());
-      } catch (err) {
-        setProductsCart([]);
-      }
-    }
-
-    listCartProducts();
-  }, [dispatch, setProductsCart]);
+  const handleShowProductsClick = () => {
+    refProductsList.current.classList.toggle('show');
+  };
 
   return (
     <Section className="cart-session">
@@ -64,7 +43,7 @@ export default function Cart() {
           <h2>Products List</h2>
         </header>
 
-        <ul className="product-list">
+        <ul ref={refProductsList} className="product-list">
           {productsCart ? (
             productsCart.map((item) => (
               <li key={item.id}>
@@ -167,6 +146,19 @@ export default function Cart() {
             </li>
           )}
         </ul>
+        <div>
+          <button
+            ref={refShowProductsListButton}
+            type="button"
+            className="show-products-button"
+            onClick={handleShowProductsClick}
+          >
+            Show products
+            <span className="angle-icon">
+              <GoTriangleDown />
+            </span>
+          </button>
+        </div>
       </section>
 
       <section className="products-details-session">
@@ -189,7 +181,7 @@ export default function Cart() {
         <footer className="details-footer">
           <div className="cart-info">
             <p className="cart-amount">
-              <abbr title="Amount">T: {getFormatedPrice(cartAmount || 0)}</abbr>
+              <abbr title="Amount">T: {getFormatedPrice(amount)}</abbr>
             </p>
             <p className="cart-total-items" translate="no">
               <abbr title="Total items">

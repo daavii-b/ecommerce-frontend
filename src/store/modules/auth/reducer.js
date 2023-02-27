@@ -1,6 +1,7 @@
 import { toast } from 'react-toastify';
 import * as types from '../types';
 import history from '../../../services/history';
+import { manageToastNotification } from '../../../utils/toast';
 
 export const initialState = {
   isAuthenticated: false,
@@ -19,7 +20,11 @@ export default (state = initialState, action) => {
       newState.refreshToken = action.payload.refresh;
       newState.user = action.payload.user;
 
-      toast.success('You have successfully logged in');
+      manageToastNotification('login-user-success', toast.TYPE.SUCCESS);
+
+      toast.success('You have successfully logged in', {
+        toastId: 'login-user-success',
+      });
 
       history.push(action.payload.from);
 
@@ -28,6 +33,8 @@ export default (state = initialState, action) => {
 
     case types.LOGIN_FAILURE: {
       const newState = { ...initialState };
+
+      manageToastNotification('login-user-failure', toast.TYPE.ERROR);
 
       toast.error('E-mail or password is incorrect');
 
@@ -42,7 +49,11 @@ export default (state = initialState, action) => {
       newState.refreshToken = action.payload.refreshToken;
       newState.user = action.payload.user;
 
-      toast.success('Your data has been updated successfully.');
+      manageToastNotification('update-user-success', toast.TYPE.SUCCESS);
+
+      toast.success('Your data has been updated successfully.', {
+        toastId: 'update-user-success',
+      });
 
       return newState;
     }
@@ -50,8 +61,13 @@ export default (state = initialState, action) => {
     case types.UPDATE_FAILURE: {
       const newState = { ...initialState };
 
+      manageToastNotification('update-user-failure', toast.TYPE.ERROR);
+
       toast.error(
-        'An error occurred while updating your data. Please, try again later.'
+        'An error occurred while updating your data. Please, try again later.',
+        {
+          toastId: 'update-user-failure',
+        }
       );
 
       return newState;
@@ -60,7 +76,11 @@ export default (state = initialState, action) => {
     case types.LOGOUT_SUCCESS: {
       const newState = { ...initialState };
 
-      toast.info('Your session has been logged out');
+      manageToastNotification('logout-success', toast.TYPE.SUCCESS);
+
+      toast.info('Your session has been logged out', {
+        toastId: 'logout-success',
+      });
 
       history.push('/login');
 

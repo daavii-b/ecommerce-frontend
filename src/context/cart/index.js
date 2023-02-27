@@ -1,14 +1,46 @@
 import React, { createContext, useState, useMemo } from 'react';
 import PropTypes from 'prop-types';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import * as cartActions from '../../store/modules/cart/actions';
-import { addAmount, removeAmount, clearAmount } from '../../utils/cart';
 
 export const CartContext = createContext();
 
 export default function CartProvider({ children }) {
+  const { cartProducts } = useSelector((state) => state.cartReducer);
   const dispatch = useDispatch();
-  const [productsCart, setProductsCart] = useState([]);
+  const [productsCart, setProductsCart] = useState([...cartProducts]);
+  const [amount, setAmount] = useState(0);
+
+  const addAmount = useMemo(
+    () =>
+      ({ price, promotional_price: promotionalPrice }) => {
+        if (promotionalPrice) {
+          setAmount((currentAmount) => currentAmount + promotionalPrice);
+        } else {
+          setAmount((currentAmount) => currentAmount + price);
+        }
+      },
+    []
+  );
+
+  const removeAmount = useMemo(
+    () =>
+      ({ price, promotional_price: promotionalPrice }) => {
+        if (promotionalPrice) {
+          setAmount((currentAmount) => currentAmount - promotionalPrice);
+        } else {
+          setAmount((currentAmount) => currentAmount - price);
+        }
+      },
+    []
+  );
+
+  const clearAmount = useMemo(
+    () => () => {
+      setAmount(0);
+    },
+    []
+  );
 
   const addProductCart = useMemo(
     () => (productId, cProduct) => {
@@ -31,7 +63,7 @@ export default function CartProvider({ children }) {
       setProductsCart(copyProductsCart);
       dispatch(cartActions.processAddProduct({ products: copyProductsCart }));
     },
-    [dispatch, productsCart]
+    [addAmount, dispatch, productsCart]
   );
 
   const removeProductCart = useMemo(
@@ -68,7 +100,7 @@ export default function CartProvider({ children }) {
         );
       }
     },
-    [dispatch, productsCart]
+    [dispatch, productsCart, removeAmount]
   );
 
   const clearCart = useMemo(
@@ -78,8 +110,27 @@ export default function CartProvider({ children }) {
 
       dispatch(cartActions.processClearCart({ products: [] }));
     },
-    [dispatch]
+    [clearAmount, dispatch]
   );
+
+  const getPercentageDiscount = (price, promotionalPrice) => {
+    const descValue = price - promotionalPrice;
+
+    return String(((descValue / price) * 100).toFixed(0)).concat('%');
+  };
+
+  const formatTextLength = (text) =>
+    text.length > 28 ? `${text.substring(0, 25)}...` : text;
+
+  const getFormatedPrice = (price) =>
+    'R$'.concat(
+      new Intl.NumberFormat('pt-BR', {
+        style: 'decimal',
+        currency: 'BRL',
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+      }).format(price)
+    );
 
   const contextObj = useMemo(
     () => ({
@@ -88,8 +139,12 @@ export default function CartProvider({ children }) {
       removeProductCart,
       clearCart,
       setProductsCart,
+      amount,
+      getPercentageDiscount,
+      formatTextLength,
+      getFormatedPrice,
     }),
-    [productsCart, addProductCart, removeProductCart, clearCart]
+    [productsCart, addProductCart, removeProductCart, clearCart, amount]
   );
 
   return (

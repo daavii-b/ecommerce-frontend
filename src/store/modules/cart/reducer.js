@@ -1,6 +1,6 @@
-// import { toast } from 'react-toastify';
 import { toast } from 'react-toastify';
 import * as types from '../types';
+import { manageToastNotification } from '../../../utils/toast';
 
 export const cartInitialState = {
   cartProducts: [],
@@ -11,7 +11,12 @@ export default (state = cartInitialState, action) => {
     case types.ADD_PRODUCT_CART: {
       const newState = { ...state };
       newState.cartProducts = action.payload.productsCart;
-      toast.info('Product has been successfully added to cart');
+
+      manageToastNotification('add-cart', toast.TYPE.INFO);
+
+      toast.info('Product has been successfully added to cart', {
+        toastId: 'add-cart',
+      });
       return newState;
     }
 
@@ -19,7 +24,11 @@ export default (state = cartInitialState, action) => {
       const newState = { ...state };
       newState.cartProducts = action.payload.productsCart;
 
-      toast.info('Product has been successfully removed from the cart');
+      manageToastNotification('remove-cart', toast.TYPE.INFO);
+
+      toast.info('Product has been successfully removed from the cart', {
+        toastId: 'remove-cart',
+      });
 
       return newState;
     }
@@ -28,7 +37,11 @@ export default (state = cartInitialState, action) => {
       const newState = { ...state };
       newState.cartProducts = action.payload.productsCart;
 
-      toast.info('Cart has been successfully cleaned');
+      manageToastNotification('clear-cart', toast.TYPE.INFO);
+
+      toast.info('Cart has been successfully cleaned', {
+        toastId: 'clear-cart',
+      });
       return newState;
     }
 
