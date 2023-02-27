@@ -1,11 +1,8 @@
-import React, { useEffect, useState, useContext } from 'react';
-import { useSearchParams } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import React, { useContext } from 'react';
 import { get } from 'lodash';
 import { FaCartPlus, FaCaretDown, FaRegHeart, FaHeart } from 'react-icons/fa';
 import { CartContext } from '../../context/cart';
 import { FavoritesContext } from '../../context/favorites';
-import axios from '../../services/axios';
 import { Section, Article, ProductContainer } from './styled';
 import {
   getPercentageDiscount,
@@ -13,35 +10,13 @@ import {
   getFormatedPrice,
 } from '../../utils';
 import Pagination from '../../components/Pagination';
+import { useAxios } from '../../hooks';
 
 export default function Home() {
-  const dispatch = useDispatch();
-  const [products, setProducts] = useState([]);
-  const [totalProducts, setTotalProducts] = useState(0);
-  const [qs] = useSearchParams();
-  const searchTerm = qs.get('search') || '';
-  const currentPage = Number(qs.get('page')) || 1;
-  const categoryFilter = qs.get('category') || '';
-
   const { addProductCart } = useContext(CartContext);
   const { toggleProductFav, checkProductIsFav } = useContext(FavoritesContext);
 
-  useEffect(() => {
-    async function listProducts() {
-      try {
-        const productsResponse = await axios.get(
-          `products/?search=${searchTerm}&category=${categoryFilter}&page=${currentPage}`
-        );
-
-        setTotalProducts(productsResponse.data.count);
-        setProducts(productsResponse.data.results);
-      } catch (err) {
-        console.error(err);
-      }
-    }
-
-    listProducts();
-  }, [currentPage, dispatch, searchTerm, categoryFilter]);
+  const { data: products, count } = useAxios('products/');
 
   return (
     <>
@@ -128,12 +103,7 @@ export default function Home() {
             ))
           : ''}
       </Section>
-      <Pagination
-        currentPage={currentPage}
-        totalProducts={totalProducts}
-        searchTerm={searchTerm}
-        categoryFilter={categoryFilter}
-      />
+      <Pagination count={count} />
     </>
   );
 }

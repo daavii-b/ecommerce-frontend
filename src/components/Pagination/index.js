@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useSearchParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {
   FaAngleDoubleLeft,
@@ -9,15 +10,13 @@ import {
 import { range } from 'lodash';
 import { PaginationContainer, PaginationList } from './styled';
 
-export default function Pagination({
-  currentPage,
-  qtyPages,
-  totalProducts,
-  searchTerm,
-  categoryFilter,
-}) {
+export default function Pagination({ qtyPages, count }) {
   // Make pagination range return an array with the range of page.
-  const totalPages = Math.ceil(totalProducts / 12);
+
+  const [params, setParams] = useSearchParams();
+  const currentPage = Number(params.get('page')) || 1;
+
+  const totalPages = Math.ceil(count / 12);
   const hasOtherPages = totalPages > 1;
 
   function makePaginationRange() {
@@ -49,9 +48,6 @@ export default function Pagination({
     };
   }
 
-  const [nextPage, setNextPage] = useState(currentPage + 1);
-  const [prevPage, setPrevPage] = useState(currentPage - 1);
-
   const {
     pagination,
     firstPageOutRange,
@@ -59,14 +55,6 @@ export default function Pagination({
     hasNext,
     hasPrevious,
   } = makePaginationRange();
-
-  function handleNextPageClick() {
-    if (currentPage < totalPages) setNextPage(currentPage + 1);
-  }
-
-  function handlePrevPageClick() {
-    if (currentPage > 1) setPrevPage(currentPage - 1);
-  }
 
   return hasOtherPages ? (
     <div>
@@ -77,11 +65,15 @@ export default function Pagination({
               aria-label="Go to first page"
               className="pagination-control first-page"
             >
-              <a
-                href={`?search=${searchTerm}&category=${categoryFilter}&page=${1}`}
+              <button
+                type="button"
+                onClick={() => {
+                  params.set('page', 1);
+                  setParams(params);
+                }}
               >
                 <FaAngleDoubleLeft />
-              </a>
+              </button>
             </li>
           ) : (
             ''
@@ -91,12 +83,15 @@ export default function Pagination({
               aria-label="Go to previous page"
               className="pagination-control previous-page"
             >
-              <a
-                onClick={handlePrevPageClick}
-                href={`?search=${searchTerm}&category=${categoryFilter}&page=${prevPage}`}
+              <button
+                type="button"
+                onClick={() => {
+                  params.set('page', currentPage - 1);
+                  setParams(params);
+                }}
               >
                 <FaAngleLeft />
-              </a>
+              </button>
             </li>
           ) : (
             ''
@@ -112,12 +107,15 @@ export default function Pagination({
               }
               key={page}
             >
-              <a
-                className="page-link"
-                href={`?search=${searchTerm}&category=${categoryFilter}&page=${page}`}
+              <button
+                type="button"
+                onClick={() => {
+                  params.set('page', page);
+                  setParams(params);
+                }}
               >
                 {page}
-              </a>
+              </button>
             </li>
           ))}
           {hasNext ? (
@@ -125,12 +123,15 @@ export default function Pagination({
               aria-label="Go to next page"
               className="pagination-control next-page"
             >
-              <a
-                onClick={handleNextPageClick}
-                href={`?search=${searchTerm}&category=${categoryFilter}&page=${nextPage}`}
+              <button
+                type="button"
+                onClick={() => {
+                  params.set('page', currentPage + 1);
+                  setParams(params);
+                }}
               >
                 <FaAngleRight />
-              </a>
+              </button>
             </li>
           ) : (
             ''
@@ -140,11 +141,15 @@ export default function Pagination({
               aria-label="Go to last page"
               className="pagination-control last-page"
             >
-              <a
-                href={`?search=${searchTerm}&category=${categoryFilter}&page=${totalPages}`}
+              <button
+                type="button"
+                onClick={() => {
+                  params.set('page', totalPages);
+                  setParams(params);
+                }}
               >
                 <FaAngleDoubleRight />
-              </a>
+              </button>
             </li>
           ) : (
             ''
@@ -158,17 +163,11 @@ export default function Pagination({
 }
 
 Pagination.defaultProps = {
-  currentPage: 1,
   qtyPages: Number(process.env.REACT_APP_QTY_PAGINATIONS_PAGES),
-  totalProducts: 0,
-  searchTerm: '',
-  categoryFilter: '',
+  count: 0,
 };
 
 Pagination.propTypes = {
-  currentPage: PropTypes.number,
   qtyPages: PropTypes.number,
-  totalProducts: PropTypes.number,
-  searchTerm: PropTypes.string,
-  categoryFilter: PropTypes.string,
+  count: PropTypes.number,
 };

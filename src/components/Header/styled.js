@@ -171,7 +171,6 @@ export const CategoryNav = styled.nav`
         align-items: center;
         justify-content: flex-start;
 
-        color: ${colors.defaultWhiteColor};
         background-color: ${colors.defaultBlackColor};
 
         border-top-right-radius: 0.4rem;
@@ -179,15 +178,19 @@ export const CategoryNav = styled.nav`
 
         white-space: nowrap;
         text-transform: capitalize;
-      }
-      .category {
-        width: 100%;
-        height: 100%;
-        display: block;
-        padding: 0.7rem;
-        transition: 0.2s ease-out;
 
-        z-index: 5;
+        button.category {
+          width: 100%;
+          height: 100%;
+          display: block;
+          padding: 0.7rem;
+          transition: 0.2s ease-out;
+
+          text-align: left;
+
+          z-index: 5;
+          color: ${colors.defaultWhiteColor};
+        }
       }
     }
   }
@@ -232,7 +235,8 @@ export const CategoryNav = styled.nav`
         &:hover {
           transform: scale(1.015) perspective(2rem);
           transition: 0.2s ease-out;
-          a {
+
+          button {
             color: ${colors.secondMainColor};
           }
         }

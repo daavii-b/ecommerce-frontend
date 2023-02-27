@@ -34,17 +34,17 @@ export const PaginationList = styled.ul`
     box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.06);
 
     :hover {
-      box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.09);
+      box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.04);
     }
 
-    a {
+    button {
       display: flex;
       align-items: center;
       justify-content: center;
       padding: 0.6rem 1rem;
     }
 
-    &.pagination-control {
+    &.pagination-control button {
       color: ${colors.secondMainColor};
       background-color: ${colors.defaultSecondaryBlackColor};
 
@@ -64,12 +64,12 @@ export const PaginationList = styled.ul`
 
         background-color: rgba(30, 30, 30, 0.2);
       }
-      &.active {
-        color: ${colors.secondMainColor};
+      &.active button {
+        color: ${colors.secondMainColor} !important;
         background-color: ${colors.defaultBlackColor};
         transform: scale(1.04) translateY(-0.4rem);
 
-        &:hover {
+        &:hover button {
           filter: brightness(1.3);
         }
       }

@@ -1,33 +1,23 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useContext } from 'react';
 
-import { useParams } from 'react-router-dom';
 import { MdPayment } from 'react-icons/md';
 import { FaCartPlus, FaHeart, FaRegHeart, FaCaretDown } from 'react-icons/fa';
 import { get } from 'lodash';
 import { Parser } from 'html-to-react';
 import { FavoritesContext } from '../../context/favorites';
 import { CartContext } from '../../context/cart';
-import axios from '../../services/axios';
 import { Section } from './styled';
 import { getFormatedPrice, getPercentageDiscount } from '../../utils';
+import { useAxiosGetDetails } from '../../hooks';
 
 export default function Details() {
-  const { productSlug } = useParams();
-  const [product, setProduct] = useState({});
   const { toggleProductFav, checkProductIsFav } = useContext(FavoritesContext);
   const { addProductCart } = useContext(CartContext);
   const htmlParser = new Parser();
 
-  useEffect(() => {
-    async function getProduct() {
-      const response = await axios.get(`products/${productSlug}/`);
-      setProduct(response.data);
-    }
+  const { data: product } = useAxiosGetDetails('products/');
 
-    getProduct();
-  }, [productSlug]);
-
-  return (
+  return product ? (
     <Section className="product-detail-section">
       <header className="product-detail-header">
         <h3>{product.name}</h3>
@@ -98,5 +88,7 @@ export default function Details() {
         </div>
       </footer>
     </Section>
+  ) : (
+    ''
   );
 }

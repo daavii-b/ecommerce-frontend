@@ -18,7 +18,7 @@ export default function User() {
   const refUsername = useRef(null);
   const refEmail = useRef(null);
 
-  // States to inputs
+  // States for inputs
   const { user, updateUser } = useContext(AuthContext);
   const [firstName, setFirstName] = useState(user.first_name);
   const [lastName, setLastName] = useState(user.last_name);

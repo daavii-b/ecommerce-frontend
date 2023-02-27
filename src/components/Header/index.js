@@ -1,5 +1,6 @@
-import React, { useContext, useRef, useEffect, useState } from 'react';
-import { useLocation, Link } from 'react-router-dom';
+import React, { useContext, useRef } from 'react';
+import { useSearchParams, useLocation, Link } from 'react-router-dom';
+
 import { useDispatch } from 'react-redux';
 import {
   FaSignOutAlt,
@@ -15,14 +16,15 @@ import { AuthContext } from '../../context/auth';
 import * as actions from '../../store/modules/auth/actions';
 import * as globalActions from '../../store/modules/global/actions';
 import { Header, Nav, CategoryNav, Form } from './styled';
-import axios from '../../services/axios';
+import { useAxios } from '../../hooks';
 
 export default function MainHeader() {
   const location = useLocation();
   const dispatch = useDispatch();
+  const [params, setParams] = useSearchParams();
 
-  const [categories, setCategories] = useState([]);
   const { isAuthenticated } = useContext(AuthContext);
+  const { data: categories } = useAxios('categories/');
 
   // elements references
   const refMainNavBar = useRef(null);
@@ -50,19 +52,6 @@ export default function MainHeader() {
       refToggleMainNavBar.current.setAttribute('aria-expanded', false);
     }, 3200);
   };
-
-  useEffect(() => {
-    async function listCategories() {
-      try {
-        const response = await axios.get('categories/');
-
-        setCategories(response.data);
-      } catch (err) {
-        console.error(err);
-      }
-    }
-    if (location.pathname === '/') listCategories();
-  }, [location.pathname]);
 
   return (
     <Header>
@@ -92,13 +81,19 @@ export default function MainHeader() {
               ? categories.map((category) => (
                   <li key={category.id} className="category-item">
                     <div className="category-container">
-                      <a
+                      <button
+                        type="button"
                         className="category"
-                        aria-label={`Filter by category ${category.name}`}
-                        href={`?category=${category.name}`}
+                        aria-label={`Filter products by category ${category.name}`}
+                        onClick={() => {
+                          params.delete('page');
+                          params.delete('search');
+                          params.set('category', category.name);
+                          setParams(params);
+                        }}
                       >
                         {category.name}
-                      </a>
+                      </button>
                     </div>
                   </li>
                 ))
@@ -109,7 +104,7 @@ export default function MainHeader() {
         ''
       )}
 
-      {/* hEADER TITLE */}
+      {/* HEADER TITLE */}
       <div>
         <h1>
           <Link aria-label="Go to home page" to="/" translate="no">
@@ -119,7 +114,17 @@ export default function MainHeader() {
       </div>
 
       {/* SEARCH FORM */}
-      <Form className="search-form" action="/">
+      <Form
+        className="search-form"
+        onSubmit={(event) => {
+          const form = new FormData(event.target);
+          params.delete('page');
+          params.delete('category');
+          params.set('search', form.get('search'));
+          setParams(params);
+        }}
+        action="/"
+      >
         <label htmlFor="search">
           <FaSearch size={15} className="search-icon" />
           <input
