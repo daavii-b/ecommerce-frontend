@@ -11,6 +11,7 @@ import {
   FaMinus,
   FaAngleDoubleRight,
 } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
 import { CartContext } from '../../context/cart';
 import { FavoritesContext } from '../../context/favorites';
 import { Section, ProductContainer, Article } from './styled';
@@ -32,6 +33,8 @@ export default function Cart() {
   const refProductsList = useRef(null);
   const refShowProductsListButton = useRef(null);
   const [showProducts, setShowProducts] = useState(false);
+
+  const navigate = useNavigate();
 
   const handleShowProductsClick = () => {
     if (productsCart.length > 0) {
@@ -171,7 +174,13 @@ export default function Cart() {
             </p>
           </div>
           <div className="cart-actions">
-            <button className="ready-to-pay" type="button">
+            <button
+              onClick={() => {
+                navigate('/payments');
+              }}
+              className="ready-to-pay"
+              type="button"
+            >
               <span>
                 <MdPayment className="icon" size={13} />
               </span>

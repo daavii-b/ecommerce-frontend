@@ -287,6 +287,8 @@ export const ProductContainer = styled.div`
       align-items: center;
       justify-content: flex-start;
 
+      text-overflow: ellipsis;
+
       border-left: 1px solid ${colors.defaultBlackColor};
       padding-left: 0.4rem;
 
