@@ -6,40 +6,78 @@ import * as cartActions from '../../store/modules/cart/actions';
 export const CartContext = createContext();
 
 export default function CartProvider({ children }) {
-  const { cartProducts } = useSelector((state) => state.cartReducer);
   const dispatch = useDispatch();
+  const { cartProducts, cartAmount } = useSelector(
+    (state) => state.cartReducer
+  );
   const [productsCart, setProductsCart] = useState([...cartProducts]);
-  const [amount, setAmount] = useState(0);
+  const [amount, setAmount] = useState(cartAmount);
 
   const addAmount = useMemo(
     () =>
       ({ price, promotional_price: promotionalPrice }) => {
         if (promotionalPrice) {
-          setAmount((currentAmount) => currentAmount + promotionalPrice);
+          setAmount((currentAmount) => {
+            dispatch(
+              cartActions.setAmount({
+                amount: currentAmount + promotionalPrice,
+              })
+            );
+
+            return currentAmount + promotionalPrice;
+          });
         } else {
-          setAmount((currentAmount) => currentAmount + price);
+          setAmount((currentAmount) => {
+            dispatch(
+              cartActions.setAmount({
+                amount: currentAmount + price,
+              })
+            );
+
+            return currentAmount + price;
+          });
         }
       },
-    []
+    [dispatch]
   );
 
   const removeAmount = useMemo(
     () =>
       ({ price, promotional_price: promotionalPrice }) => {
         if (promotionalPrice) {
-          setAmount((currentAmount) => currentAmount - promotionalPrice);
+          setAmount((currentAmount) => {
+            dispatch(
+              cartActions.setAmount({
+                amount: currentAmount - promotionalPrice,
+              })
+            );
+
+            return currentAmount - promotionalPrice;
+          });
         } else {
-          setAmount((currentAmount) => currentAmount - price);
+          setAmount((currentAmount) => {
+            dispatch(
+              cartActions.setAmount({
+                amount: currentAmount - price,
+              })
+            );
+            return currentAmount - price;
+          });
         }
       },
-    []
+    [dispatch]
   );
 
   const clearAmount = useMemo(
     () => () => {
       setAmount(0);
+      dispatch(
+        cartActions.setAmount({
+          amount: 0,
+        })
+      );
     },
-    []
+    [dispatch]
   );
 
   const addProductCart = useMemo(
@@ -61,9 +99,11 @@ export default function CartProvider({ children }) {
         addAmount(product.product);
       }
       setProductsCart(copyProductsCart);
-      dispatch(cartActions.processAddProduct({ products: copyProductsCart }));
+      dispatch(
+        cartActions.processAddProduct({ products: copyProductsCart, amount })
+      );
     },
-    [addAmount, dispatch, productsCart]
+    [addAmount, amount, dispatch, productsCart]
   );
 
   const removeProductCart = useMemo(
@@ -82,7 +122,10 @@ export default function CartProvider({ children }) {
         removeAmount(product.product);
 
         dispatch(
-          cartActions.processRemoveProduct({ products: copyProductsCart })
+          cartActions.processRemoveProduct({
+            products: copyProductsCart,
+            amount,
+          })
         );
       } else {
         const cartProductsFiltered = copyProductsCart.filter(
@@ -100,7 +143,7 @@ export default function CartProvider({ children }) {
         );
       }
     },
-    [dispatch, productsCart, removeAmount]
+    [amount, dispatch, productsCart, removeAmount]
   );
 
   const clearCart = useMemo(
@@ -108,7 +151,7 @@ export default function CartProvider({ children }) {
       setProductsCart([]);
       clearAmount();
 
-      dispatch(cartActions.processClearCart({ products: [] }));
+      dispatch(cartActions.processClearCart({ products: [], amount: 0 }));
     },
     [clearAmount, dispatch]
   );

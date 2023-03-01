@@ -4,6 +4,7 @@ import { manageToastNotification } from '../../../utils/toast';
 
 export const cartInitialState = {
   cartProducts: [],
+  cartAmount: 0,
 };
 
 export default (state = cartInitialState, action) => {
@@ -42,6 +43,14 @@ export default (state = cartInitialState, action) => {
       toast.info('Cart has been successfully cleaned', {
         toastId: 'clear-cart',
       });
+      return newState;
+    }
+
+    case types.SET_AMOUNT: {
+      const newState = { ...state };
+
+      newState.cartAmount = action.payload.amount;
+
       return newState;
     }
 

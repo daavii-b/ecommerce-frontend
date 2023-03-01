@@ -1,8 +1,8 @@
-import React, { useContext, useRef } from 'react';
+import React, { useContext, useRef, useState } from 'react';
 import { get } from 'lodash';
 import { AiOutlineClear } from 'react-icons/ai';
 import { MdPayment } from 'react-icons/md';
-import { GoTriangleDown } from 'react-icons/go';
+import { GoTriangleDown, GoTriangleUp } from 'react-icons/go';
 import {
   FaRegHeart,
   FaHeart,
@@ -31,9 +31,16 @@ export default function Cart() {
   // Elements references
   const refProductsList = useRef(null);
   const refShowProductsListButton = useRef(null);
+  const [showProducts, setShowProducts] = useState(false);
 
   const handleShowProductsClick = () => {
-    refProductsList.current.classList.toggle('show');
+    if (productsCart.length > 0) {
+      refShowProductsListButton.current.toggleAttribute('disabled');
+      refProductsList.current.classList.toggle('show');
+      setShowProducts(!showProducts);
+    } else {
+      refShowProductsListButton.current.toggleAttribute('disabled');
+    }
   };
 
   return (
@@ -146,47 +153,21 @@ export default function Cart() {
             </li>
           )}
         </ul>
-        <div>
-          <button
-            ref={refShowProductsListButton}
-            type="button"
-            className="show-products-button"
-            onClick={handleShowProductsClick}
-          >
-            Show products
-            <span className="angle-icon">
-              <GoTriangleDown />
-            </span>
-          </button>
-        </div>
-      </section>
-
-      <section className="products-details-session">
-        <header className="details-header">
-          <h2>Cart Details</h2>
-        </header>
-        <div className="details-content">
-          <ul className="product-list-name">
-            {productsCart
-              ? productsCart.map((item) => (
-                  <li key={item.id}>
-                    <a href={`/product/${item.product.slug}`}>
-                      <h3>{item.product.name}</h3>
-                    </a>
-                  </li>
-                ))
-              : ''}
-          </ul>
-        </div>
-        <footer className="details-footer">
+        <button
+          ref={refShowProductsListButton}
+          type="button"
+          className="show-products-button"
+          onClick={handleShowProductsClick}
+        >
+          <span className="angle-icon">
+            {showProducts ? <GoTriangleUp /> : <GoTriangleDown />}
+          </span>
+        </button>
+        <footer className="product-session-footer">
           <div className="cart-info">
-            <p className="cart-amount">
-              <abbr title="Amount">T: {getFormatedPrice(amount)}</abbr>
-            </p>
+            <p className="cart-amount">Total: {getFormatedPrice(amount)}</p>
             <p className="cart-total-items" translate="no">
-              <abbr title="Total items">
-                I: {productsCart ? productsCart.length : 0}
-              </abbr>
+              Items: {productsCart ? productsCart.length : 0}
             </p>
           </div>
           <div className="cart-actions">

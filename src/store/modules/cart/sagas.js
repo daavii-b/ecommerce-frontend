@@ -7,7 +7,11 @@ function* processAddProduct({ payload }) {
   //   productsCart: payload.products,
   //   cartAmount,
   // });
-  yield put(actions.addProductInCart({ productsCart: payload.products }));
+  yield put(
+    actions.addProductInCart({
+      productsCart: payload.products,
+    })
+  );
 }
 
 function* processRemoveProduct({ payload }) {
@@ -15,7 +19,11 @@ function* processRemoveProduct({ payload }) {
   //   productsCart: payload.products,
   //   cartAmount,
   // });
-  yield put(actions.removeProductInCart({ productsCart: payload.products }));
+  yield put(
+    actions.removeProductInCart({
+      productsCart: payload.products,
+    })
+  );
 }
 
 function* processClearCart({ payload }) {
@@ -23,7 +31,11 @@ function* processClearCart({ payload }) {
   //   productsCart: payload.products,
   //   cartAmount,
   // });
-  yield put(actions.clearCart({ productsCart: payload.products }));
+  yield put(
+    actions.clearCart({
+      productsCart: payload.products,
+    })
+  );
 }
 
 export default all([

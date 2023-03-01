@@ -30,6 +30,7 @@ export const ProductContainer = styled.div`
   position: relative;
 
   border-radius: 0.5rem;
+  border: 1px solid ${colors.defaultBlackColor};
 
   transform: scale(1);
   transition: 0.4s ease-in-out;
@@ -76,7 +77,7 @@ export const ProductContainer = styled.div`
     text-align: center;
     font-weight: 600;
     top: 0;
-    left: 0;
+    right: 0;
 
     border-radius: inherit;
 

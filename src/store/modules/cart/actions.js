@@ -36,3 +36,10 @@ export function processClearCart(payload) {
     payload,
   };
 }
+
+export function setAmount(payload) {
+  return {
+    type: types.SET_AMOUNT,
+    payload,
+  };
+}

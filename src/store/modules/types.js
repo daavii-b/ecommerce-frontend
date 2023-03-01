@@ -27,3 +27,5 @@ export const REMOVE_PRODUCT_CART = 'REMOVE_PRODUCT_CART';
 export const CLEAR_CART = 'CLEAR_CART';
 
 export const REFRESH_USER_TOKEN = 'REFRESH_USER_TOKEN';
+
+export const SET_AMOUNT = 'SET_AMOUNT';
