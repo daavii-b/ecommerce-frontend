@@ -1,11 +1,11 @@
-import React, { useContext, useState, useRef, useLayoutEffect } from 'react';
+import React, { useState, useRef, useLayoutEffect } from 'react';
 import { FaRegUser } from 'react-icons/fa';
 import { CiEdit } from 'react-icons/ci';
 import { BsCheckCircleFill, BsInfoCircleFill } from 'react-icons/bs';
 import { AiFillCloseCircle, AiOutlineLink } from 'react-icons/ai';
 import { isEqual } from 'lodash';
 import { Section } from './styled';
-import { AuthContext } from '../../context/auth';
+import { useAuth } from '../../context/auth';
 import { editFormValidator } from '../../utils/form/validators';
 
 export default function User() {
@@ -19,7 +19,7 @@ export default function User() {
   const refEmail = useRef(null);
 
   // States for inputs
-  const { user, updateUser } = useContext(AuthContext);
+  const { user, updateUser } = useAuth();
   const [firstName, setFirstName] = useState(user.first_name);
   const [lastName, setLastName] = useState(user.last_name);
   const [username, setUsername] = useState(user.username);

@@ -1,14 +1,14 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { AiFillEyeInvisible, AiFillEye } from 'react-icons/ai';
 import { Section, Form } from './styled';
 import { changePasswordFormValidator } from '../../utils/form/validators';
-import { AuthContext } from '../../context/auth';
+import { useAuth } from '../../context/auth';
 
 export default function ChangePassword() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
-  const { user } = useContext(AuthContext);
+  const { user } = useAuth();
 
   const handleSubmit = (event) => {
     event.preventDefault();

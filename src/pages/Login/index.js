@@ -1,17 +1,15 @@
-import React, { useState, useContext } from 'react';
-import { useSelector } from 'react-redux';
+import React, { useState } from 'react';
 
 import { isEmail } from 'validator';
 
 import { FaOpencart } from 'react-icons/fa';
 import { toast } from 'react-toastify';
-import { AuthContext } from '../../context/auth';
+import { useAuth } from '../../context/auth';
 import { Container, Form } from './styled';
 import { manageToastNotification } from '../../utils/toast';
 
 export default function Login() {
-  const { isAuthenticated } = useSelector((state) => state.authReducer);
-  const { loginUser } = useContext(AuthContext);
+  const { loginUser, isAuthenticated } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 

@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { get } from 'lodash';
 import { FaCartPlus, FaCaretDown, FaRegHeart, FaHeart } from 'react-icons/fa';
-import { CartContext } from '../../context/cart';
+import { useCart } from '../../context/cart';
 import { FavoritesContext } from '../../context/favorites';
 import { Section, Article, ProductContainer } from './styled';
 import {
@@ -13,7 +13,7 @@ import Pagination from '../../components/Pagination';
 import { useAxios } from '../../hooks';
 
 export default function Home() {
-  const { addProductCart } = useContext(CartContext);
+  const { addProductCart } = useCart();
   const { toggleProductFav, checkProductIsFav } = useContext(FavoritesContext);
 
   const { data: products, count } = useAxios('products/');

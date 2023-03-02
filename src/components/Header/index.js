@@ -1,4 +1,4 @@
-import React, { useContext, useRef } from 'react';
+import React, { useRef } from 'react';
 import { useSearchParams, useLocation, Link } from 'react-router-dom';
 
 import { useDispatch } from 'react-redux';
@@ -12,10 +12,10 @@ import {
   FaHeart,
 } from 'react-icons/fa';
 import { BiCategory } from 'react-icons/bi';
-import { AuthContext } from '../../context/auth';
 import * as actions from '../../store/modules/auth/actions';
 import * as globalActions from '../../store/modules/global/actions';
 import { Header, Nav, CategoryNav, Form } from './styled';
+import { useAuth } from '../../context/auth';
 import { useAxios } from '../../hooks';
 
 export default function MainHeader() {
@@ -23,7 +23,7 @@ export default function MainHeader() {
   const dispatch = useDispatch();
   const [params, setParams] = useSearchParams();
 
-  const { isAuthenticated } = useContext(AuthContext);
+  const { isAuthenticated } = useAuth();
   const { data: categories } = useAxios('categories/');
 
   // elements references

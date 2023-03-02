@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { get } from 'lodash';
 import { AiOutlineClear } from 'react-icons/ai';
 import { MdPayment } from 'react-icons/md';
@@ -12,8 +12,8 @@ import {
   FaAngleDoubleRight,
 } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
-import { CartContext } from '../../context/cart';
-import { FavoritesContext } from '../../context/favorites';
+import { useCart } from '../../context/cart';
+import { useFav } from '../../context/favorites';
 import { Section, ProductContainer, Article } from './styled';
 
 export default function Cart() {
@@ -26,8 +26,8 @@ export default function Cart() {
     getPercentageDiscount,
     formatTextLength,
     getFormatedPrice,
-  } = useContext(CartContext);
-  const { toggleProductFav, checkProductIsFav } = useContext(FavoritesContext);
+  } = useCart();
+  const { toggleProductFav, checkProductIsFav } = useFav();
 
   // Elements references
   const refProductsList = useRef(null);

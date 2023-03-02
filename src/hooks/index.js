@@ -11,7 +11,7 @@ export function useAxios(url) {
     axios({
       method: 'GET',
       url,
-      signal: AbortSignal.timeout(3000),
+      signal: AbortSignal.timeout(5000),
       params: {
         page: qs.get('page'),
         search: qs.get('search'),
@@ -38,7 +38,7 @@ export function useAxiosGetDetails(url) {
     axios({
       method: 'GET',
       url: url.concat(`${productSlug}/`),
-      signal: AbortSignal.timeout(3000),
+      signal: AbortSignal.timeout(5000),
     })
       .then((response) => {
         setData(response.data);

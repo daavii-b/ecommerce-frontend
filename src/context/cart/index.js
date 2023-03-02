@@ -1,9 +1,13 @@
-import React, { createContext, useState, useMemo } from 'react';
+import React, { createContext, useState, useMemo, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import * as cartActions from '../../store/modules/cart/actions';
 
 export const CartContext = createContext();
+
+export function useCart() {
+  return useContext(CartContext);
+}
 
 export default function CartProvider({ children }) {
   const dispatch = useDispatch();

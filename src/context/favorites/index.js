@@ -1,8 +1,11 @@
-import React, { createContext, useState, useMemo } from 'react';
+import React, { createContext, useState, useContext, useMemo } from 'react';
 import PropTypes from 'prop-types';
 
 export const FavoritesContext = createContext();
 
+export function useFav() {
+  return useContext(FavoritesContext);
+}
 export default function FavoritesProvider({ children }) {
   const [productsFav, setProductsFav] = useState([]);
 

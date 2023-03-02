@@ -1,4 +1,4 @@
-import React, { createContext, useMemo } from 'react';
+import React, { createContext, useMemo, useContext } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { useLocation } from 'react-router-dom';
@@ -7,6 +7,10 @@ import * as globalActions from '../../store/modules/global/actions';
 import axios from '../../services/axios';
 
 export const AuthContext = createContext();
+
+export function useAuth() {
+  return useContext(AuthContext);
+}
 
 export default function AuthProvider({ children }) {
   const { user, accessToken, refreshToken, isAuthenticated } = useSelector(
@@ -19,7 +23,7 @@ export default function AuthProvider({ children }) {
 
   const loginUser = useMemo(
     () =>
-      async ({ email, password }) => {
+      ({ email, password }) => {
         dispatch(
           globalActions.dispatchAction(actions.loginRequest, {
             user: { email, password },
@@ -31,7 +35,7 @@ export default function AuthProvider({ children }) {
   );
 
   const updateUser = useMemo(
-    () => async (newUserData) => {
+    () => (newUserData) => {
       dispatch(
         globalActions.dispatchAction(actions.updateRequest, {
           user: newUserData,
@@ -86,9 +90,7 @@ export default function AuthProvider({ children }) {
     (response) => response,
 
     async (error) => {
-      const statusList = [401];
-
-      if (statusList.includes(error.response.status)) {
+      if (error.response.status === 401) {
         const { access, refresh } = await refreshUserToken();
 
         const { responseURL } = error.request;
