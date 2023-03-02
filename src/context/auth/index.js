@@ -86,7 +86,7 @@ export default function AuthProvider({ children }) {
     (response) => response,
 
     async (error) => {
-      const statusList = [401, 404];
+      const statusList = [401];
 
       if (statusList.includes(error.response.status)) {
         const { access, refresh } = await refreshUserToken();
