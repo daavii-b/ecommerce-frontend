@@ -37,16 +37,9 @@ export function updateFailure(payload) {
   };
 }
 
-export function logoutRequest(payload) {
+export function logoutUser(payload) {
   return {
-    type: types.LOGOUT_REQUEST,
-    payload,
-  };
-}
-
-export function logoutSuccess(payload) {
-  return {
-    type: types.LOGOUT_SUCCESS,
+    type: types.LOGOUT_USER,
     payload,
   };
 }

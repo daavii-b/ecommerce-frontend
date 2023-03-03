@@ -73,7 +73,7 @@ export default (state = initialState, action) => {
       return newState;
     }
 
-    case types.LOGOUT_SUCCESS: {
+    case types.LOGOUT_USER: {
       const newState = { ...initialState };
 
       manageToastNotification('logout-success', toast.TYPE.SUCCESS);

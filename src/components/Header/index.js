@@ -13,7 +13,6 @@ import {
 } from 'react-icons/fa';
 import { BiCategory } from 'react-icons/bi';
 import * as actions from '../../store/modules/auth/actions';
-import * as globalActions from '../../store/modules/global/actions';
 import { Header, Nav, CategoryNav, Form } from './styled';
 import { useAuth } from '../../context/auth';
 import { useAxios } from '../../hooks';
@@ -174,11 +173,7 @@ export default function MainHeader() {
               <Link
                 onClick={(event) => {
                   event.preventDefault();
-                  dispatch(
-                    globalActions.dispatchAction(actions.logoutRequest, {
-                      userLogout: true,
-                    })
-                  );
+                  dispatch(actions.logoutUser());
                 }}
                 to="/logout"
               >

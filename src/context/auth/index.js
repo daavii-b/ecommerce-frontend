@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { useLocation } from 'react-router-dom';
 import * as actions from '../../store/modules/auth/actions';
-import * as globalActions from '../../store/modules/global/actions';
 import axios from '../../services/axios';
 
 export const AuthContext = createContext();
@@ -25,7 +24,7 @@ export default function AuthProvider({ children }) {
     () =>
       ({ email, password }) => {
         dispatch(
-          globalActions.dispatchAction(actions.loginRequest, {
+          actions.loginRequest({
             user: { email, password },
             from,
           })
@@ -37,7 +36,7 @@ export default function AuthProvider({ children }) {
   const updateUser = useMemo(
     () => (newUserData) => {
       dispatch(
-        globalActions.dispatchAction(actions.updateRequest, {
+        actions.updateRequest({
           user: newUserData,
           accessToken,
           refreshToken,
@@ -47,6 +46,7 @@ export default function AuthProvider({ children }) {
     [dispatch, accessToken, refreshToken]
   );
 
+  // eslint-disable-next-line no-unused-vars
   const refreshUserToken = useMemo(
     () => async () => {
       try {
@@ -70,47 +70,6 @@ export default function AuthProvider({ children }) {
       }
     },
     [dispatch, refreshToken, user]
-  );
-
-  axios.interceptors.request.use(
-    (config) => {
-      if (['post', 'put', 'patch', 'delete'].includes(config.method)) {
-        axios.defaults.headers.post['Content-Type'] =
-          'application/json;charset=utf-8';
-        if (accessToken)
-          axios.defaults.headers.Authorization = `Bearer ${accessToken}`;
-      }
-
-      return config;
-    },
-    (error) => Promise.reject(error)
-  );
-
-  axios.interceptors.response.use(
-    (response) => response,
-
-    async (error) => {
-      if (error.response.status === 401) {
-        const { access, refresh } = await refreshUserToken();
-
-        const { responseURL } = error.request;
-        const { method, data } = error.config;
-
-        try {
-          axios({
-            method,
-            url: responseURL,
-            data,
-          });
-        } catch (err) {
-          console.log(err);
-        }
-
-        return { access, refresh };
-      }
-
-      return Promise.reject(error);
-    }
   );
 
   const context = useMemo(

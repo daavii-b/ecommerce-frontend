@@ -47,14 +47,7 @@ function* updateRequest({ payload }) {
   }
 }
 
-function* logoutRequest({ payload }) {
-  axios.defaults.headers.Authorization = '';
-
-  yield put(actions.logoutSuccess({ ...payload }));
-}
-
 export default all([
   takeLatest(types.LOGIN_REQUEST, loginRequest),
   takeLatest(types.UPDATE_REQUEST, updateRequest),
-  takeLatest(types.LOGOUT_REQUEST, logoutRequest),
 ]);

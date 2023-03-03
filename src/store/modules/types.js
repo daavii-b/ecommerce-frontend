@@ -13,8 +13,7 @@ export const UPDATE_FAILURE = 'UPDATE_FAILURE';
 
 export const PERSIST_REHYDRATE = 'persist/REHYDRATE';
 
-export const LOGOUT_REQUEST = 'LOGOUT_REQUEST';
-export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
+export const LOGOUT_USER = 'LOGOUT_USER';
 
 export const UPDATE_FAVORITES = 'UPDATE_FAVORITES';
 
