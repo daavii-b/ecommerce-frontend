@@ -1,86 +1,27 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-import { isEmail } from 'validator';
-
-import { FaOpencart } from 'react-icons/fa';
-import { toast } from 'react-toastify';
-import { useAuth } from '../../context/auth';
-import { Container, Form } from './styled';
-import { manageToastNotification } from '../../utils/toast';
+import { Container } from './styled';
+import { LoginForm } from '../../components/Forms';
 
 export default function Login() {
-  const { loginUser, isAuthenticated } = useAuth();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    let formErrors = false;
-
-    if (!isEmail(email)) {
-      manageToastNotification('emai-error', toast.TYPE.ERROR);
-      toast.error('Email is invalid. Please enter a valid email address', {
-        toastId: 'email-error',
-      });
-      formErrors = true;
-    }
-
-    if (!formErrors) {
-      loginUser({ email, password });
-    }
-  };
-
-  return !isAuthenticated ? (
+  return (
     <Container>
-      <h2 translate="no">
-        E-commerce
-        <span className="cart-icon">
-          <FaOpencart size={34} />
-        </span>
-      </h2>
-      <hr />
-      <Form
-        onSubmit={handleSubmit}
-        className="login-form"
-        action="#"
-        method="POST"
-      >
-        <label className="field-label" htmlFor="email">
-          E-mail
-          <input
-            type="email"
-            id="email"
-            name="email"
-            placeholder="E-mail"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </label>
-        <label className="field-label" htmlFor="password">
-          Password
-          <input
-            type="password"
-            id="password"
-            name="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            autoComplete="password"
-          />
-        </label>
-        <button type="submit">Login</button>
-      </Form>
-
-      <div className="create-account">
+      <LoginForm />
+      <div className="account-actions">
         <p>
-          <a href="/register">Create an account</a>
+          <a
+            aria-label="Click to redirect you to create an account page"
+            href="/register"
+          >
+            Create an account
+          </a>
+        </p>
+        <p>
+          <a aria-label="Click to reset your password" href="/home">
+            Reset password
+          </a>
         </p>
       </div>
-    </Container>
-  ) : (
-    <Container>
-      <h2>You are authenticated</h2>
     </Container>
   );
 }

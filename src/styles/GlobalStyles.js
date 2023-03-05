@@ -5,21 +5,21 @@ import { device } from './mediaQueries';
 
 export default createGlobalStyle`
     * {
-        margin: 0;
-        padding: 0;
-        text-decoration: 0;
-        outline: 0;
-        box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      text-decoration: 0;
+      outline: 0;
+      box-sizing: border-box;
     }
 
     :root, html {
-        font-size: 62.5%;
+      font-size: 62.5%;
     }
 
     body {
-        font-size: 1.6rem;
-        font-family: monospace;
-        background-color: ${colors.defaultWhiteColor};
+      font-size: 1.6rem;
+      font-family: monospace;
+      background-color: ${colors.defaultWhiteColor};
     }
 
     h1 {
@@ -27,57 +27,53 @@ export default createGlobalStyle`
     }
 
     h2, h3, h4, h5, h6 {
-        font-family: 'David Libre', serif;
+      font-family: 'David Libre', serif;
     }
 
     button {
-        cursor: pointer;
-        outline: none;
-        border: none;
-        background-color: transparent;
+      cursor: pointer;
+      outline: none;
+      border: none;
+      background-color: transparent;
     }
 
     li {
-        list-style-type: none;
+      list-style-type: none;
     }
 
     a {
-        color: inherit;
+      color: inherit;
     }
 
     img {
-        max-width: 100%;
+      width: 100%;
+      height: 100%;
+      max-height: 100%;
+      max-width: 100%;
     }
 
     .icons {
-        color: ${colors.defaultBlackColor};
+      color: ${colors.defaultBlackColor};
     }
 
 
 
     .toast-notification-style {
-        margin: 0.4rem 0;
+      margin: 0.4rem 0;
     }
 
     @media ${device.mobileL} {
-        .toast-notification-style {
-            width: 28rem;
-        }
-    }
-
-
-    #form-checkout {
-    display: flex;
-    flex-direction: column;
-    max-width: 600px;
+      .toast-notification-style {
+          width: 28rem;
+      }
     }
 
     .container {
-    height: 18px;
-    display: inline-block;
-    border: 1px solid rgb(118, 118, 118);
-    border-radius: 2px;
-    padding: 1px 2px;
+      height: 18px;
+      display: inline-block;
+      border: 1px solid rgb(118, 118, 118);
+      border-radius: 2px;
+      padding: 1px 2px;
     }
 
     * {
