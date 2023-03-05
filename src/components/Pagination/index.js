@@ -61,11 +61,9 @@ export default function Pagination({ qtyPages, count }) {
       <PaginationContainer className="pagination-navbar">
         <PaginationList className="pagination-list">
           {firstPageOutRange ? (
-            <li
-              aria-label="Go to first page"
-              className="pagination-control first-page"
-            >
+            <li className="pagination-control first-page">
               <button
+                aria-label="Go to first page"
                 type="button"
                 onClick={() => {
                   params.set('page', 1);
@@ -79,11 +77,9 @@ export default function Pagination({ qtyPages, count }) {
             ''
           )}
           {hasPrevious ? (
-            <li
-              aria-label="Go to previous page"
-              className="pagination-control previous-page"
-            >
+            <li className="pagination-control previous-page">
               <button
+                aria-label="Go to previous page"
                 type="button"
                 onClick={() => {
                   params.set('page', currentPage - 1);
@@ -98,8 +94,6 @@ export default function Pagination({ qtyPages, count }) {
           )}
           {pagination.map((page) => (
             <li
-              aria-label={`Go to page ${page}`}
-              aria-current={currentPage === page ? 'page' : 'false'}
               className={
                 currentPage === page
                   ? 'pagination-item active'
@@ -108,6 +102,8 @@ export default function Pagination({ qtyPages, count }) {
               key={page}
             >
               <button
+                aria-current={currentPage === page ? 'page' : 'false'}
+                aria-label={`Go to page ${page}`}
                 type="button"
                 onClick={() => {
                   params.set('page', page);
@@ -119,11 +115,9 @@ export default function Pagination({ qtyPages, count }) {
             </li>
           ))}
           {hasNext ? (
-            <li
-              aria-label="Go to next page"
-              className="pagination-control next-page"
-            >
+            <li className="pagination-control next-page">
               <button
+                aria-label="Go to next page"
                 type="button"
                 onClick={() => {
                   params.set('page', currentPage + 1);
@@ -137,11 +131,9 @@ export default function Pagination({ qtyPages, count }) {
             ''
           )}
           {lastPageOutRange ? (
-            <li
-              aria-label="Go to last page"
-              className="pagination-control last-page"
-            >
+            <li className="pagination-control last-page">
               <button
+                aria-label="Go to last page"
                 type="button"
                 onClick={() => {
                   params.set('page', totalPages);
