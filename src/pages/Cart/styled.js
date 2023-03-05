@@ -281,7 +281,7 @@ export const ProductContainer = styled.div`
 
     & .product-header {
       width: 85%;
-      height: 3rem;
+      height: 6.5rem;
 
       display: flex;
       align-items: center;

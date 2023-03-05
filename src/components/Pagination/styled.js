@@ -64,10 +64,13 @@ export const PaginationList = styled.ul`
 
         background-color: rgba(30, 30, 30, 0.2);
       }
-      &.active button {
-        color: ${colors.secondMainColor} !important;
+      &.active {
         background-color: ${colors.defaultBlackColor};
         transform: scale(1.04) translateY(-0.4rem);
+
+        button {
+          color: ${colors.secondMainColor};
+        }
 
         &:hover button {
           filter: brightness(1.3);
