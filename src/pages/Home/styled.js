@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import * as colors from '../../styles/colors';
 import { device } from '../../styles/mediaQueries';
+import emptyImage from './images/research.svg';
 
 export const Section = styled.section`
   display: grid;
@@ -16,6 +17,21 @@ export const Section = styled.section`
 
   @media ${device.laptop} {
     grid-template-columns: repeat(auto-fit, fit-content);
+  }
+
+  .empty-feedback {
+    width: 100%;
+    height: 100vh;
+
+    background-image: url(${emptyImage});
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: auto;
+
+    h2 {
+      font-weight: 200;
+      text-align: center;
+    }
   }
 `;
 

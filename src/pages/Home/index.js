@@ -21,87 +21,91 @@ export default function Home() {
   return (
     <>
       <Section className="product">
-        {products
-          ? products.map((product) => (
-              <Article key={product.id}>
-                <ProductContainer>
-                  <abbr title="Units" className="stock">
-                    {product.stock}
-                  </abbr>
-                  {product.promotional_price ? (
-                    <span className="per-des">
-                      {getPercentageDiscount(
-                        product.price,
-                        product.promotional_price
-                      )}
-                      <span className="arrow-down">
-                        <FaCaretDown size={13} />
-                      </span>
+        {products.length > 0 ? (
+          products.map((product) => (
+            <Article key={product.id}>
+              <ProductContainer>
+                <abbr title="Units" className="stock">
+                  {product.stock}
+                </abbr>
+                {product.promotional_price ? (
+                  <span className="per-des">
+                    {getPercentageDiscount(
+                      product.price,
+                      product.promotional_price
+                    )}
+                    <span className="arrow-down">
+                      <FaCaretDown size={13} />
                     </span>
-                  ) : (
-                    ''
-                  )}
-                  {get(product, 'cover', '') ? (
-                    <div className="product-image">
-                      <a href={`/product/${product.slug}`}>
-                        <img
-                          src={product.cover}
-                          alt={`Product: ${product.name}`}
-                        />
-                      </a>
-                    </div>
-                  ) : (
-                    ''
-                  )}
-
-                  <div className="product-header">
+                  </span>
+                ) : (
+                  ''
+                )}
+                {get(product, 'cover', '') ? (
+                  <div className="product-image">
                     <a href={`/product/${product.slug}`}>
-                      <h2>{formatTextLength(product.name)}</h2>
+                      <img
+                        src={product.cover}
+                        alt={`Product: ${product.name}`}
+                      />
                     </a>
                   </div>
+                ) : (
+                  ''
+                )}
 
-                  <div className="product-footer">
-                    <button
-                      className="fav-button"
-                      aria-label="Click to add product in favorites"
-                      onClick={() => toggleProductFav(product.id)}
-                      type="button"
-                    >
-                      {checkProductIsFav(product.id) ? (
-                        <FaHeart size={15} className="remove" />
-                      ) : (
-                        <FaRegHeart size={15} className="add" />
-                      )}
-                    </button>
-                    {product.promotional_price ? (
-                      <div className="product-price">
-                        <span translate="no" className="price old">
-                          {getFormatedPrice(product.price)}
-                        </span>
-                        <span translate="no" className="price promotional">
-                          {getFormatedPrice(product.promotional_price)}
-                        </span>
-                      </div>
+                <div className="product-header">
+                  <a href={`/product/${product.slug}`}>
+                    <h2>{formatTextLength(product.name)}</h2>
+                  </a>
+                </div>
+
+                <div className="product-footer">
+                  <button
+                    className="fav-button"
+                    aria-label="Click to add product in favorites"
+                    onClick={() => toggleProductFav(product.id)}
+                    type="button"
+                  >
+                    {checkProductIsFav(product.id) ? (
+                      <FaHeart size={15} className="remove" />
                     ) : (
-                      <span translate="no" className="product-price">
+                      <FaRegHeart size={15} className="add" />
+                    )}
+                  </button>
+                  {product.promotional_price ? (
+                    <div className="product-price">
+                      <span translate="no" className="price old">
                         {getFormatedPrice(product.price)}
                       </span>
-                    )}
-                    <button
-                      type="button"
-                      className="add-cart-button"
-                      aria-label="Click to add product in cart"
-                      onClick={() => {
-                        addProductCart(product.id, product);
-                      }}
-                    >
-                      <FaCartPlus className="add-cart" size={15} />
-                    </button>
-                  </div>
-                </ProductContainer>
-              </Article>
-            ))
-          : ''}
+                      <span translate="no" className="price promotional">
+                        {getFormatedPrice(product.promotional_price)}
+                      </span>
+                    </div>
+                  ) : (
+                    <span translate="no" className="product-price">
+                      {getFormatedPrice(product.price)}
+                    </span>
+                  )}
+                  <button
+                    type="button"
+                    className="add-cart-button"
+                    aria-label="Click to add product in cart"
+                    onClick={() => {
+                      addProductCart(product.id, product);
+                    }}
+                  >
+                    <FaCartPlus className="add-cart" size={15} />
+                  </button>
+                </div>
+              </ProductContainer>
+            </Article>
+          ))
+        ) : (
+          <div className="empty-feedback">
+            <h2>We are sorry, but there are no products to show.</h2>
+          </div>
+        )}
       </Section>
       <Pagination count={count} />
     </>
