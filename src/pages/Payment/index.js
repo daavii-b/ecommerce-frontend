@@ -1,13 +1,17 @@
 import React from 'react';
 import { FiAlertOctagon } from 'react-icons/fi';
+import { useLocation, Navigate } from 'react-router-dom';
 import { useCart } from '../../context/cart';
 import { useAuth } from '../../context/auth';
 import axios from '../../services/axios';
 import { Section } from './styled';
 
 export default function Payment() {
+  const location = useLocation();
   const { productsCart, amount, getFormatedPrice } = useCart();
   const { accessToken } = useAuth();
+
+  const { redirected } = location.state || false;
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -30,7 +34,7 @@ export default function Payment() {
     }
   };
 
-  return (
+  return redirected ? (
     <Section>
       <header className="checkout-review-header">
         <h2 className="title">Checkout Review</h2>
@@ -98,5 +102,7 @@ export default function Payment() {
         </button>
       </form>
     </Section>
+  ) : (
+    <Navigate to="/cart" replace />
   );
 }

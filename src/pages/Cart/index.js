@@ -176,7 +176,7 @@ export default function Cart() {
           <div className="cart-actions">
             <button
               onClick={() => {
-                navigate('/payments');
+                navigate('/payments', { state: { redirected: true } });
               }}
               className="ready-to-pay"
               type="button"

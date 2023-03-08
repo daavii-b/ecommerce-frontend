@@ -182,6 +182,7 @@ export const Section = styled.section`
     .cart-actions {
       display: flex;
       flex-direction: row wrap;
+      grid-gap: 1rem;
       margin-top: 0.3rem;
       width: 100%;
 
@@ -196,8 +197,7 @@ export const Section = styled.section`
 
         font-size: 1.1rem;
 
-        margin: 0 0.3rem;
-        padding: 0.5rem;
+        padding: 0.8rem;
 
         border: 1px solid rgba(0, 0, 0, 0.07);
         border-radius: 0.4rem;
