@@ -49,6 +49,10 @@ export default createGlobalStyle`
       max-width: 100%;
     }
 
+    li {
+      list-style-type: none;
+    }
+
     .icons {
       color: ${colors.defaultBlackColor};
     }

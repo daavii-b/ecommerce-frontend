@@ -127,7 +127,7 @@ export default function MainHeader() {
         <label htmlFor="search">
           <FaSearch size={15} className="search-icon" />
           <input
-            type="text"
+            type="search"
             name="search"
             id="search"
             className="search-input"
