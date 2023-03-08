@@ -366,8 +366,8 @@ export const ProductContainer = styled.div`
     justify-self: flex-start;
 
     h3 {
-      font-size: 1.5rem;
-      font-weight: 200;
+      font-size: 1.2rem;
+      font-weight: 500;
     }
   }
 

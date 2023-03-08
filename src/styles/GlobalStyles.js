@@ -27,7 +27,8 @@ export default createGlobalStyle`
     }
 
     h2, h3, h4, h5, h6 {
-      font-family: 'David Libre', serif;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2rem;
     }
 
     button {
@@ -35,10 +36,6 @@ export default createGlobalStyle`
       outline: none;
       border: none;
       background-color: transparent;
-    }
-
-    li {
-      list-style-type: none;
     }
 
     a {

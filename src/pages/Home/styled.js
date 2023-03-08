@@ -64,8 +64,8 @@ export const ProductContainer = styled.div`
   }
 
   h2 {
-    font-size: 1.4rem;
-    font-weight: 200;
+    font-size: 1.25rem;
+    font-weight: 400;
     padding: 0.4rem;
   }
 
