@@ -200,5 +200,5 @@ export default function CartProvider({ children }) {
 }
 
 CartProvider.propTypes = {
-  children: PropTypes.shape().isRequired,
+  children: PropTypes.node.isRequired,
 };

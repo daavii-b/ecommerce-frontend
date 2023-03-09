@@ -89,5 +89,5 @@ export default function AuthProvider({ children }) {
 }
 
 AuthProvider.propTypes = {
-  children: PropTypes.shape().isRequired,
+  children: PropTypes.node.isRequired,
 };

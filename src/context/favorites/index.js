@@ -69,5 +69,5 @@ export default function FavoritesProvider({ children }) {
 }
 
 FavoritesProvider.propTypes = {
-  children: PropTypes.shape().isRequired,
+  children: PropTypes.node.isRequired,
 };
