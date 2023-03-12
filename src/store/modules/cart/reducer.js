@@ -46,6 +46,19 @@ export default (state = cartInitialState, action) => {
       return newState;
     }
 
+    case types.SET_CART: {
+      const newState = { ...state };
+      manageToastNotification('set-cart', toast.TYPE.INFO);
+
+      toast.info('Cart has been updated successfully', {
+        toastId: 'set-cart',
+      });
+
+      newState.cartProducts = action.payload.productsCart;
+
+      return newState;
+    }
+
     case types.SET_AMOUNT: {
       const newState = { ...state };
 

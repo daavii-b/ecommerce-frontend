@@ -46,14 +46,14 @@ export const ProductContainer = styled.div`
   position: relative;
 
   border-radius: 0.5rem;
-  border: 1px solid ${colors.defaultBlackColor};
+  /* border: 1px solid ${colors.defaultBlackColor}; */
 
   transform: scale(1);
   transition: 0.4s ease-in-out;
   overflow: hidden;
 
   box-shadow: 0 0 6px 3px rgba(0, 0, 0, 0.08);
-  background-color: ${colors.defaultWhiteColor};
+  background-color: #dddddd;
 
   &:hover {
     transform: scale(1.02);
@@ -97,8 +97,8 @@ export const ProductContainer = styled.div`
 
     border-radius: inherit;
 
-    border-top-right-radius: 0;
-    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+    border-bottom-right-radius: 0;
   }
 
   .product-image {
@@ -123,22 +123,34 @@ export const ProductContainer = styled.div`
   }
 
   .product-header {
+    max-width: 100%;
+
     padding: 0.5rem 0;
     border-top: 0.1px solid ${colors.mainPurlpleColor};
     border-bottom: 0.1px solid ${colors.mainPurlpleColor};
-    text-overflow: ellipsis;
     font-size: 1.6rem;
+
+    letter-spacing: 0.6px;
+    overflow: hidden;
+
+    h2,
+    a {
+      max-width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
   }
 
   .product-footer {
     width: 100%;
-    height: 3.2rem;
+    height: 4.2rem;
 
     background-color: ${colors.defaultBlackColor};
     color: ${colors.defaultWhiteColor};
 
     display: grid;
-    grid-template-columns: 13% 74% 13%;
+    grid-template-columns: 74% 13% 13%;
     align-items: center;
     justify-items: center;
 

@@ -61,18 +61,6 @@ export default function Home() {
                 </div>
 
                 <div className="product-footer">
-                  <button
-                    className="fav-button"
-                    aria-label="Click to add product in favorites"
-                    onClick={() => toggleProductFav(product.id)}
-                    type="button"
-                  >
-                    {checkProductIsFav(product.id) ? (
-                      <FaHeart size={15} className="remove" />
-                    ) : (
-                      <FaRegHeart size={15} className="add" />
-                    )}
-                  </button>
                   {product.promotional_price ? (
                     <div className="product-price">
                       <span translate="no" className="price old">
@@ -87,6 +75,19 @@ export default function Home() {
                       {getFormatedPrice(product.price)}
                     </span>
                   )}
+                  <button
+                    className="fav-button"
+                    aria-label="Click to add product in favorites"
+                    onClick={() => toggleProductFav(product.id)}
+                    type="button"
+                  >
+                    {checkProductIsFav(product.id) ? (
+                      <FaHeart size={15} className="remove" />
+                    ) : (
+                      <FaRegHeart size={15} className="add" />
+                    )}
+                  </button>
+
                   <button
                     type="button"
                     className="add-cart-button"

@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import * as colors from '../../styles/colors';
-import * as defaultStyles from '../../styles/defaultStyles';
 import { device } from '../../styles/mediaQueries';
 
 export const Header = styled.header`
@@ -12,17 +11,15 @@ export const Header = styled.header`
 
   display: grid;
   grid-template-columns: 18rem 1fr 20%;
-  gap: 1rem;
   align-items: center;
   justify-items: center;
+  gap: 2rem;
 
   text-transform: uppercase;
-  padding: ${defaultStyles.padding};
+  padding: 0 4rem;
   background-color: ${colors.mainPurlpleColor};
 
-  box-shadow: 0 6px 9px 3px rgba(0, 0, 0, 0.15);
-
-  /* Category Nav Bar Logic */
+  box-shadow: 0 6px 9px 3px rgba(0, 0, 0, 0.25);
 
   div {
     display: flex;
@@ -30,12 +27,14 @@ export const Header = styled.header`
     justify-content: center;
 
     h1 {
-      font-size: 1.8rem;
+      font-size: 2.2rem;
       font-style: italic;
+      font-weight: 700;
 
-      text-shadow: 0 3px 0.5px rgba(255, 255, 255, 0.2);
+      text-shadow: 0 4px 0.5px rgba(0, 0, 0, 0.1);
 
-      letter-spacing: 5px;
+      letter-spacing: 3px;
+      color: ${colors.defaultWhiteColor};
     }
   }
 
@@ -264,12 +263,12 @@ export const Nav = styled.nav`
 
   border: 1px solid rgba(0, 0, 0, 0.15);
   border-right: none;
-  border-radius: 0.6rem;
+  border-radius: 0.3rem;
 
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
 
-  padding: 0.3rem;
+  padding: 0.4rem;
   padding-right: none;
 
   &:hover {
@@ -465,18 +464,25 @@ export const Form = styled.form`
     max-width: 100%;
 
     margin-left: 1rem;
-    padding: 0.3rem 0.6rem;
+    padding: 0.5rem 0.6rem;
 
-    border-radius: 0.6rem;
-    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 0.4rem;
+    border: 1px solid rgba(0, 0, 0, 0.1);
 
-    box-shadow: 0 0 4px 3px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 5px 7px rgba(0, 0, 0, 0.1);
 
     transition: all 0.2s ease-in-out;
 
+    background-color: #dddddd;
+
     &:focus {
       transition: all 0.2s ease-in;
-      border: 1.2px solid rgba(0, 0, 0, 0.8);
+      border: 1.2px solid rgba(0, 0, 0, 0.5);
+    }
+
+    &::placeholder {
+      font-weight: 300;
+      color: grey;
     }
   }
 `;

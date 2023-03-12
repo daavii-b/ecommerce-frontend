@@ -120,7 +120,7 @@ export default function Cart() {
                         <FaMinus size={11} />
                       </button>
                     </div>
-                    {item.product.promotional_price ? (
+                    {Boolean(item.product.promotional_price) && (
                       <div className="per-des">
                         <p>
                           {getPercentageDiscount(
@@ -132,8 +132,6 @@ export default function Cart() {
                           <FaCaretDown size={12} />
                         </span>
                       </div>
-                    ) : (
-                      ''
                     )}
                   </ProductContainer>
                 </Article>
@@ -170,7 +168,7 @@ export default function Cart() {
           <div className="cart-info">
             <p className="cart-amount">Total: {getFormatedPrice(amount)}</p>
             <p className="cart-total-items" translate="no">
-              Items: {productsCart ? productsCart.length : 0}
+              Items: {productsCart.length || 0}
             </p>
           </div>
           <div className="cart-actions">
@@ -180,6 +178,7 @@ export default function Cart() {
               }}
               className="ready-to-pay"
               type="button"
+              {...(productsCart.length <= 0 && { disabled: true })}
             >
               <span>
                 <MdPayment className="icon" size={13} />
@@ -190,6 +189,7 @@ export default function Cart() {
               className="clear-cart"
               onClick={() => clearCart()}
               type="button"
+              {...(productsCart.length <= 0 && { disabled: true })}
             >
               <span>
                 <AiOutlineClear className="icon" size={13} />

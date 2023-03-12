@@ -201,8 +201,12 @@ export const Section = styled.section`
 
         border: 1px solid rgba(0, 0, 0, 0.07);
         border-radius: 0.4rem;
-        box-shadow: 2px 0px 8px 1px rgba(0, 0, 0, 0.1);
+        box-shadow: 0px 4px 8px 1px rgba(0, 0, 0, 0.08);
         text-transform: uppercase;
+
+        &:disabled {
+          background-color: rgba(0, 0, 0, 0.2);
+        }
 
         span {
           margin: 0 0.3rem;
@@ -215,8 +219,8 @@ export const Section = styled.section`
         }
 
         &.ready-to-pay {
-          &:active {
-            box-shadow: -2px 0px 8px 1px rgba(0, 0, 0, 0.1);
+          &:active:not([disabled]) {
+            box-shadow: 0 -4px 8px 1px rgba(0, 0, 0, 0.15);
             background-color: rgba(0, 255, 0, 0.6);
           }
 
@@ -227,20 +231,34 @@ export const Section = styled.section`
           border-color: green;
 
           transition: 0.1s ease-out;
+
+          &[disabled] {
+            border: 1px solid rgba(0, 0, 0, 0.2);
+
+            span {
+              color: grey;
+            }
+          }
         }
 
         &.clear-cart {
-          &:active {
-            box-shadow: -2px 0px 8px 1px rgba(0, 0, 0, 0.1);
+          &:active:not([disabled]) {
+            box-shadow: 0 -4px 8px 1px rgba(0, 0, 0, 0.15);
             background-color: rgba(255, 0, 0, 0.6);
           }
 
           span {
-            .icon {
-              color: red;
-            }
+            color: red;
           }
           border-color: red;
+        }
+
+        &[disabled] {
+          border: 1px solid rgba(0, 0, 0, 0.2);
+
+          span {
+            color: grey;
+          }
         }
       }
     }

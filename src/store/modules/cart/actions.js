@@ -18,6 +18,12 @@ export function clearCart(payload) {
     payload,
   };
 }
+export function setCart(payload) {
+  return {
+    type: types.SET_CART,
+    payload,
+  };
+}
 export function processAddProduct(payload) {
   return {
     type: types.PROCESS_ADD_PRODUCT,

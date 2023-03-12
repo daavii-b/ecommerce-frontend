@@ -8,8 +8,5 @@ export default function Main({ children }) {
 }
 
 Main.propTypes = {
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.shape()),
-    PropTypes.shape(),
-  ]).isRequired,
+  children: PropTypes.node.isRequired,
 };

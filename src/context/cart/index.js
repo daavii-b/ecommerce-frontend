@@ -20,27 +20,15 @@ export default function CartProvider({ children }) {
   const addAmount = useMemo(
     () =>
       ({ price, promotional_price: promotionalPrice }) => {
-        if (promotionalPrice) {
-          setAmount((currentAmount) => {
-            dispatch(
-              cartActions.setAmount({
-                amount: currentAmount + promotionalPrice,
-              })
-            );
+        setAmount((currentAmount) => {
+          dispatch(
+            cartActions.setAmount({
+              amount: currentAmount + (promotionalPrice || price),
+            })
+          );
 
-            return currentAmount + promotionalPrice;
-          });
-        } else {
-          setAmount((currentAmount) => {
-            dispatch(
-              cartActions.setAmount({
-                amount: currentAmount + price,
-              })
-            );
-
-            return currentAmount + price;
-          });
-        }
+          return currentAmount + (promotionalPrice || price);
+        });
       },
     [dispatch]
   );
@@ -48,26 +36,15 @@ export default function CartProvider({ children }) {
   const removeAmount = useMemo(
     () =>
       ({ price, promotional_price: promotionalPrice }) => {
-        if (promotionalPrice) {
-          setAmount((currentAmount) => {
-            dispatch(
-              cartActions.setAmount({
-                amount: currentAmount - promotionalPrice,
-              })
-            );
+        setAmount((currentAmount) => {
+          dispatch(
+            cartActions.setAmount({
+              amount: currentAmount - (promotionalPrice || price),
+            })
+          );
 
-            return currentAmount - promotionalPrice;
-          });
-        } else {
-          setAmount((currentAmount) => {
-            dispatch(
-              cartActions.setAmount({
-                amount: currentAmount - price,
-              })
-            );
-            return currentAmount - price;
-          });
-        }
+          return currentAmount - (promotionalPrice || price);
+        });
       },
     [dispatch]
   );
@@ -84,80 +61,141 @@ export default function CartProvider({ children }) {
     [dispatch]
   );
 
+  const calculateAmount = useMemo(
+    () => (products) =>
+      products.reduce(
+        (accumulator, item) =>
+          accumulator +
+          (item.product.promotional_price || item.product.price) * item.qty,
+        0
+      ),
+    []
+  );
+
   const addProductCart = useMemo(
     () => (productId, cProduct) => {
-      const copyProductsCart = [...productsCart];
-      const product = copyProductsCart.find(
-        (cartProduct) => cartProduct.id === productId
-      );
-      if (!product) {
-        const newProduct = {
-          id: productId,
-          product: cProduct,
-          qty: 1,
-        };
-        copyProductsCart.push(newProduct);
-        addAmount(cProduct);
-      } else {
-        product.qty += 1;
-        addAmount(product.product);
-      }
-      setProductsCart(copyProductsCart);
-      dispatch(
-        cartActions.processAddProduct({ products: copyProductsCart, amount })
-      );
+      setProductsCart((currentCart) => {
+        const item = currentCart.find(
+          (cartProduct) => cartProduct.id === productId
+        );
+
+        if (!item) {
+          const newProduct = {
+            id: productId,
+            product: cProduct,
+            qty: 1,
+          };
+
+          addAmount(cProduct);
+
+          const updatedCart = [...currentCart, newProduct];
+
+          dispatch(
+            cartActions.processAddProduct({
+              products: updatedCart,
+              amount,
+            })
+          );
+
+          return updatedCart;
+        }
+
+        item.qty += 1;
+
+        addAmount(item.product);
+
+        dispatch(
+          cartActions.processAddProduct({
+            products: [...currentCart],
+            amount,
+          })
+        );
+
+        return [...currentCart];
+      });
     },
-    [addAmount, amount, dispatch, productsCart]
+    [addAmount, amount, dispatch]
   );
 
   const removeProductCart = useMemo(
     () => (productId) => {
-      const copyProductsCart = [...productsCart];
+      setProductsCart((currentCart) => {
+        const item = currentCart.find((cProduct) => cProduct.id === productId);
 
-      const product = copyProductsCart.find(
-        (cProduct) => cProduct.id === productId
-      );
+        if (item && item.qty > 1) {
+          item.qty -= 1;
 
-      if (product && product.qty > 1) {
-        product.qty -= 1;
+          removeAmount(item.product);
 
-        setProductsCart(copyProductsCart);
+          dispatch(
+            cartActions.processRemoveProduct({
+              products: [...currentCart],
+              amount,
+            })
+          );
 
-        removeAmount(product.product);
+          return [...currentCart];
+        }
+        const filteredCart = [
+          ...currentCart.filter((cProduct) => cProduct.id !== productId),
+        ];
+
+        removeAmount(item.product);
 
         dispatch(
           cartActions.processRemoveProduct({
-            products: copyProductsCart,
+            products: filteredCart,
             amount,
           })
         );
-      } else {
-        const cartProductsFiltered = copyProductsCart.filter(
-          (cProduct) => cProduct.id !== productId
-        );
 
-        setProductsCart(cartProductsFiltered);
-
-        removeAmount(product.product);
-
-        dispatch(
-          cartActions.processRemoveProduct({
-            products: cartProductsFiltered,
-          })
-        );
-      }
+        return filteredCart;
+      });
     },
-    [amount, dispatch, productsCart, removeAmount]
+    [amount, dispatch, removeAmount]
   );
 
   const clearCart = useMemo(
     () => () => {
-      setProductsCart([]);
-      clearAmount();
+      setProductsCart(() => {
+        clearAmount();
 
-      dispatch(cartActions.processClearCart({ products: [], amount: 0 }));
+        dispatch(cartActions.processClearCart({ products: [], amount: 0 }));
+
+        return [];
+      });
     },
     [clearAmount, dispatch]
+  );
+
+  const setCart = useMemo(
+    () => (cartItemsNotAvailable) => {
+      setProductsCart((currentCart) => {
+        const newCart = [
+          ...currentCart.filter(
+            (item) =>
+              !cartItemsNotAvailable.some((product) => product.id === item.id)
+          ),
+        ];
+
+        dispatch(cartActions.setCart({ productsCart: newCart }));
+
+        const newAmount = calculateAmount(newCart);
+
+        setAmount(() => {
+          dispatch(
+            cartActions.setAmount({
+              amount: newAmount,
+            })
+          );
+
+          return newAmount;
+        });
+
+        return newCart;
+      });
+    },
+    [calculateAmount, dispatch]
   );
 
   const getPercentageDiscount = (price, promotionalPrice) => {
@@ -190,8 +228,18 @@ export default function CartProvider({ children }) {
       getPercentageDiscount,
       formatTextLength,
       getFormatedPrice,
+      calculateAmount,
+      setCart,
     }),
-    [productsCart, addProductCart, removeProductCart, clearCart, amount]
+    [
+      productsCart,
+      addProductCart,
+      removeProductCart,
+      clearCart,
+      calculateAmount,
+      amount,
+      setCart,
+    ]
   );
 
   return (
