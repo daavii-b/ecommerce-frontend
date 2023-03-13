@@ -43,7 +43,7 @@ export const ProductWrapper = styled.article`
   width: 100%;
   height: 100%;
 
-  /* max-width: 20rem; */
+  max-width: 25rem;
   min-height: max-content;
 
   overflow: hidden;
