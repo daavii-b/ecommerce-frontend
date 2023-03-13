@@ -24,7 +24,6 @@ export default function Cart() {
     clearCart,
     amount,
     getPercentageDiscount,
-    formatTextLength,
     getFormatedPrice,
   } = useCart();
   const { toggleProductFav, checkProductIsFav } = useFav();
@@ -71,9 +70,7 @@ export default function Cart() {
                       </abbr>
                     </div>
                     <header className="product-header">
-                      <h3 translate="no">
-                        {formatTextLength(item.product.name)}
-                      </h3>
+                      <h3 translate="no">{item.product.name}</h3>
                     </header>
                     <footer className="product-footer">
                       {item.product.promotional_price ? (
@@ -123,10 +120,7 @@ export default function Cart() {
                     {Boolean(item.product.promotional_price) && (
                       <div className="per-des">
                         <p>
-                          {getPercentageDiscount(
-                            item.product.price,
-                            item.product.promotional_price
-                          )}
+                          {getPercentageDiscount(item.product, item.product)}
                         </p>
                         <span className="arrow-down">
                           <FaCaretDown size={12} />

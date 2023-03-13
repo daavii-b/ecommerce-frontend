@@ -11,7 +11,7 @@ import {
   FaBars,
   FaHeart,
 } from 'react-icons/fa';
-import { BiCategory } from 'react-icons/bi';
+import { BiFilter } from 'react-icons/bi';
 import * as actions from '../../store/modules/auth/actions';
 import { Header, Nav, CategoryNav, Form } from './styled';
 import { useAuth } from '../../context/auth';
@@ -68,10 +68,10 @@ export default function MainHeader() {
                 className="toggle-category-nav"
                 type="button"
               >
-                <span>
-                  <BiCategory />
-                </span>
                 Categories
+                <span>
+                  <BiFilter />
+                </span>
               </button>
             </h2>
           </div>

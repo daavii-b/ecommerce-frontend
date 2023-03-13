@@ -1,106 +1,96 @@
-import React, { useContext } from 'react';
-import { get } from 'lodash';
-import { FaCartPlus, FaCaretDown, FaRegHeart, FaHeart } from 'react-icons/fa';
+import React, { useState, useEffect } from 'react';
+import { FaCartPlus, FaRegHeart, FaHeart, FaCaretDown } from 'react-icons/fa';
 import { useCart } from '../../context/cart';
-import { FavoritesContext } from '../../context/favorites';
-import { Section, Article, ProductContainer } from './styled';
-import {
-  getPercentageDiscount,
-  formatTextLength,
-  getFormatedPrice,
-} from '../../utils';
+import { useFav } from '../../context/favorites';
+import { Section, ProductWrapper, CategorySection } from './styled';
+
 import Pagination from '../../components/Pagination';
 import { useAxios } from '../../hooks';
 
 export default function Home() {
-  const { addProductCart } = useCart();
-  const { toggleProductFav, checkProductIsFav } = useContext(FavoritesContext);
+  const { addProductCart, getFormatedPrice, getPercentageDiscount } = useCart();
+  const { toggleProductFav, checkProductIsFav } = useFav();
 
   const { data: products, count } = useAxios('products/');
 
+  const [category, setCategory] = useState();
+
+  const choice = (choices) => {
+    const index = Math.floor(Math.random() * choices.length);
+    return choices[index];
+  };
+
+  useEffect(
+    () => setCategory(() => choice(products)?.category_name),
+    [products]
+  );
+
   return (
     <>
-      <Section className="product">
+      <Section className="products">
         {products.length > 0 ? (
           products.map((product) => (
-            <Article key={product.id}>
-              <ProductContainer>
-                <abbr title="Units" className="stock">
-                  {product.stock}
-                </abbr>
-                {product.promotional_price ? (
-                  <span className="per-des">
-                    {getPercentageDiscount(
-                      product.price,
-                      product.promotional_price
-                    )}
-                    <span className="arrow-down">
-                      <FaCaretDown size={13} />
-                    </span>
-                  </span>
-                ) : (
-                  ''
-                )}
-                {get(product, 'cover', '') ? (
-                  <div className="product-image">
-                    <a href={`/product/${product.slug}`}>
-                      <img
-                        src={product.cover}
-                        alt={`Product: ${product.name}`}
-                      />
-                    </a>
-                  </div>
-                ) : (
-                  ''
-                )}
-
-                <div className="product-header">
-                  <a href={`/product/${product.slug}`}>
-                    <h2>{formatTextLength(product.name)}</h2>
-                  </a>
+            <ProductWrapper key={product.id} className="wrapper">
+              <div className="product-container">
+                <span className="discount">
+                  {getPercentageDiscount(product)}
+                  <FaCaretDown />
+                </span>
+                <div className="product-image">
+                  <img src={product.cover} alt="" />
                 </div>
-
-                <div className="product-footer">
+                <div className="product-header">
+                  <h2>
+                    <a href="/">{product.name}</a>
+                  </h2>
+                </div>
+                <div className="product-price">
                   {product.promotional_price ? (
-                    <div className="product-price">
-                      <span translate="no" className="price old">
-                        {getFormatedPrice(product.price)}
+                    <>
+                      <span className="price old">
+                        <p>{getFormatedPrice(product.price)}</p>
                       </span>
-                      <span translate="no" className="price promotional">
-                        {getFormatedPrice(product.promotional_price)}
+                      <span className="promotional-price">
+                        <p>{getFormatedPrice(product.promotional_price)}</p>
                       </span>
-                    </div>
+                    </>
                   ) : (
-                    <span translate="no" className="product-price">
-                      {getFormatedPrice(product.price)}
+                    <span className="price">
+                      <p>{getFormatedPrice(product.price)}</p>
                     </span>
                   )}
-                  <button
-                    className="fav-button"
-                    aria-label="Click to add product in favorites"
-                    onClick={() => toggleProductFav(product.id)}
-                    type="button"
-                  >
-                    {checkProductIsFav(product.id) ? (
-                      <FaHeart size={15} className="remove" />
-                    ) : (
-                      <FaRegHeart size={15} className="add" />
-                    )}
-                  </button>
-
-                  <button
-                    type="button"
-                    className="add-cart-button"
-                    aria-label="Click to add product in cart"
-                    onClick={() => {
-                      addProductCart(product.id, product);
-                    }}
-                  >
-                    <FaCartPlus className="add-cart" size={15} />
-                  </button>
                 </div>
-              </ProductContainer>
-            </Article>
+                <div className="info">
+                  <div className="stock">
+                    <p>Stock: {product.stock}</p>
+                  </div>
+                  <div className="controls">
+                    <button
+                      className="fav-button"
+                      aria-label="Click to add product in favorites"
+                      onClick={() => toggleProductFav(product.id)}
+                      type="button"
+                    >
+                      {checkProductIsFav(product.id) ? (
+                        <FaHeart className="remove" />
+                      ) : (
+                        <FaRegHeart className="add" />
+                      )}
+                    </button>
+                    <button
+                      type="button"
+                      className="add-cart-button"
+                      aria-label="Click to add product in cart"
+                      onClick={() => {
+                        addProductCart(product.id, product);
+                      }}
+                    >
+                      <FaCartPlus className="add-cart" />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </ProductWrapper>
           ))
         ) : (
           <div className="empty-feedback">
@@ -108,6 +98,78 @@ export default function Home() {
           </div>
         )}
       </Section>
+      <CategorySection className="suggested-categories-section">
+        <div className="wrapper">
+          <h2>{category}</h2>
+          <ul>
+            {products
+              .filter((product) => product.category_name === category)
+              .map((product) => (
+                <li key={product.id}>
+                  <article className="product">
+                    <div className="product-container">
+                      <div className="product-image">
+                        <img src={product.cover} alt="" />
+                      </div>
+                      <div className="product-header">
+                        <h2>
+                          <a href="/">{product.name}</a>
+                        </h2>
+                      </div>
+                      <div className="product-price">
+                        {product.promotional_price ? (
+                          <>
+                            <span className="price old">
+                              <p>{getFormatedPrice(product.price)}</p>
+                            </span>
+                            <span className="promotional-price">
+                              <p>
+                                {getFormatedPrice(product.promotional_price)}
+                              </p>
+                            </span>
+                          </>
+                        ) : (
+                          <span className="price">
+                            <p>{getFormatedPrice(product.price)}</p>
+                          </span>
+                        )}
+                      </div>
+                      <div className="info">
+                        <div className="stock">
+                          <p>Stock: {product.stock}</p>
+                        </div>
+                        <div className="controls">
+                          <button
+                            className="fav-button"
+                            aria-label="Click to add product in favorites"
+                            onClick={() => toggleProductFav(product.id)}
+                            type="button"
+                          >
+                            {checkProductIsFav(product.id) ? (
+                              <FaHeart className="remove" />
+                            ) : (
+                              <FaRegHeart className="add" />
+                            )}
+                          </button>
+                          <button
+                            type="button"
+                            className="add-cart-button"
+                            aria-label="Click to add product in cart"
+                            onClick={() => {
+                              addProductCart(product.id, product);
+                            }}
+                          >
+                            <FaCartPlus className="add-cart" />
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </article>
+                </li>
+              ))}
+          </ul>
+        </div>
+      </CategorySection>
       <Pagination count={count} />
     </>
   );

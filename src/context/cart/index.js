@@ -198,14 +198,14 @@ export default function CartProvider({ children }) {
     [calculateAmount, dispatch]
   );
 
-  const getPercentageDiscount = (price, promotionalPrice) => {
+  const getPercentageDiscount = ({
+    price,
+    promotional_price: promotionalPrice,
+  }) => {
     const descValue = price - promotionalPrice;
 
     return String(((descValue / price) * 100).toFixed(0)).concat('%');
   };
-
-  const formatTextLength = (text) =>
-    text.length > 28 ? `${text.substring(0, 25)}...` : text;
 
   const getFormatedPrice = (price) =>
     'R$'.concat(
@@ -226,7 +226,6 @@ export default function CartProvider({ children }) {
       setProductsCart,
       amount,
       getPercentageDiscount,
-      formatTextLength,
       getFormatedPrice,
       calculateAmount,
       setCart,

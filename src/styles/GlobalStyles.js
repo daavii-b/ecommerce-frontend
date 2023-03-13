@@ -22,11 +22,13 @@ export default createGlobalStyle`
       background-color: ${colors.defaultWhiteColor};
     }
 
-    h1 {
+    ${
+      '' /* h1 {
       font-family: 'Playfair Display', serif;
+    } */
     }
 
-    h2, h3, h4, h5, h6 {
+    h1, h2, h3, h4, h5, h6 {
       font-family: 'Montserrat', sans-serif;
       font-size: 2rem;
     }

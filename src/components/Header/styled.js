@@ -7,13 +7,13 @@ export const Header = styled.header`
   width: 100%;
   height: 8rem;
 
-  z-index: 100;
+  z-index: 10000;
 
   display: grid;
-  grid-template-columns: 18rem 1fr 20%;
+  grid-template-columns: 19rem 1fr 20%;
   align-items: center;
   justify-items: center;
-  gap: 2rem;
+  gap: 1.5rem;
 
   text-transform: uppercase;
   padding: 0 4rem;
@@ -27,8 +27,8 @@ export const Header = styled.header`
     justify-content: center;
 
     h1 {
-      font-size: 2.2rem;
-      font-style: italic;
+      font-size: 2.1rem;
+      font-style: normal;
       font-weight: 700;
 
       text-shadow: 0 4px 0.5px rgba(0, 0, 0, 0.1);
@@ -66,11 +66,8 @@ export const CategoryNav = styled.nav`
   transition: 0.4s ease;
 
   position: absolute;
-  top: 8rem;
-  left: 0;
-
-  padding-top: 0.2rem;
-  padding-left: 0.2rem;
+  top: 9rem;
+  left: -2rem;
 
   z-index: 100;
 
@@ -86,25 +83,31 @@ export const CategoryNav = styled.nav`
 
   .toggle-category-nav {
     display: flex;
+
     align-items: center;
     justify-content: center;
     align-self: center;
+
     grid-gap: 0.5rem;
 
     width: 100%;
     height: fit-content;
 
-    border: 1px solid rgba(0, 0, 0, 0.2);
-    border-radius: 0.5rem;
-
-    letter-spacing: 1.5px;
-
-    padding: 0.6rem;
-    transition: 0.4s ease;
-    color: ${colors.secondMainColor};
-    background-color: rgba(0, 0, 0, 0.55);
-
+    letter-spacing: 1.2px;
     font-weight: bold;
+    padding: 0.6rem 0.4rem;
+
+    border-top-right-radius: 0.3rem;
+    border-bottom-right-radius: 0.3rem;
+
+    box-shadow: 0 5px 6px rgba(50, 50, 50, 0.2);
+
+    transition: 0.4s ease;
+
+    background-color: ${colors.defaultBlackColor};
+    color: ${colors.defaultWhiteColor};
+
+    padding: 0.7rem 0;
 
     &:hover {
       filter: brightness(1.1);
@@ -115,8 +118,7 @@ export const CategoryNav = styled.nav`
       align-items: center;
       justify-content: center;
       font-size: 1.8rem;
-
-      color: ${colors.defaultWhiteColor};
+      color: ${colors.secondMainColor};
 
       svg {
         transition: 0.4s ease-out;
@@ -153,6 +155,8 @@ export const CategoryNav = styled.nav`
     left: 0;
     bottom: 0;
 
+    padding-left: 0.4rem;
+
     .category-item {
       width: 100%;
       height: fit-content;
@@ -170,7 +174,7 @@ export const CategoryNav = styled.nav`
         align-items: center;
         justify-content: flex-start;
 
-        background-color: ${colors.defaultBlackColor};
+        background-color: rgba(40, 40, 40);
 
         border-top-right-radius: 0.4rem;
         border-bottom-right-radius: 0.4rem;
@@ -195,20 +199,22 @@ export const CategoryNav = styled.nav`
   }
 
   &.active {
+    left: 0;
+
     transition: 0.4s ease-in;
-    padding-top: 0.5rem;
-    padding-left: 0.5rem;
+    /* padding-top: 0.5rem;
+    padding-left: 0.5rem; */
 
     .toggle-category-nav {
       transition: 0.4s ease;
-      color: ${colors.defaultWhiteColor};
+      color: ${colors.secondMainColor};
       background-color: ${colors.defaultBlackColor};
 
       span {
         svg {
           transition: 0.4s ease-in;
-          transform: rotate(90deg);
-          color: ${colors.secondMainColor};
+          transform: rotate(360deg);
+          color: ${colors.defaultWhiteColor};
         }
       }
     }
@@ -221,6 +227,8 @@ export const CategoryNav = styled.nav`
       visibility: visible;
       opacity: 1;
       padding-right: 0.5rem;
+
+      background-color: rgba(0, 0, 0, 0.1);
 
       .category-item {
         transform: translateX(0);
@@ -478,6 +486,7 @@ export const Form = styled.form`
     &:focus {
       transition: all 0.2s ease-in;
       border: 1.2px solid rgba(0, 0, 0, 0.5);
+      background-color: #fff;
     }
 
     &::placeholder {
