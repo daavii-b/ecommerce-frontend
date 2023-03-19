@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import * as colors from '../../styles/colors';
 import { device } from '../../styles/mediaQueries/index';
 
 export const Section = styled.section`
@@ -47,11 +46,11 @@ export const Section = styled.section`
           align-items: center;
           justify-content: center;
 
-          color: ${colors.secondMainColor};
+          color: ${({ theme }) => theme.colors.secondary};
 
           border-right: 1px solid rgba(0, 0, 0, 0.2);
 
-          background-color: ${colors.defaultBlackColor};
+          background-color: ${({ theme }) => theme.colors.textSecondary};
 
           border-top-left-radius: 0.4rem;
           border-bottom-left-radius: 0.4rem;
@@ -74,7 +73,7 @@ export const Section = styled.section`
 
       grid-gap: 0.8rem;
 
-      border-left: 1px solid ${colors.defaultBlackColor};
+      border-left: 1px solid ${({ theme }) => theme.colors.textSecondary};
 
       padding: 0.7rem;
       padding-left: 1.2rem;
@@ -99,7 +98,7 @@ export const Section = styled.section`
           span {
             font-size: 1.3rem;
             text-transform: uppercase;
-            color: ${colors.mainPurlpleColor};
+            color: ${({ theme }) => theme.colors.primary};
             letter-spacing: 0.3px;
           }
         }
@@ -120,8 +119,8 @@ export const Section = styled.section`
             }
 
             &:hover {
-              color: ${colors.secondMainColor};
-              border-color: ${colors.secondMainColor};
+              color: ${({ theme }) => theme.colors.secondary};
+              border-color: ${({ theme }) => theme.colors.secondary};
               box-shadow: -2px 2px 1px 1px rgba(0, 0, 0, 0.05);
               transition: 0.3s ease-in;
             }
@@ -260,7 +259,7 @@ export const Section = styled.section`
         grid-column-gap: 0.7rem;
 
         padding: 0.5rem;
-        border-left: 2px solid ${colors.secondMainColor};
+        border-left: 2px solid ${({ theme }) => theme.colors.secondary};
         transition: 0.3s ease-in;
 
         animation: remove-animate 0.4s linear;
@@ -303,7 +302,7 @@ export const Section = styled.section`
 
             &:focus {
               transition: 0.4s ease;
-              border-color: ${colors.secondMainColor};
+              border-color: ${({ theme }) => theme.colors.secondary};
             }
 
             &::placeholder {
@@ -323,7 +322,7 @@ export const Section = styled.section`
 
             font-size: 1.8rem;
 
-            color: ${colors.defaultBlackColor};
+            color: ${({ theme }) => theme.colors.textSecondary};
             transition: 0.3s ease;
 
             &:hover {
@@ -398,7 +397,7 @@ export const Section = styled.section`
 
       &:hover {
         transition: 0.4s ease;
-        color: ${colors.secondMainColor};
+        color: ${({ theme }) => theme.colors.secondary};
       }
 
       p {

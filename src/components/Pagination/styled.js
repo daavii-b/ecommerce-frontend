@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import * as colors from '../../styles/colors';
 
 export const PaginationContainer = styled.nav`
   width: fit-content;
@@ -45,8 +44,8 @@ export const PaginationList = styled.ul`
     }
 
     &.pagination-control button {
-      color: ${colors.secondMainColor};
-      background-color: ${colors.defaultSecondaryBlackColor};
+      color: ${({ theme }) => theme.colors.secondary};
+      background-color: ${({ theme }) => theme.colors.textTetiary};
 
       &:hover {
         filter: brightness(1.3);
@@ -55,7 +54,7 @@ export const PaginationList = styled.ul`
 
     &.pagination-item {
       background-color: rgba(30, 30, 30, 0.06);
-      color: ${colors.defaultSecondaryBlackColor};
+      color: ${({ theme }) => theme.colors.textTetiary};
       transition: 0.3s ease-in-out;
       transform: scale(1);
 
@@ -65,11 +64,11 @@ export const PaginationList = styled.ul`
         background-color: rgba(30, 30, 30, 0.2);
       }
       &.active {
-        background-color: ${colors.defaultBlackColor};
+        background-color: ${({ theme }) => theme.colors.textSecondary};
         transform: scale(1.04) translateY(-0.4rem);
 
         button {
-          color: ${colors.secondMainColor};
+          color: ${({ theme }) => theme.colors.secondary};
         }
 
         &:hover button {

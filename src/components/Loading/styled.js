@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import * as colors from '../../styles/colors';
 
 export const Container = styled.div`
   @keyframes load {
@@ -61,7 +60,7 @@ export const Container = styled.div`
     width: 20rem;
     height: 20rem;
     z-index: 1000;
-    border: 0.1px solid ${colors.secondMainColor};
+    border: 0.1px solid ${({ theme }) => theme.colors.secondary};
     border-radius: 50%;
   }
   .loader-2 {
@@ -86,7 +85,7 @@ export const Container = styled.div`
 
     width: 3rem;
     height: 3rem;
-    background-color: ${colors.secondMainColor};
+    background-color: ${({ theme }) => theme.colors.secondary};
     border-radius: 50%;
     z-index: 10000;
   }

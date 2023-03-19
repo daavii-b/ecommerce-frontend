@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { useSearchParams, useLocation, Link } from 'react-router-dom';
+import { useSearchParams, Link } from 'react-router-dom';
 
 import { useDispatch } from 'react-redux';
 import {
@@ -11,35 +11,19 @@ import {
   FaBars,
   FaHeart,
 } from 'react-icons/fa';
-import { BiFilter } from 'react-icons/bi';
 import * as actions from '../../store/modules/auth/actions';
-import { Header, Nav, CategoryNav, Form } from './styled';
+import { Header, Nav, Form } from './styled';
 import { useAuth } from '../../context/auth';
-import { useAxios } from '../../hooks';
 
 export default function MainHeader() {
-  const location = useLocation();
   const dispatch = useDispatch();
   const [params, setParams] = useSearchParams();
 
   const { isAuthenticated } = useAuth();
-  const { data: categories } = useAxios('categories/');
 
   // elements references
   const refMainNavBar = useRef(null);
-  const refCategoryNavBar = useRef(null);
   const refToggleMainNavBar = useRef(null);
-  const refToggleCategoryNavBar = useRef(null);
-
-  const categoryNavHandleClick = () => {
-    refCategoryNavBar.current.classList.toggle('active');
-
-    if (refCategoryNavBar.current.classList.contains('active')) {
-      refToggleCategoryNavBar.current.setAttribute('aria-expanded', 'true');
-    } else {
-      refToggleCategoryNavBar.current.setAttribute('aria-expanded', 'false');
-    }
-  };
 
   const mainNavHandleClick = () => {
     refMainNavBar.current.classList.toggle('active');
@@ -54,55 +38,6 @@ export default function MainHeader() {
 
   return (
     <Header>
-      {/* CATEGORY NAVIGATION BAR */}
-
-      {location.pathname === '/' ? (
-        <CategoryNav ref={refCategoryNavBar} className="category-navbar">
-          <div>
-            <h2>
-              <button
-                ref={refToggleCategoryNavBar}
-                aria-expanded="false"
-                onClick={categoryNavHandleClick}
-                aria-label="Toggle category navigation"
-                className="toggle-category-nav"
-                type="button"
-              >
-                Categories
-                <span>
-                  <BiFilter />
-                </span>
-              </button>
-            </h2>
-          </div>
-          <ul className="categories-list">
-            {categories
-              ? categories.map((category) => (
-                  <li key={category.id} className="category-item">
-                    <div className="category-container">
-                      <button
-                        type="button"
-                        className="category"
-                        aria-label={`Filter products by category ${category.name}`}
-                        onClick={() => {
-                          params.delete('page');
-                          params.delete('search');
-                          params.set('category', category.name);
-                          setParams(params);
-                        }}
-                      >
-                        {category.name}
-                      </button>
-                    </div>
-                  </li>
-                ))
-              : ''}
-          </ul>
-        </CategoryNav>
-      ) : (
-        ''
-      )}
-
       {/* HEADER TITLE */}
       <div>
         <h1>
@@ -117,15 +52,15 @@ export default function MainHeader() {
         className="search-form"
         onSubmit={(event) => {
           const form = new FormData(event.target);
-          params.delete('page');
-          params.delete('category');
+
           params.set('search', form.get('search'));
-          setParams(params);
+
+          setParams(() => ({ ...params }));
         }}
         action="/"
       >
         <label htmlFor="search">
-          <FaSearch size={15} className="search-icon" />
+          <FaSearch className="search-icon" />
           <input
             type="search"
             name="search"
@@ -183,7 +118,7 @@ export default function MainHeader() {
           ) : (
             <li>
               <Link aria-label="Navigate to login" to="/login">
-                <FaSignInAlt size={15} className="icons" />
+                <FaSignInAlt className="icons" />
               </Link>
             </li>
           )}

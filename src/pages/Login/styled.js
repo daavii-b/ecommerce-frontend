@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import * as colors from '../../styles/colors';
 
 // import * as defaultStyles from '../../styles/defaultStyles';
 // import { device } from '../../styles/mediaQueries';
@@ -38,7 +37,7 @@ export const Container = styled.div`
 
       :hover {
         transition: 0.2s ease-in-out;
-        color: ${colors.secondMainColor};
+        color: ${({ theme }) => theme.colors.secondary};
       }
     }
   }

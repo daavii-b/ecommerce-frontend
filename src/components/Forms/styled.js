@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 // import { device } from '../../styles/mediaQueries';
-import * as colors from '../../styles/colors';
 
 export const Form = styled.form`
   display: flex;
@@ -40,7 +39,7 @@ export const Form = styled.form`
         border: 1px solid black;
         border-radius: 0.3rem;
 
-        background-color: ${colors.defaultBlackColor};
+        background-color: ${({ theme }) => theme.colors.textSecondary};
       }
 
       .field-input {
@@ -56,7 +55,7 @@ export const Form = styled.form`
 
         &:focus {
           transition: 0.3s ease-out;
-          border-color: ${colors.secondMainColor};
+          border-color: ${({ theme }) => theme.colors.secondary};
         }
 
         &::placeholder {
@@ -74,9 +73,9 @@ export const Form = styled.form`
 
     padding: 0.4rem;
 
-    color: ${colors.defaultBlackColor};
+    color: ${({ theme }) => theme.colors.textSecondary};
 
-    border: 1px solid ${colors.secondMainColor};
+    border: 1px solid ${({ theme }) => theme.colors.secondary};
 
     border-radius: 0.4rem;
   }

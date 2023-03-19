@@ -8,7 +8,6 @@ export default (reducers) => {
       storage,
       whitelist: [
         'authReducer',
-        'globalReducer',
         'favoritesReducer',
         'cartReducer',
       ],

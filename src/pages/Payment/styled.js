@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import * as colors from '../../styles/colors';
 import { device } from '../../styles/mediaQueries';
 
 export const Section = styled.section`
@@ -22,7 +21,7 @@ export const Section = styled.section`
     z-index: 10000;
 
     .modal {
-      color: ${colors.defaultWhiteColor};
+      color:${({ theme }) => theme.colors.textPrimary}
 
       hr {
         margin: 1rem 0;
@@ -51,7 +50,7 @@ export const Section = styled.section`
           font-weight: 400;
           text-transform: uppercase;
           text-align: center;
-          color: ${colors.defaultWhiteColor};
+          color:${({ theme }) => theme.colors.textPrimary}
         }
 
         .close-container {
@@ -86,7 +85,7 @@ export const Section = styled.section`
 
         padding: 0.5rem;
 
-        background-color: ${colors.defaultSecondaryBlackColor};
+        background-color:${({ theme }) => theme.colors.textTetiary};
 
         .icon {
           display: flex;
@@ -127,7 +126,7 @@ export const Section = styled.section`
           width: fit-content;
 
           padding: 0.5rem;
-          border-bottom: 1px solid ${colors.defaultWhiteColor};
+          border-bottom: 1px solid${({ theme }) => theme.colors.textPrimary}
 
           &::marker {
             content: '-';
@@ -159,7 +158,7 @@ export const Section = styled.section`
 
             border: 1px solid rgba(255, 255, 255, 0.3);
             border-radius: 0.6rem;
-            background-color: ${colors.secondMainColor};
+            background-color: ${({ theme }) => theme.colors.secondary};
 
             font-weight: 600;
 
@@ -176,9 +175,9 @@ export const Section = styled.section`
 
   .checkout-review-header {
     padding: 1rem;
-    /* color: ${colors.secondMainColor}; */
-    color: ${colors.defaultWhiteColor};
-    background-color: ${colors.thirdMainColor};
+    /* color: ${({ theme }) => theme.colors.secondary};; */
+    color:${({ theme }) => theme.colors.textPrimary}
+    background-color: ${({ theme }) => theme.colors.primary};
 
     border: 1px solid rgba(0, 0, 0, 0.2);
     border-radius: 0.3rem;
@@ -286,7 +285,7 @@ export const Section = styled.section`
 
         overflow: hidden;
 
-        background-color: ${colors.defaultWhiteColor};
+        background-color:${({ theme }) => theme.colors.textPrimary}
 
         h4 {
           white-space: nowrap;
@@ -451,7 +450,7 @@ export const Section = styled.section`
 
             grid-column: 3;
 
-            color: ${colors.defaultBlackColor};
+            color: ${({ theme }) => theme.colors.textSecondary};
 
             font-size: 1.4rem;
 

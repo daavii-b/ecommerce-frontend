@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import * as colors from '../../styles/colors';
 
 export const Section = styled.section`
   display: flex;
@@ -24,7 +23,7 @@ export const Section = styled.section`
       border: 1px solid rgba(0, 0, 0, 0.07);
 
       padding: 0.85rem;
-      color: ${colors.defaultBlackColor};
+      color: ${({ theme }) => theme.colors.textSecondary};
     }
   }
 `;
@@ -89,7 +88,7 @@ export const Form = styled.form`
         padding-left: 0.4rem;
 
         &:focus {
-          border-color: ${colors.secondMainColor};
+          border-color: ${({ theme }) => theme.colors.secondary};
         }
       }
     }

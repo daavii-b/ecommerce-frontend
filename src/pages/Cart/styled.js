@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import * as colors from '../../styles/colors';
 import { device } from '../../styles/mediaQueries';
 
 export const Section = styled.section`
@@ -82,9 +81,9 @@ export const Section = styled.section`
           justify-content: center;
 
           font-size: inherit;
-          color: ${colors.mainPurlpleColor};
-          background-color: ${colors.defaultBlackColor};
-          border: 1px solid ${colors.mainPurlpleColor};
+          color: ${({ theme }) => theme.colors.primary};
+          background-color: ${({ theme }) => theme.colors.textSecondary};
+          border: 1px solid ${({ theme }) => theme.colors.primary};
           border-radius: 0.5rem;
           box-shadow: 0 0 8px 1px rgba(0, 0, 0, 0.2);
         }
@@ -102,8 +101,8 @@ export const Section = styled.section`
   .products-session,
   .products-details-session {
     & > header {
-      background-color: ${colors.thirdMainColor};
-      color: ${colors.defaultWhiteColor};
+      background-color: ${({ theme }) => theme.colors.primary};
+      color: ${({ theme }) => theme.colors.textPrimary};
       border: 1px solid rgba(0, 0, 0, 0.3);
       padding: 1rem;
 
@@ -116,7 +115,7 @@ export const Section = styled.section`
         &::first-letter {
           text-transform: uppercase;
           font-weight: bold;
-          color: ${colors.secondMainColor};
+          color: ${({ theme }) => theme.colors.secondary};
         }
       }
     }
@@ -169,7 +168,7 @@ export const Section = styled.section`
         width: fit-content;
         text-transform: uppercase;
         font-size: 1.3rem;
-        border: 1px solid ${colors.mainPurlpleColor};
+        border: 1px solid ${({ theme }) => theme.colors.primary};
         border-radius: 1rem;
         padding: 0.5rem;
       }
@@ -273,7 +272,7 @@ export const ProductContainer = styled.div`
   align-items: center;
   justify-items: center;
 
-  border: 1px solid ${colors.defaultBlackColor};
+  border: 1px solid ${({ theme }) => theme.colors.textSecondary};
   border-radius: 0.6rem;
   box-shadow: 1px 0 1px 1px rgba(0, 0, 0, 0.04);
 
@@ -307,7 +306,7 @@ export const ProductContainer = styled.div`
 
       text-overflow: ellipsis;
 
-      border-left: 1px solid ${colors.defaultBlackColor};
+      border-left: 1px solid ${({ theme }) => theme.colors.textSecondary};
       padding-left: 0.4rem;
 
       h3 {
@@ -346,7 +345,7 @@ export const ProductContainer = styled.div`
   &:hover {
     transform: scale(1.015);
     transition: 0.2s ease-out;
-    border: 1px solid ${colors.secondMainColor};
+    border: 1px solid ${({ theme }) => theme.colors.secondary};
     box-shadow: 2.5px 0 1px 1px rgba(0, 0, 0, 0.08);
   }
 
@@ -394,8 +393,8 @@ export const ProductContainer = styled.div`
     align-items: center;
     justify-self: flex-start;
 
-    background-color: ${colors.defaultBlackColor};
-    color: ${colors.secondMainColor};
+    background-color: ${({ theme }) => theme.colors.textSecondary};
+    color: ${({ theme }) => theme.colors.secondary};
 
     width: fit;
     border: 1px solid rgba(0, 0, 0, 0.4);
@@ -407,7 +406,7 @@ export const ProductContainer = styled.div`
       text-decoration-color: red;
       font-weight: lighter;
       font-size: 1.1rem;
-      color: ${colors.defaultWhiteColor};
+      color: ${({ theme }) => theme.colors.textPrimary};
     }
 
     .price.promotional {
@@ -436,10 +435,10 @@ export const ProductContainer = styled.div`
     bottom: 0.4rem;
 
     border-radius: 0.6rem;
-    border: 1px solid ${colors.secondMainColor};
+    border: 1px solid ${({ theme }) => theme.colors.secondary};
     overflow: hidden;
 
-    background-color: ${colors.defaultBlackColor};
+    background-color: ${({ theme }) => theme.colors.textSecondary};
 
     &:active {
       box-shadow: 0 0 3px 2px rgba(0, 0, 0, 0.13);
@@ -450,7 +449,7 @@ export const ProductContainer = styled.div`
       display: flex;
       align-items: center;
       justify-content: center;
-      color: ${colors.secondMainColor};
+      color: ${({ theme }) => theme.colors.secondary};
 
       margin: 0 0.2rem;
       padding: 0.7rem;
@@ -458,7 +457,7 @@ export const ProductContainer = styled.div`
       transition: 0.1s ease-in-out;
 
       &:active {
-        color: ${colors.defaultWhiteColor};
+        color: ${({ theme }) => theme.colors.textPrimary};
       }
     }
     .fav-button {
@@ -468,7 +467,7 @@ export const ProductContainer = styled.div`
     }
     .fav-button:hover {
       & > .add {
-        color: ${colors.secondMainColor};
+        color: ${({ theme }) => theme.colors.secondary};
       }
     }
   }

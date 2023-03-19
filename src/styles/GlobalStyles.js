@@ -1,6 +1,6 @@
 import 'react-toastify/dist/ReactToastify.css';
 import styled, { createGlobalStyle } from 'styled-components';
-import * as colors from './colors';
+
 import { device } from './mediaQueries';
 
 export default createGlobalStyle`
@@ -18,8 +18,8 @@ export default createGlobalStyle`
 
     body {
       font-size: 1.6rem;
-      font-family: monospace;
-      background-color: ${colors.defaultWhiteColor};
+      font-family: 'Inter', sans-serif;
+      background-color:${({ theme }) => theme.colors.textPrimary}
     }
 
     ${
@@ -56,7 +56,7 @@ export default createGlobalStyle`
     }
 
     .icons {
-      color: ${colors.defaultBlackColor};
+      color: ${({ theme }) => theme.colors.textSecondary};
     }
 
 
@@ -95,7 +95,7 @@ export default createGlobalStyle`
     }
 
     *::-webkit-scrollbar-thumb {
-      background-color: ${colors.mainPurlpleColor};
+      background-color: ${({ theme }) => theme.colors.primary};
       border-top-left-radius: none;
       border-top-right-radius: none;
     }

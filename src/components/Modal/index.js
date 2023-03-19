@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 export default function Modal({ show, children }) {
   return (
     show && (
-      <div className="modal-container">
+      <div style={{ zIndex: 1000 }} className="modal-container">
         <section className="modal">{children}</section>
       </div>
     )
@@ -13,9 +13,10 @@ export default function Modal({ show, children }) {
 
 Modal.defaultProps = {
   show: false,
+  children: null,
 };
 
 Modal.propTypes = {
   show: PropTypes.bool,
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node,
 };
