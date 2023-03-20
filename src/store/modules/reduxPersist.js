@@ -10,6 +10,7 @@ export default (reducers) => {
         'authReducer',
         'favoritesReducer',
         'cartReducer',
+        'filtersReducer',
       ],
     },
     reducers

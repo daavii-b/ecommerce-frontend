@@ -27,4 +27,6 @@ export const SET_AMOUNT = 'SET_AMOUNT';
 
 // Filters Types
 
-export const SET_AMOUNT = 'SET_AMOUNT';
+export const APPLY_FILTER = 'APPLY_FILTER';
+export const REMOVE_FILTER = 'REMOVE_FILTER';
+export const CLEAR_FILTERS = 'CLEAR_FILTERS';

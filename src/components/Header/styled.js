@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import * as colors from '../../styles/colors';
 import { device } from '../../styles/mediaQueries';
 
 export const Header = styled.header`
@@ -17,7 +16,7 @@ export const Header = styled.header`
 
   text-transform: uppercase;
   padding: 0 4rem;
-  background-color: ${colors.mainPurlpleColor};
+  background-color: ${({ theme }) => theme.colors.primary};
 
   box-shadow: 0 6px 9px 3px rgba(0, 0, 0, 0.25);
 
@@ -34,7 +33,7 @@ export const Header = styled.header`
       text-shadow: 0 4px 0.5px rgba(0, 0, 0, 0.1);
 
       letter-spacing: 3px;
-      color: ${colors.defaultWhiteColor};
+      color: ${({ theme }) => theme.colors.textPrimary};
     }
   }
 
@@ -59,199 +58,6 @@ export const Header = styled.header`
   }
 `;
 
-export const CategoryNav = styled.nav`
-  width: fit-content;
-  height: fit-content;
-  max-height: 40rem;
-  transition: 0.4s ease;
-
-  position: absolute;
-  top: 9rem;
-  left: -2rem;
-
-  z-index: 100;
-
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-
-  grid-row-gap: 0.4rem;
-
-  h2 {
-    width: 15rem;
-  }
-
-  .toggle-category-nav {
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-    align-self: center;
-
-    grid-gap: 0.5rem;
-
-    width: 100%;
-    height: fit-content;
-
-    letter-spacing: 1.2px;
-    font-weight: bold;
-    padding: 0.6rem 0.4rem;
-
-    border-top-right-radius: 0.3rem;
-    border-bottom-right-radius: 0.3rem;
-
-    box-shadow: 0 5px 6px rgba(50, 50, 50, 0.2);
-
-    transition: 0.4s ease;
-
-    background-color: ${colors.defaultBlackColor};
-    color: ${colors.defaultWhiteColor};
-
-    padding: 0.7rem 0;
-
-    &:hover {
-      filter: brightness(1.1);
-    }
-
-    span {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.8rem;
-      color: ${colors.secondMainColor};
-
-      svg {
-        transition: 0.4s ease-out;
-        font-weight: bold;
-      }
-    }
-  }
-
-  .categories-list {
-    width: 0;
-    height: 0;
-    max-width: fit-content;
-    max-height: fit-content;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-
-    grid-row-gap: 0.5rem;
-
-    font-size: 1.4rem;
-
-    overflow-y: auto;
-    overflow-x: hidden;
-
-    transition: 0.4s ease;
-
-    visibility: hidden;
-    opacity: 0;
-
-    position: relative;
-    top: 0;
-    left: 0;
-    bottom: 0;
-
-    padding-left: 0.4rem;
-
-    .category-item {
-      width: 100%;
-      height: fit-content;
-
-      transform: translateX(-40rem);
-      transition: 0.4s ease-in;
-
-      visibility: hidden;
-      opacity: 0;
-      padding-left: 0.5rem;
-      border-left: 3.5px solid ${colors.secondMainColor};
-
-      .category-container {
-        display: flex;
-        align-items: center;
-        justify-content: flex-start;
-
-        background-color: rgba(40, 40, 40);
-
-        border-top-right-radius: 0.4rem;
-        border-bottom-right-radius: 0.4rem;
-
-        white-space: nowrap;
-        text-transform: capitalize;
-
-        button.category {
-          width: 100%;
-          height: 100%;
-          display: block;
-          padding: 0.7rem;
-          transition: 0.2s ease-out;
-
-          text-align: left;
-
-          z-index: 5;
-          color: ${colors.defaultWhiteColor};
-        }
-      }
-    }
-  }
-
-  &.active {
-    left: 0;
-
-    transition: 0.4s ease-in;
-    /* padding-top: 0.5rem;
-    padding-left: 0.5rem; */
-
-    .toggle-category-nav {
-      transition: 0.4s ease;
-      color: ${colors.secondMainColor};
-      background-color: ${colors.defaultBlackColor};
-
-      span {
-        svg {
-          transition: 0.4s ease-in;
-          transform: rotate(360deg);
-          color: ${colors.defaultWhiteColor};
-        }
-      }
-    }
-
-    .categories-list {
-      width: 100%;
-      height: 100%;
-      transition: 0.4s ease-out;
-
-      visibility: visible;
-      opacity: 1;
-      padding-right: 0.5rem;
-
-      background-color: rgba(0, 0, 0, 0.1);
-
-      .category-item {
-        transform: translateX(0);
-        transition: 0.4s ease-out;
-
-        visibility: visible;
-        opacity: 1;
-
-        transform: scale(1);
-
-        &:hover {
-          transform: scale(1.015) perspective(2rem);
-          transition: 0.2s ease-out;
-
-          button {
-            color: ${colors.secondMainColor};
-          }
-        }
-      }
-    }
-  }
-`;
-
 export const Nav = styled.nav`
   width: 100%;
   height: fit-content;
@@ -269,7 +75,7 @@ export const Nav = styled.nav`
 
   transition: 0.2s ease-in;
 
-  border: 1px solid rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.7);
   border-right: none;
   border-radius: 0.3rem;
 
@@ -278,10 +84,6 @@ export const Nav = styled.nav`
 
   padding: 0.4rem;
   padding-right: none;
-
-  &:hover {
-    border-color: rgba(255, 255, 255, 0.4);
-  }
 
   &.active {
     width: fit-content;
@@ -362,9 +164,16 @@ export const Nav = styled.nav`
 
       transition: 0.3s ease-out;
 
-      &:hover svg {
-        transition: 0.3s ease-in;
-        color: ${colors.defaultWhiteColor};
+      .icons {
+        color: ${({ theme }) => theme.colors.textTetiary};
+        font-size: 1.4rem;
+      }
+
+      &:hover {
+        .icons {
+          transition: 0.3s ease-out;
+          color: ${({ theme }) => theme.colors.textPrimary};
+        }
       }
     }
   }
@@ -393,7 +202,7 @@ export const Nav = styled.nav`
       display: block;
 
       background-color: transparent;
-      color: ${colors.defaultWhiteColor};
+      color: ${({ theme }) => theme.colors.textPrimary};
       border: none;
 
       padding: 0.4rem;
@@ -403,7 +212,7 @@ export const Nav = styled.nav`
       transition: all 0.1s ease-in;
 
       background-color: transparent;
-      color: ${colors.defaultSecondaryBlackColor};
+      color: ${({ theme }) => theme.colors.textTetiary};
     }
 
     ul.nav-items {
@@ -414,8 +223,8 @@ export const Nav = styled.nav`
       width: 5rem;
       height: 20rem;
 
-      background: ${colors.defaultBlackColor};
-      border: 1.5px solid ${colors.secondMainColor};
+      background: ${({ theme }) => theme.colors.textSecondary};
+      border: 1.5px solid ${({ theme }) => theme.colors.secondary};
       border-right: none;
 
       border-top-left-radius: 0.4rem;
@@ -436,12 +245,12 @@ export const Nav = styled.nav`
 
         a svg {
           font-size: 1.5rem;
-          color: ${colors.defaultWhiteColor};
+          color: ${({ theme }) => theme.colors.textPrimary};
         }
 
         &:hover {
           a svg {
-            color: ${colors.secondMainColor};
+            color: ${({ theme }) => theme.colors.secondary};
           }
         }
       }
@@ -463,7 +272,8 @@ export const Form = styled.form`
     justify-content: center;
 
     .search-icon {
-      color: rgba(0, 0, 0, 0.5);
+      font-size: 1.6rem;
+      color: ${({ theme }) => theme.colors.textPrimary};
       transition: all 0.2s ease-in;
     }
   }

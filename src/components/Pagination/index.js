@@ -16,7 +16,7 @@ export default function Pagination({ qtyPages, count }) {
   const [params, setParams] = useSearchParams();
   const currentPage = Number(params.get('page')) || 1;
 
-  const totalPages = Math.ceil(count / 12);
+  const totalPages = Math.ceil(count / 20);
   const hasOtherPages = totalPages > 1;
 
   function makePaginationRange() {
